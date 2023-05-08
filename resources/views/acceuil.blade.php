@@ -10,7 +10,6 @@
   <meta content="" name="keywords">
 
   <!-- Favicons -->
-
   <link href="assets_acceuil/img/favicon.png "rel="icon">
   <link href="assets_acceuil/img/apple-touch-icon.png" rel="apple-touch-icon">
 
@@ -30,7 +29,9 @@
 <body>
 
   <!-- ======= Header ======= -->
-
+  
+  @include('layouts.navbar')
+  <!-- End #header -->
 
   <!-- ======= Hero Section ======= -->
   <section id="hero">

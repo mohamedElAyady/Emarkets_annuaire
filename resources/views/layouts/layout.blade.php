@@ -20,6 +20,9 @@
     <!-- Template Main CSS File -->
     <link href="{{ asset('assets/annuaire/css/main.css') }}" rel="stylesheet"> 
     <link href="{{ asset('assets/annuaire/css/style.css') }}" rel="stylesheet"> 
+      <!-- Favicons -->
+
+  
 
     <title>{{ config('app.name', 'Laravel') }}</title>
 </head>
