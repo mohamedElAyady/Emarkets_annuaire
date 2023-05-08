@@ -37,14 +37,14 @@
 
             <div class="content col-xs-12 col-lg-9 " style="float: right">
                 
-                <div class="card mt-3" style="background-image: url('assets/img/cardbackground.png'); background-size:contain; background-repeat: no-repeat; background-position: right ">
+                <div class="card mt-3" style="background-image: url('assets/annuaire/img/cardbackground.png'); background-size:contain; background-repeat: no-repeat; background-position: right ">
                     <div class="card-header " style="opacity: 0.5;">
                        <span class="skeleton" style="opacity: 0.5;"><i class="fa-solid fa-diagram-project" style="margin-right: 5px; font-size: 15px;"></i>
                         secteur d'activité</span>
                     </div>
                     <div class="card-body">
                         <h3 class="card-title skeleton">
-                            <img src="assets/img/elogo.png" alt="" style="width: 50px; height: 50px; margin-right: 5px;">
+                            <img src="assets/annuaire/img/elogo.png" alt="" style="width: 50px; height: 50px; margin-right: 5px;">
                             <b>E-markets expo</b>
                         </h3>
                         <p class="nunito skeleton">
@@ -66,14 +66,14 @@
                     </div>
                 </div>
 
-                <div class="card mt-3" style="background-image: url('assets/img/cardbackground.png'); background-size:contain; background-repeat: no-repeat; background-position: right ">
+                <div class="card mt-3" style="background-image: url('assets/annuaire/img/cardbackground.png'); background-size:contain; background-repeat: no-repeat; background-position: right ">
                     <div class="card-header " style="opacity: 0.5;">
                        <span class="skeleton" style="opacity: 0.5;"><i class="fa-solid fa-diagram-project" style="margin-right: 5px; font-size: 15px;"></i>
                         secteur d'activité</span>
                     </div>
                     <div class="card-body">
                         <h3 class="card-title skeleton">
-                            <img src="assets/img/elogo.png" alt="" style="width: 50px; height: 50px; margin-right: 5px;">
+                            <img src="assets/annuaire/img/elogo.png" alt="" style="width: 50px; height: 50px; margin-right: 5px;">
                             <b>E-markets expo</b>
                         </h3>
                         <p class="nunito skeleton">
@@ -95,14 +95,14 @@
                     </div>
                 </div>
 
-                <div class="card mt-3" style="background-image: url('assets/img/cardbackground.png'); background-size:contain; background-repeat: no-repeat; background-position: right ">
+                <div class="card mt-3" style="background-image: url('assets/annuaire/img/cardbackground.png'); background-size:contain; background-repeat: no-repeat; background-position: right ">
                     <div class="card-header " style="opacity: 0.5;">
                        <span class="skeleton" style="opacity: 0.5;"><i class="fa-solid fa-diagram-project" style="margin-right: 5px; font-size: 15px;"></i>
                         secteur d'activité</span>
                     </div>
                     <div class="card-body">
                         <h3 class="card-title skeleton">
-                            <img src="assets/img/elogo.png" alt="" style="width: 50px; height: 50px; margin-right: 5px;">
+                            <img src="assets/annuaire/img/elogo.png" alt="" style="width: 50px; height: 50px; margin-right: 5px;">
                             <b>E-markets expo</b>
                         </h3>
                         <p class="nunito skeleton">
