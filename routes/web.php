@@ -18,16 +18,12 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-<<<<<<< HEAD
 Route::get('/acceuil', [HomeController::class, 'Acceuil']);
 
-Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-=======
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::get('/annuaire', function () {
     return view('/annuaire');
