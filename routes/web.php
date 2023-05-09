@@ -31,4 +31,8 @@ Route::get('/acceuil', function () {
     return view('/acceuil');
 });
 
+Route::get('/admin', function () {
+    return view('/admin/admin');
+});
+
 
