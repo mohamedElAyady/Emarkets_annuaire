@@ -35,7 +35,7 @@
   <!-- End #header -->
 
   <!-- ======= Hero Section ======= -->
-  <section id="hero">
+  <section id="hero" style="background-image: url('assets/annuaire/img/cardbackground.png');">
     <div class="hero-container">
       <h1>Emarket Annuaire</h1>
       <h2>Trouver une entreprise</h2>
@@ -55,7 +55,7 @@
           <div class="error-message"></div>
           <div class="sent-message">Your notification request was sent. Thank you!</div>
         </div>
-        <div class="text-center"><button type="submit">Trouver</button></div>
+        <div class="text-center"><button type="submit" >Trouver</button></div>
       </form>
     </div>
   </section><!-- End Hero -->

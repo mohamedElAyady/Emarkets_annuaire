@@ -10,13 +10,28 @@
             @csrf
 
             <div>
-                <x-label for="name" value="{{ __('Name') }}" />
-                <x-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required autofocus autocomplete="name" />
+                <x-label for="nom" value="{{ __('Nom') }}" />
+                <x-input id="nom" class="block mt-1 w-full" type="text" name="nom" :value="old('nom')" required autofocus autocomplete="nom" />
             </div>
 
             <div>
                 <x-label for="prenom" value="{{ __('Prenom') }}" />
                 <x-input id="prenom" class="block mt-1 w-full" type="text" name="prenom" :value="old('prenom')" required autofocus autocomplete="prenom" />
+            </div>
+
+            <div>
+                <x-label for="ville" value="{{ __('Ville') }}" />
+                <x-input id="ville" class="block mt-1 w-full" type="text" name="ville" :value="old('ville')" required autofocus autocomplete="ville" />
+            </div>
+
+            <div>
+                <x-label for="zip" value="{{ __('Zip') }}" />
+                <x-input id="zip" class="block mt-1 w-full" type="text" name="zip" :value="old('zip')" required autofocus autocomplete="zip" />
+            </div>
+
+            <div>
+                <x-label for="telephone" value="{{ __('Telephone') }}" />
+                <x-input id="telephone" class="block mt-1 w-full" type="text" name="telephone" :value="old('zip')" required autofocus autocomplete="zip" />
             </div>
 
             <div class="mt-4">
