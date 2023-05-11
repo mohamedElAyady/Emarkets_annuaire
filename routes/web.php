@@ -32,7 +32,7 @@ Route::get('/acceuil', function () {
 });
 
 Route::get('/admin', function () {
-    return view('/admin/admin');
+    return view('/admin/admin_layout');
 });
 
 
@@ -46,3 +46,25 @@ Route::middleware([
         return view('dashboard');
     })->name('dashboard');
 });
+
+
+Route::get('/admin/dashboard', function () {
+    return view('/admin/dashboard');
+});
+
+
+Route::get('/admin/dashboard', function () {
+    return view('/admin/dashboard');
+});
+
+
+Route::resource('admin/utilisateurs','App\Http\Controllers\UtilisateurController');
+Route::post('/utilisateurs', 'App\Http\Controllers\UtilisateurController@store')->name('utilisateurs.store');
+Route::get('/utilisateurs/softDelete/{id}', 'App\Http\Controllers\UtilisateurController@softDelete')->name('utilisateurs.softdelete');
+Route::get('/utilisateurs/poubelle', 'App\Http\Controllers\UtilisateurController@poubelle');
+Route::get('utilisateurs/restore/delete/{id}', 'App\Http\Controllers\UtilisateurController@restore')->name('utilisateur.restore');
+Route::get('utilisateurs/harddelete/{id}', 'App\Http\Controllers\UtilisateurController@hardDelete')->name('utilisateur.harddelete');
+
+/*Route::get('/admin/show', function () {
+    return view('/admin/utilisateurs/show');
+});*/
