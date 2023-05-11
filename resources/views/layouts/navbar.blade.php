@@ -32,22 +32,49 @@
           <li><a class="nav-link scrollto" href="#services">Blog</a></li>
           <li><a class="nav-link scrollto" href="#portfolio">Contacter-nous</a></li>
           
-          <li>
-            @if (Route::has('login'))
-            <div class="switch">
-                @auth
-                    <a href="{{ url('/dashboard') }}" class="font-semibold text-gray-600 hover:text-gray-900 focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Dashboard</a>
-                @else
-                    <li><a href="{{ route('login') }}" class="getstarted " >Log in</a></li>
 
-                    @if (Route::has('register'))
-                       <li> <a href="{{ route('register') }}" class=" getstarted" >Register</a></li>
-                    @endif
-                @endauth
 
-            </div>
-             @endif
-           </li>
+          @if (Route::has('login'))
+          @auth
+              <li class="nav-item dropdown pe-3">
+                <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
+                  <span class="d-none d-md-block dropdown-toggle ps-2">{{ Auth::user()->prenom }} {{ Auth::user()->nom }}</span>
+                </a><!-- End Profile Iamge Icon -->
+      
+                <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
+                
+      
+                  <li>
+                      <i class="bi bi-person"></i>
+                      <a class="dropdown-item" href="{{ url('/dashboard') }}">Profile</a>
+                  </li>
+
+                  <li>
+                    <hr class="dropdown-divider">
+                  </li>
+      
+                  <li>
+                      <i class="bi bi-gear"></i>
+                      <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                        @csrf
+                    </form>
+                  </li>
+        
+                </ul><!-- End Profile Dropdown Items -->
+              </li>
+          @else
+              <li>
+                  <a href="{{ route('login') }}" class="getstarted">Log in</a>
+              </li>
+          @if (Route::has('register'))
+              <li>
+                  <a href="{{ route('register') }}" class="getstarted">Register</a>
+              </li>
+          @endif
+          @endauth
+          @endif
+
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav><!-- .navbar -->
