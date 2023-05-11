@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class UtilisateurController extends Controller
 {
@@ -12,6 +13,7 @@ class UtilisateurController extends Controller
      */
     public function index()
     {
+        echo Auth::user()->id;  ;
         $utilisateurs = User::all();
         return view('admin/utilisateurs/all',compact('utilisateurs'));
     }
