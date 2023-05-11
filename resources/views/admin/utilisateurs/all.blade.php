@@ -34,7 +34,7 @@
                   <th scope="col">Adresse e-mail</th>
                   <th scope="col">Téléphone</th>
                   <th scope="col">ville</th>
-                  <th scope="col">password</th>
+                  <th scope="col">Zip</th>
                   <th scope="col">Action</th>
                 </tr>
               </thead>
@@ -46,11 +46,12 @@
                   <td>{{$item->email}}</td>
                   <td>{{$item->telephone}}</td>
                   <td>{{$item->ville}}</td>
-                  <td>{{$item->password}}</td>
+                  <td>{{$item->zip}}</td>
                   <td>
-                    <a href="{{route('utilisateurs.softdelete',$item->id )}}"><i class="bi bi-trash m-3" style="color: black; font-size: 20px"></i></a>
                     <a href="{{route('utilisateurs.show',$item->id)}}"><i class="bi bi-eye m-3" style="color: black; font-size: 20px"></i></a>
-                  </td>
+                    <a href="{{route('utilisateurs.edit',$item->id)}}"><i class="bi bi-pencil-square m-3" style="color: black; font-size: 20px"></i></a>
+                    <a href="{{route('utilisateurs.softdelete',$item->id )}}"><i class="bi bi-trash m-3" style="color: black; font-size: 20px"></i></a>
+                    </td>
                 </tr>
                 @endforeach
                

@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Utilisateur;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class UtilisateurController extends Controller
@@ -12,13 +12,13 @@ class UtilisateurController extends Controller
      */
     public function index()
     {
-        $utilisateurs = Utilisateur::all();
+        $utilisateurs = User::all();
         return view('admin/utilisateurs/all',compact('utilisateurs'));
     }
 
     public function poubelle()
     {
-        $utilisateurs = Utilisateur::onlyTrashed()->get();
+        $utilisateurs = User::onlyTrashed()->get();
         return view('admin/utilisateurs/trash',compact('utilisateurs'));
     }
     /**
@@ -44,7 +44,7 @@ class UtilisateurController extends Controller
             'password'=>'required',
         ]);
 
-        $utilisateur = Utilisateur::create($request->all());
+        $utilisateur = User::create($request->all());
         return redirect()->route('utilisateurs.index')
         ->with('success',"l'utilisateur a été bien ajouter");
     }
@@ -53,47 +53,41 @@ class UtilisateurController extends Controller
      * Display the specified resource.
      */
 
-    public function show(Utilisateur $utilisateur)
+    public function show(User $utilisateur)
     {
         return view('admin/utilisateurs/show', compact('utilisateur'))  ;
+    }
+
+    public function edit(User $utilisateur)
+    {
+        return view('admin/utilisateurs/edit', compact('utilisateur'))  ;
     }
 
 
 
 
-    /*Update the specified resource in storage.
+    /*Update the specified resource in storage.*/
     
-    public function updateUser(Request $request, $id)
-{
-    
-    $utilisateur = Utilisateur::findOrFail($id);
+    public function update(Request $request, User $utilisateur)
+    {
+        $request->validate([
+            'nom'=>'required',
+            'prenom'=>'required',
+            'ville'=>'required',
+            'zip'=>'required',
+            'telephone'=>'required',
+            'email'=>'required',
+            'password'=>'required',
+        ]);
 
-    $request->validate([
-        'nom'=>'required',
-        'prenom'=>'required',
-        'ville'=>'required',
-        'zip'=>'required',
-        'telephone'=>'required',
-        'email'=>'required|email|unique:utilisateurs,email,'.$utilisateur->id,
-        'password'=>'required',
-    ]);
-
-    $utilisateur->nom = $request->input('nom');
-    $utilisateur->prenom = $request->input('prenom');
-    $utilisateur->ville = $request->input('ville');
-    $utilisateur->zip = $request->input('zip');
-    $utilisateur->telephone = $request->input('telephone');
-    $utilisateur->email = $request->input('email');
-    $utilisateur->password = $request->input('password');
-    $utilisateur->save();
-
-    return redirect()->route('utilisateurs.index', $utilisateur->id)
-        ->with('success', 'L\'utilisateur a été mis à jour.');
-} */
+        $utilisateur->update($request->all());
+        return redirect()->route('utilisateurs.index')
+        ->with('success',"l'utilisateur a été bien modifier");
+    }
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Utilisateur $utilisateur)
+    public function destroy(User $utilisateur)
     {
         $utilisateur->delete();
         return redirect()->route('utilisateurs.index')
@@ -103,7 +97,7 @@ class UtilisateurController extends Controller
 
    public function softDelete($id)
     {
-        $utilisateur = Utilisateur::find($id);
+        $utilisateur = User::find($id);
 
         if (!$utilisateur) {
             return redirect()->route('utilisateurs.index')
@@ -119,7 +113,7 @@ class UtilisateurController extends Controller
     {
 
 
-        $utilisateur = Utilisateur::onlyTrashed()->where('id' , $id)->first()->restore() ;
+        $utilisateur = User::onlyTrashed()->where('id' , $id)->first()->restore() ;
       //  dd($product);
 
         return redirect()->route('utilisateurs.index')
@@ -128,7 +122,7 @@ class UtilisateurController extends Controller
 
     public function hardDelete($id)
 {
-    $utilisateur = Utilisateur::withTrashed()->findOrFail($id);
+    $utilisateur = User::withTrashed()->findOrFail($id);
     $utilisateur->forceDelete();
 
     return redirect()->route('utilisateurs.index')
