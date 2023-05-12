@@ -280,7 +280,7 @@
       <li class="nav-item">
         <a class="nav-link 
         <?php 
-        if (Request::is('admin/utilisateurs') || Request::is('admin/utilisateurs/create') || Request::is('utilisateurs/poubelle') ) {
+        if (Request::is('admin/utilisateurs') || Request::is('admin/utilisateurs/create') || Request::is('admin/utilisateurs/poubelle') ) {
         } else {
           echo 'collapsed';
         }
@@ -290,7 +290,7 @@
           <i class="bi bi-people " ></i><span>Utilisateurs</span><i class="bi bi-chevron-down ms-auto"></i>
         </a>
         <ul id="user-nav" class="nav-content collapse <?php 
-        if (Request::is('admin/utilisateurs') || Request::is('admin/utilisateurs/create') || Request::is('utilisateurs/poubelle') ) {echo 'show';
+        if (Request::is('admin/utilisateurs') || Request::is('admin/utilisateurs/create') || Request::is('admin/utilisateurs/poubelle') ) {echo 'show';
         } 
         
         ?>" data-bs-parent="#sidebar-nav">
@@ -305,7 +305,7 @@
             </a>
           </li>
           <li>
-            <a class="{{ Request::is('utilisateurs/poubelle') ? 'active' : '' }}" href="/utilisateurs/poubelle">
+            <a class="{{ Request::is('admin/utilisateurs/poubelle') ? 'active' : '' }}" href="{{ route('utilisateurs.poubelle') }}">
               <i class="bi bi-circle"></i><span>Poubelle</span>
             </a>
           </li>
@@ -315,22 +315,34 @@
       </li><!-- End Utilisateurs Nav -->
 
       <li class="nav-item">
-        <a class="nav-link collapsed" data-bs-target="#company-nav" data-bs-toggle="collapse" href="#">
-          <i class="bi bi-building"></i><span>Entreprises</span><i class="bi bi-chevron-down ms-auto"></i>
+        <a class="nav-link 
+        <?php 
+        if (Request::is('admin/entreprises') || Request::is('admin/entreprises/create') || Request::is('admin/entreprises/poubelle') ) {
+        } else {
+          echo 'collapsed';
+        }
+        
+        ?>
+        " data-bs-target="#entrepriser-nav" data-bs-toggle="collapse" href="#">
+          <i class="bi bi-people " ></i><span>Entreprises</span><i class="bi bi-chevron-down ms-auto"></i>
         </a>
-        <ul id="company-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+        <ul id="entrepriser-nav" class="nav-content collapse <?php 
+        if (Request::is('admin/entreprises') || Request::is('admin/entreprises/create') || Request::is('admin/entreprises/poubelle') ) {echo 'show';
+        } 
+        
+        ?>" data-bs-parent="#sidebar-nav">
           <li>
-            <a href="forms-elements.html">
+            <a class="{{ Request::is('admin/entreprises') ? 'active' : '' }}" href="/admin/entreprises" >
               <i class="bi bi-circle"></i><span>Tous les entreprises</span>
             </a>
           </li>
           <li>
-            <a href="forms-layouts.html">
-              <i class="bi bi-circle"></i><span>Ajouter une entreprise</span>
+            <a class="{{ Request::is('admin/entreprises/create') ? 'active' : '' }}" href="{{ route('entreprises.create') }}" >
+              <i class="bi bi-circle"></i><span>Ajouter un entreprises</span>
             </a>
           </li>
           <li>
-            <a href="utilisateurs/poubelle">
+            <a class="{{ Request::is('admin/entreprises/poubelle') ? 'active' : '' }}" href="{{ route('entreprises.poubelle') }}">
               <i class="bi bi-circle"></i><span>Poubelle</span>
             </a>
           </li>

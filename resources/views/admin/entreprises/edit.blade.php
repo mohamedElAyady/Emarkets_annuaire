@@ -7,11 +7,11 @@
     color: rgba(1, 41, 112, 0.6);}
 </style>
 <div class="pagetitle">
-    <h1>informations de l'utilisateur</h1>
+    <h1>informations de l'entreprise</h1>
     <nav>
       <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="index.html">Utilisateurs</a></li>
-        <li class="breadcrumb-item active">informations de l'utilisateur</li>
+        <li class="breadcrumb-item"><a href="index.html">entreprises</a></li>
+        <li class="breadcrumb-item active">informations de l'entreprise</li>
       </ol>
     </nav>
   </div><!-- End Page Title -->
@@ -39,28 +39,36 @@
                     <div class="tab-content pt-2">
                       <div class="tab-pane fade profile-edit pt-3" id="profile-edit">
       
-
+                        @if ($errors->any())
+                        <div class="alert alert-danger">
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                        @endif
                         <!-- Profile Edit Form -->
-                        <form class="row g-3" method="POST" action="{{ route('utilisateurs.updateUser', $utilisateur->id) }}">
+                        <form class="row g-3" method="POST" action="{{ route('entreprises.updateUser', $entreprise->id) }}">
                           @csrf
                           @method('POST')
                           <div class="col-md-6">
-                            <input type="text" class="form-control" name="prenom" placeholder="Prenom" value="{{$utilisateur->prenom}}">
+                            <input type="text" class="form-control" name="prenom" placeholder="Prenom" value="{{$entreprise->prenom}}">
                           </div>
                           <div class="col-md-6">
-                            <input type="text" class="form-control"  name="nom" placeholder="Nom" value="{{$utilisateur->nom}}">
+                            <input type="text" class="form-control"  name="nom" placeholder="Nom" value="{{$entreprise->nom}}">
                           </div>
                           <div class="col-md-6">
-                            <input type="email" class="form-control"  name="email" placeholder="Email" value="{{$utilisateur->email}}">
+                            <input type="email" class="form-control"  name="email" placeholder="Email" value="{{$entreprise->email}}">
                           </div>
                           <div class="col-md-6">
-                            <input type="text" class="form-control"  name="telephone" placeholder="Numéro téléphone" value="{{$utilisateur->telephone}}">
+                            <input type="text" class="form-control"  name="telephone" placeholder="Numéro téléphone" value="{{$entreprise->telephone}}">
                           </div>
                           <div class="col-md-6">
-                            <input type="text" class="form-control"  name="ville" placeholder="Ville" value="{{$utilisateur->ville}}">
+                            <input type="text" class="form-control"  name="ville" placeholder="Ville" value="{{$entreprise->ville}}">
                           </div>
                           <div class="col-md-6">
-                            <input type="text" class="form-control"  name="zip" placeholder="Zip" value="{{$utilisateur->zip}}">
+                            <input type="text" class="form-control"  name="zip" placeholder="Zip" value="{{$entreprise->zip}}">
                           </div>
       
                           <div class="text-center">
@@ -73,7 +81,7 @@
 
                       <div class="tab-pane fade pt-3" id="profile-change-password">
                         <!-- Change Password Form -->
-                        <form class="row g-3" method="POST" action="{{ route('utilisateurs.changePassword', $utilisateur->id) }}">
+                        <form class="row g-3" method="POST" action="{{ route('entreprises.changePassword', $entreprise->id) }}">
                           @csrf
                           @method('POST')
                           <div class="col-md-6">

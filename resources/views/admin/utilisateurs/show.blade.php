@@ -7,11 +7,11 @@
     color: rgba(1, 41, 112, 0.6);}
 </style>
 <div class="pagetitle">
-    <h1>Tous les utilisateurs</h1>
+    <h1>informations de l'utilisateur</h1>
     <nav>
       <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-        <li class="breadcrumb-item active">Tous les utilisateurs</li>
+        <li class="breadcrumb-item"><a href="index.html">Utilisateurs</a></li>
+        <li class="breadcrumb-item active">informations de l'utilisateur</li>
       </ol>
     </nav>
   </div><!-- End Page Title -->

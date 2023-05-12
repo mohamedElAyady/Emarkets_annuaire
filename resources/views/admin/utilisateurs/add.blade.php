@@ -25,10 +25,10 @@
               <form class="row g-3" action="{{route('utilisateurs.store')}}" method="POST">
                 @csrf
                 <div class="col-md-6">
-                  <input type="text" class="form-control" name="nom" placeholder="Nom">
+                  <input type="text" class="form-control" name="prenom" placeholder="Prenom">
                 </div>
                 <div class="col-md-6">
-                  <input type="text" class="form-control"  name="prenom" placeholder="Prenom">
+                  <input type="text" class="form-control"  name="nom" placeholder="Nom">
                 </div>
                 <div class="col-md-6">
                   <input type="email" class="form-control"  name="email" placeholder="Email">

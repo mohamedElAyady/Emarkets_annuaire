@@ -5,7 +5,7 @@
     <h1>Poubelle</h1>
     <nav>
       <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a>Utilisateurs</a></li>
+        <li class="breadcrumb-item"><a>Entreprises</a></li>
         <li class="breadcrumb-item active">Poubelle</li>
       </ol>
     </nav>
@@ -16,6 +16,15 @@
         <div class="card">
           <div class="card-body">
               <h5 class="card-title">Poubelle</h5>
+              @if ($errors->any())
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+                @endif
             <!-- Table with stripped rows -->
             <table class="table datatable">
               <thead>
@@ -30,7 +39,7 @@
                 </tr>
               </thead>
               <tbody>
-                @foreach ($utilisateurs as $item)
+                @foreach ($entreprises as $item)
                   <tr>
                     <th scope="row">{{$item->id}}</th>
                     <td>{{$item->prenom}} {{$item->nom}}</td>
@@ -39,11 +48,11 @@
                     <td>{{$item->ville}}</td>
                     <td>{{$item->zip}}</td>
                     <td>
-                      <a href="{{route('utilisateurs.restore',$item->id)}}" ><i class="bi bi-arrow-repeat m-3" style="color: black; font-size: 20px"></i></a>
-                      <a href="{{ route('utilisateurs.harddelete', ['id' => $item->id]) }}" onclick="event.preventDefault(); if (confirm('Are you sure you want to permanently delete this user?')) { document.getElementById('delete-form-{{ $item->id }}').submit(); }">
+                      <a href="{{route('entreprises.restore',$item->id)}}" ><i class="bi bi-arrow-repeat m-3" style="color: black; font-size: 20px"></i></a>
+                      <a href="{{ route('entreprises.harddelete', ['id' => $item->id]) }}" onclick="event.preventDefault(); if (confirm('Are you sure you want to permanently delete this user?')) { document.getElementById('delete-form-{{ $item->id }}').submit(); }">
                         <i class="bi bi-trash m-3" style="color: black; font-size: 20px"></i>
                       </a>
-                      <form id="delete-form-{{ $item->id }}" action="{{ route('utilisateurs.harddelete', ['id' => $item->id]) }}" method="POST" style="display: none;">
+                      <form id="delete-form-{{ $item->id }}" action="{{ route('entreprises.harddelete', ['id' => $item->id]) }}" method="POST" style="display: none;">
                         @csrf
                         @method('DELETE')
                       </form>

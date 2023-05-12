@@ -9,10 +9,16 @@ return new class extends Migration
     public function up()
     {
         Schema::table('users', function ($table) {
-            $table->renameColumn('name', 'nom');
-            $table->string('ville')->after('prenom');
-            $table->integer('zip')->after('ville');
-            $table->string('telephone')->after('zip');
+            //$table->renameColumn('name', 'nom');
+            if (!Schema::hasColumn('users', 'ville')) {
+                $table->string('ville')->after('prenom');
+            }
+            if (!Schema::hasColumn('users', 'zip')) {
+                $table->integer('zip')->after('ville');
+            }
+            if (!Schema::hasColumn('users', 'telephone')) {
+                $table->string('telephone')->after('zip');
+            }
         });
     }
 
