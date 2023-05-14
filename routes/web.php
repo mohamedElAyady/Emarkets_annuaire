@@ -37,6 +37,8 @@ Route::get('/admin', function () {
 
 
 
+
+
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),
@@ -77,3 +79,11 @@ Route::post('admin/entreprises', 'App\Http\Controllers\EntrepriseController@stor
 Route::get('admin/entreprises/softDelete/{id}', 'App\Http\Controllers\EntrepriseController@softDelete')->name('entreprises.softdelete');
 Route::post('admin/entreprises/{id}/updateUser', 'App\Http\Controllers\EntrepriseController@updateUser')->name('entreprises.updateUser');
 Route::post('/entreprises/{id}/change-password', 'App\Http\Controllers\EntrepriseController@changePassword')->name('entreprises.changePassword');
+
+/**  admin/demandes routes */
+Route::resource('admin/demandes', 'App\Http\Controllers\DemandeController')->except(['store']);
+Route::get('/demandes/{id}/accepte', 'App\Http\Controllers\DemandeController@accepte')->name('demandes.accepte');
+Route::get('/demandes/{id}/rejette','App\Http\Controllers\DemandeController@rejette')->name('demandes.rejette');
+
+/*layout initialization*/
+Route::get('/admin/admin_layout', [App\Http\Controllers\HomeController::class, 'index'])->name('admin.admin_layout');

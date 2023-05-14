@@ -49,32 +49,51 @@
                         </div>
                         @endif
                         <!-- Profile Edit Form -->
-                        <form class="row g-3" method="POST" action="{{ route('entreprises.updateUser', $entreprise->id) }}">
+                        <form class="row g-3" method="POST" action="{{ route('entreprises.update', $entreprise->id) }}" enctype="multipart/form-data">
                           @csrf
-                          @method('POST')
-                          <div class="col-md-6">
-                            <input type="text" class="form-control" name="prenom" placeholder="Prenom" value="{{$entreprise->prenom}}">
-                          </div>
-                          <div class="col-md-6">
-                            <input type="text" class="form-control"  name="nom" placeholder="Nom" value="{{$entreprise->nom}}">
-                          </div>
-                          <div class="col-md-6">
-                            <input type="email" class="form-control"  name="email" placeholder="Email" value="{{$entreprise->email}}">
-                          </div>
-                          <div class="col-md-6">
-                            <input type="text" class="form-control"  name="telephone" placeholder="Numéro téléphone" value="{{$entreprise->telephone}}">
-                          </div>
-                          <div class="col-md-6">
-                            <input type="text" class="form-control"  name="ville" placeholder="Ville" value="{{$entreprise->ville}}">
-                          </div>
-                          <div class="col-md-6">
-                            <input type="text" class="form-control"  name="zip" placeholder="Zip" value="{{$entreprise->zip}}">
-                          </div>
-      
+                          @method('PUT')
                           <div class="text-center">
-                            <button type="submit" class="btn btn-primary">Enregistre</button>
+                            <img src="{{ $entreprise->logo_url }}" alt="Logo" class="img-fluid">
                           </div>
-                        </form><!-- End Profile Edit Form -->
+                          <div class="col-md-6">
+                            <input type="text" class="form-control" name="raison_sociale" placeholder="Raison sociale" value="{{ $entreprise->raison_sociale }}">
+                          </div>
+                          <div class="col-md-6">
+                            <input type="text" class="form-control" name="type_entreprise" placeholder="Type d'entreprise" value="{{ $entreprise->type_entreprise }}">
+                          </div>
+                          <div class="col-md-6">
+                            <textarea class="form-control" name="description" placeholder="Description">{{ $entreprise->description }}</textarea>
+                          </div>
+                          <div class="col-md-6">
+                            <input type="text" class="form-control" name="ville" placeholder="Ville" value="{{ $entreprise->ville }}">
+                          </div>
+                          <div class="col-md-6">
+                            <input type="text" class="form-control" name="adresse" placeholder="Adresse" value="{{ $entreprise->adresse }}">
+                          </div>
+                          <div class="col-md-6">
+                            <input type="email" class="form-control" name="email" placeholder="Email" value="{{ $entreprise->email }}">
+                          </div>
+                          <div class="col-md-6">
+                            <input type="text" class="form-control" name="telephone" placeholder="Numéro de téléphone" value="{{ $entreprise->telephone }}">
+                          </div>
+                          <div class="col-md-6">
+                            <input type="file" class="form-control" name="logo_url">
+                          </div>
+                          <div class="col-md-6">
+                            <input type="number" class="form-control" name="utilisateur_id" placeholder="ID de l'utilisateur" value="{{ $entreprise->utilisateur_id }}">
+                          </div>
+                          <div class="col-md-6">
+                            <input type="url" class="form-control" name="site_web" placeholder="Site Web" value="{{ $entreprise->site_web }}">
+                          </div>
+                          <div class="col-md-6">
+                            <input type="text" class="form-control" name="secteur_activite" placeholder="Secteur d'activité" value="{{ $entreprise->secteur_activite }}">
+                          </div>
+                        
+                          <div class="text-center">
+                            <button type="submit" class="btn btn-primary">Enregistrer</button>
+                          </div>
+                        </form>
+                        <!-- End Profile Edit Form -->
       
                       </div>
 

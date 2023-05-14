@@ -67,45 +67,7 @@
               You have 4 new notifications
               <a href="#"><span class="badge rounded-pill bg-primary p-2 ms-2">View all</span></a>
             </li>
-            <li>
-              <hr class="dropdown-divider">
-            </li>
-
-            <li class="notification-item">
-              <i class="bi bi-exclamation-circle text-warning"></i>
-              <div>
-                <h4>Lorem Ipsum</h4>
-                <p>Quae dolorem earum veritatis oditseno</p>
-                <p>30 min. ago</p>
-              </div>
-            </li>
-
-            <li>
-              <hr class="dropdown-divider">
-            </li>
-
-            <li class="notification-item">
-              <i class="bi bi-x-circle text-danger"></i>
-              <div>
-                <h4>Atque rerum nesciunt</h4>
-                <p>Quae dolorem earum veritatis oditseno</p>
-                <p>1 hr. ago</p>
-              </div>
-            </li>
-
-            <li>
-              <hr class="dropdown-divider">
-            </li>
-
-            <li class="notification-item">
-              <i class="bi bi-check-circle text-success"></i>
-              <div>
-                <h4>Sit rerum fuga</h4>
-                <p>Quae dolorem earum veritatis oditseno</p>
-                <p>2 hrs. ago</p>
-              </div>
-            </li>
-
+            @foreach ($demandes as $demande)
             <li>
               <hr class="dropdown-divider">
             </li>
@@ -113,7 +75,7 @@
             <li class="notification-item">
               <i class="bi bi-info-circle text-primary"></i>
               <div>
-                <h4>Dicta reprehenderit</h4>
+                <h4>{{$new_date = date("d-m-Y",strtotime($demande->date_creation))}}</h4>
                 <p>Quae dolorem earum veritatis oditseno</p>
                 <p>4 hrs. ago</p>
               </div>
@@ -122,6 +84,7 @@
             <li>
               <hr class="dropdown-divider">
             </li>
+            @endforeach
             <li class="dropdown-footer">
               <a href="#">Show all notifications</a>
             </li>
