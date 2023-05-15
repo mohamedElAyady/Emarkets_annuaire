@@ -199,5 +199,5 @@ class EntrepriseController extends Controller
 
     
 
->>>>>>> 4f2850b03a50c05d7afc7a1bce15b47c95343b19
+    
 }
