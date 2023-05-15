@@ -46,45 +46,63 @@
                                   <div class="col-lg-9 col-md-8">{{ $entreprise->raison_sociale }}</div>
                                 </div>
                               
+                                <hr style="margin-top: 1rem">
+
                                 <div class="row">
                                   <div class="col-lg-3 col-md-4 profil_label">Type d'entreprise</div>
                                   <div class="col-lg-9 col-md-8">{{ $entreprise->type_entreprise }}</div>
                                 </div>
+
+                                <hr style="margin-top: 1rem">
                               
                                 <div class="row">
                                   <div class="col-lg-3 col-md-4 profil_label">Description</div>
                                   <div class="col-lg-9 col-md-8">{{ $entreprise->description }}</div>
                                 </div>
+
+                                <hr style="margin-top: 1rem">
                               
                                 <div class="row">
                                   <div class="col-lg-3 col-md-4 profil_label">Ville</div>
                                   <div class="col-lg-9 col-md-8">{{ $entreprise->ville }}</div>
                                 </div>
+
+                                <hr style="margin-top: 1rem">
                               
                                 <div class="row">
                                   <div class="col-lg-3 col-md-4 profil_label">Adresse</div>
                                   <div class="col-lg-9 col-md-8">{{ $entreprise->adresse }}</div>
                                 </div>
+
+                                <hr style="margin-top: 1rem">
                               
                                 <div class="row">
                                   <div class="col-lg-3 col-md-4 profil_label">Email</div>
                                   <div class="col-lg-9 col-md-8">{{ $entreprise->email }}</div>
                                 </div>
+
+                                <hr style="margin-top: 1rem">
                               
                                 <div class="row">
                                   <div class="col-lg-3 col-md-4 profil_label">Téléphone</div>
                                   <div class="col-lg-9 col-md-8">{{ $entreprise->telephone }}</div>
                                 </div>
+
+                                <hr style="margin-top: 1rem">
                               
                                 <div class="row">
                                   <div class="col-lg-3 col-md-4 profil_label">Utilisateur ID</div>
-                                  <div class="col-lg-9 col-md-8">{{ $entreprise->utilisateur_id }}</div>
+                                  <div class="col-lg-9 col-md-8"><a href="{{ route('utilisateurs.show', $entreprise->utilisateur_id) }}">{{ $entreprise->utilisateur_id }}</a></div>
                                 </div>
+
+                                <hr style="margin-top: 1rem">
                               
                                 <div class="row">
                                   <div class="col-lg-3 col-md-4 profil_label">Site web</div>
                                   <div class="col-lg-9 col-md-8">{{ $entreprise->site_web }}</div>
                                 </div>
+
+                                <hr style="margin-top: 1rem">
                               
                                 <div class="row">
                                   <div class="col-lg-3 col-md-4 profil_label">Secteur d'activité</div>
@@ -93,7 +111,7 @@
                               </div>
                               <div class="col-3">
                                   <div class="col-lg-3 col-md-4 profil_label">Logo</div>
-                                  <div class="col-lg-9 col-md-8">
+                                  <div class="col-lg-9 col-md-8  d-flex justify-content-center">
                                     <img src="{{asset( $entreprise->logo_url )}}" alt="Logo">
                                   </div>
                               </div>

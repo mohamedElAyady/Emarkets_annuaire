@@ -27,17 +27,21 @@ Route::get('/annuaire', function () {
     return view('/annuaire');
 });
 
-Route::get('/acceuil', function () {
-    return view('/acceuil');
-});
+Route::get('/acceuil',[AcceuilController::class,'redirect'])->middleware('auth','verified');
 
 Route::get('/admin', function () {
     return view('/admin/admin_layout');
 });
 
 
+Route::get('/entreprise', function () {
+    return view('/demande_entreprise');
+});
 
 
+Route::get('/profil', function () {
+    return view('/profile/editprofil');
+});
 
 Route::middleware([
     'auth:sanctum',

@@ -59,34 +59,39 @@
 
           <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
             <i class="bi bi-bell"></i>
-            <span class="badge bg-primary badge-number">4</span>
+            <span class="badge bg-primary badge-number">{{ $count }}</span>
           </a><!-- End Notification Icon -->
 
           <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow notifications">
             <li class="dropdown-header">
-              You have 4 new notifications
-              <a href="#"><span class="badge rounded-pill bg-primary p-2 ms-2">View all</span></a>
+              Vous avez {{ $count }} nouvelles notifications
             </li>
-            @foreach ($demandes as $demande)
-            <li>
-              <hr class="dropdown-divider">
-            </li>
+            @foreach ($notifications as $index => $notification)
+              @if ($index < 4)
+                <li>
+                  <hr class="dropdown-divider">
+                </li>
 
-            <li class="notification-item">
-              <i class="bi bi-info-circle text-primary"></i>
-              <div>
-                <h4>{{$new_date = date("d-m-Y",strtotime($demande->date_creation))}}</h4>
-                <p>Quae dolorem earum veritatis oditseno</p>
-                <p>4 hrs. ago</p>
-              </div>
-            </li>
-
-            <li>
-              <hr class="dropdown-divider">
-            </li>
+              <!-- Notification Items -->
+                <a style="color: #6F6C6D" href="{{ route('demandes.show', $notification['demande_id']) }}">
+                  <li class="notification-item">
+                    <i class="bi bi-info-circle text-primary"></i>
+                    <div>
+                      <h4>{{ $notification['raison_sociale'] }}</h4>
+                      <p>{{ $notification['telephone'] }}</p>
+                      <p>{{ $notification['date_soumission'] }}</p>
+                    </div>
+                  </li>
+                </a>
+                <li>
+                  <hr class="dropdown-divider">
+                </li>
+              @else
+                @break
+              @endif
             @endforeach
             <li class="dropdown-footer">
-              <a href="#">Show all notifications</a>
+              <a href="{{ route('demandes.index') }}">Afficher toutes les demandes</a>
             </li>
 
           </ul><!-- End Notification Dropdown Items -->
@@ -287,7 +292,7 @@
         
         ?>
         " data-bs-target="#entrepriser-nav" data-bs-toggle="collapse" href="#">
-          <i class="bi bi-people " ></i><span>Entreprises</span><i class="bi bi-chevron-down ms-auto"></i>
+          <i class="bi bi-code-slash" ></i><span>Entreprises</span><i class="bi bi-chevron-down ms-auto"></i>
         </a>
         <ul id="entrepriser-nav" class="nav-content collapse <?php 
         if (Request::is('admin/entreprises') || Request::is('admin/entreprises/create') || Request::is('admin/entreprises/poubelle') ) {echo 'show';

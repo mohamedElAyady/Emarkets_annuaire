@@ -82,7 +82,7 @@
                                       ?>
                                     " >{{ $demande->status }}
                                   </div>
-                                  <div class="col-3">
+                                  <div class="col-3  d-flex justify-content-end">
                                     @if ($demande->status === 'en attente')
                                         <a href="{{ route('demandes.accepte', $demande->id) }}"><i class="bi bi-check-lg m-3" style="color: green; font-size: 20px"></i></a>
                                         <a href="{{ route('demandes.rejette', $demande->id) }}"><i class="bi bi-x-lg m-3" style="color: red; font-size: 20px;"></i></a>
