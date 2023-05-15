@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+
 
 class AcceuilController extends Controller
 {
@@ -18,7 +20,29 @@ class AcceuilController extends Controller
             }
         }
         else{
+            
             return redirect()->back();
         }
+    }
+
+    public function index()
+    {
+        if(Auth::id()){
+            return redirect('acceuil');
+        }
+        else{
+            return view('acceuil');
+        }
+        
+    }
+
+    public function Annuaire()
+    {
+       return view('annuaire');
+    }
+
+    public function Acceuil()
+    {
+        return view('acceuil');
     }
 }

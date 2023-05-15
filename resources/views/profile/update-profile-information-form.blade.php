@@ -1,7 +1,7 @@
 @extends('layouts.layout')
 
 @section('content')
-<x-form-section submit="updateProfileInformation">
+<x-form-section submit="updateProfileInformation" style="background-color: white">
     <x-slot name="title">
         {{ __('Profile Information') }}
     </x-slot>
@@ -31,7 +31,7 @@
 
                 <!-- Current Profile Photo -->
                 <div class="mt-2" x-show="! photoPreview">
-                    <img src="{{ $this->user->profile_photo_url }}" alt="{{ $this->user->name }}" class="rounded-full h-20 w-20 object-cover">
+                    <img src="{{ $this->user->profile_photo_url }}" alt="{{ $this->user->nom }}" class="rounded-full h-20 w-20 object-cover">
                 </div>
 
                 <!-- New Profile Photo Preview -->
@@ -57,9 +57,9 @@
 
         <!-- Name -->
         <div class="col-span-6 sm:col-span-4">
-            <x-label for="name" value="{{ __('Nom') }}" />
-            <x-input id="name" type="text" class="mt-1 block w-full" wire:model.defer="state.name" autocomplete="name" />
-            <x-input-error for="name" class="mt-2" />
+            <x-label name="nom"  for="nom" value="{{ __('Nom') }}" />
+            <x-input id="nom" name="nom" type="text" class="mt-1 block w-full" wire:model.defer="state.nom" autocomplete="nom" />
+            <x-input-error name="nom" for="nom" class="mt-2" />
         </div>
 
         <!-- Email -->

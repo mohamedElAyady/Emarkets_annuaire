@@ -33,7 +33,7 @@
     
     <x-app-layout style="margin-top: 400px; background-color: white">
             <div style="margin-top: 64px; background-color: white" >
-              <div class="max-w-7xl mx-auto py-10 sm:px-6 lg:px-8">
+              <div class="max-w-7xl mx-auto py-10 sm:px-6 lg:px-8" style="background-color: white">
                   @if (Laravel\Fortify\Features::canUpdateProfileInformation())
                       @livewire('profile.update-profile-information-form')
 

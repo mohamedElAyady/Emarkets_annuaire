@@ -35,10 +35,12 @@
     justify-content:center;
     align-items:center;
     background-color:#fff;
+    margin-top: 50px;
+  
 }
 .container .card{
-    height:550px;
-    width:1100px;
+    height:730px;
+    width:900px;
     background-color:#fff;
     position:relative;
     box-shadow:0 15px 30px rgba(0,0,0,0.1);
@@ -496,7 +498,6 @@ select{
                   
                 </ul>
                 
-
                 
             </div>
             <div class="right-side">
@@ -505,33 +506,56 @@ select{
                     <div class="text">
                         <h2>description d'entreprise</h2>
                         <p>entrer les informations d'entreprise</p>
+                        @if ($errors->any())
+                        <div class="alert alert-danger">
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                        @endif
                     </div>
                     
                     <div class="input-text">
-                <form action="{{ route('save.data') }}" method="POST">
-                    @csrf
+                <form  action="{{route('entreprises.store')}}"   method="POST" enctype="multipart/form-data">
+                   @csrf
+                   <input type="hidden" name="utilisateur_id" value="{{ Auth::id()}}">
+                      <div class="input-text">
                         <div class="input-div">
-                            <input type="text" required require name="ent_nom" id="user_name">
-                            <span>Nom de l'entreprise</span>
-                        </div>
+                            <input type="text" required require name="type_entreprise" id="user_name">
+                            <span>type d'entreprise</span>
+                         </div>
                         <div class="input-div"> 
-                            <input type="text"  name="ent_adresse" required>
+                            <input type="text"  name="raison_sociale" required>
+                            <span>Raison Sociale</span>
+                        </div>
+                     </div>
+
+                     <div class="input-text">
+                        <div class="input-div">
+                            <input type="text" required name="ville" require>
+                            <span>Ville</span>
+                        </div>
+                        <div class="input-div">
+                            <input type="text" required name="adresse" require>
                             <span>Adresse</span>
                         </div>
                      </div>
+
                      <div class="input-text">
                         <div class="input-div">
-                            <input type="text" required name="ent_tele" require>
+                            <input type="text" required name="telephone" require>
                             <span>telephone</span>
                         </div>
                         <div class="input-div">
-                            <input type="text" required name="ent_site" require>
+                            <input type="text" required name="site_web" require>
                             <span>Site Web</span>
                         </div>
                      </div>
                      <div class="input-text">
                         <div class="input-div">
-                            <select name="ent_secteur">
+                            <select name="secteur_activite">
                                 <option>Secteur D'activité</option>
                                 <option>Vente au détail en ligne</option>
                                 <option>Marketplaces en ligne</option>
@@ -541,13 +565,21 @@ select{
                         
                         </div>
                         <div class="input-div">
-                            <input type="text" name="ent_email" required require>
+                            <input type="text" name="email" required require>
                             <span>email</span>
                         </div>
-
                      </div>
-                     <div class="buttons button_space">
-                        <button class="back_button">Enregitrer</button>
+
+                     <div class="input-text">
+                        <textarea class="form-control" name="description" placeholder="Description"></textarea>
+                      </div>
+                      <div class="input-text">
+                        <div class="col-md-6">
+                       <input type="file" class="form-control" name="logo_url" accept="image/*"> 
+                      </div>
+                    </div>
+                  
+                     <div class="buttons button_space"> 
                           <button type="submit" class="submit_button">Submit</button>
                       </div>
                 </form>
