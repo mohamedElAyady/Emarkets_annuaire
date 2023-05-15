@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+
 use App\Models\Entreprise;
 use App\Models\User;
 use App\Rules\MatchOldPassword;
@@ -13,9 +14,10 @@ use Illuminate\Support\Facades\Hash;
 
 class EntrepriseController extends Controller
 {
-     /**
-     * Display a listing of the resource.
-     */
+     public function demande_entreprise()
+     {
+        return view('demande_entreprise');
+     }
     public function index()
     {
         $entreprises = Entreprise::all();
@@ -64,7 +66,6 @@ class EntrepriseController extends Controller
         'folder' => $logoPath,
     ]);
     
-
 
     $entreprise = Entreprise::create([
         'raison_sociale' => $request->raison_sociale,
@@ -197,5 +198,6 @@ class EntrepriseController extends Controller
     
 
     
+
 
 }

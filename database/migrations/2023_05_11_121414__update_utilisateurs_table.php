@@ -9,6 +9,7 @@ return new class extends Migration
     public function up()
     {
         Schema::table('users', function ($table) {
+
             //$table->renameColumn('name', 'nom');
             if (!Schema::hasColumn('users', 'ville')) {
                 $table->string('ville')->after('prenom');
