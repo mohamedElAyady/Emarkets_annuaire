@@ -27,15 +27,21 @@ Route::get('/annuaire', function () {
     return view('/annuaire');
 });
 
-Route::get('/acceuil', function () {
-    return view('/acceuil');
-});
+Route::get('/acceuil',[AcceuilController::class,'redirect'])->middleware('auth','verified');
 
 Route::get('/admin', function () {
     return view('/admin/admin_layout');
 });
 
 
+Route::get('/entreprise', function () {
+    return view('/demande_entreprise');
+});
+
+
+Route::get('/profil', function () {
+    return view('/profile/editprofil');
+});
 
 Route::middleware([
     'auth:sanctum',
@@ -58,13 +64,30 @@ Route::get('/admin/dashboard', function () {
 });
 
 
-Route::resource('admin/utilisateurs','App\Http\Controllers\UtilisateurController');
-Route::post('/utilisateurs', 'App\Http\Controllers\UtilisateurController@store')->name('utilisateurs.store');
-Route::get('/utilisateurs/softDelete/{id}', 'App\Http\Controllers\UtilisateurController@softDelete')->name('utilisateurs.softdelete');
-Route::get('/utilisateurs/poubelle', 'App\Http\Controllers\UtilisateurController@poubelle');
-Route::get('utilisateurs/restore/delete/{id}', 'App\Http\Controllers\UtilisateurController@restore')->name('utilisateur.restore');
-Route::get('utilisateurs/harddelete/{id}', 'App\Http\Controllers\UtilisateurController@hardDelete')->name('utilisateur.harddelete');
+/**  admin/utilisateurs routes */
+Route::get('admin/utilisateurs/poubelle', 'App\Http\Controllers\UtilisateurController@poubelle')->name('utilisateurs.poubelle');
+Route::get('admin/utilisateurs/{id}/restore', 'App\Http\Controllers\UtilisateurController@restore')->name('utilisateurs.restore');
+Route::delete('admin/utilisateurs/{id}/harddelete', 'App\Http\Controllers\UtilisateurController@hardDelete')->name('utilisateurs.harddelete');
+Route::resource('admin/utilisateurs', 'App\Http\Controllers\UtilisateurController')->except(['store']);
+Route::post('admin/utilisateurs', 'App\Http\Controllers\UtilisateurController@store')->name('utilisateurs.store');
+Route::get('admin/utilisateurs/softDelete/{id}', 'App\Http\Controllers\UtilisateurController@softDelete')->name('utilisateurs.softdelete');
+Route::post('admin/utilisateurs/{id}/updateUser', 'App\Http\Controllers\UtilisateurController@updateUser')->name('utilisateurs.updateUser');
+Route::post('/utilisateurs/{id}/change-password', 'App\Http\Controllers\UtilisateurController@changePassword')->name('utilisateurs.changePassword');
 
-/*Route::get('/admin/show', function () {
-    return view('/admin/utilisateurs/show');
-});*/
+/**  admin/entreprises routes */
+Route::get('admin/entreprises/poubelle', 'App\Http\Controllers\EntrepriseController@poubelle')->name('entreprises.poubelle');
+Route::get('admin/entreprises/{id}/restore', 'App\Http\Controllers\EntrepriseController@restore')->name('entreprises.restore');
+Route::delete('admin/entreprises/{id}/harddelete', 'App\Http\Controllers\EntrepriseController@hardDelete')->name('entreprises.harddelete');
+Route::resource('admin/entreprises', 'App\Http\Controllers\EntrepriseController')->except(['store']);
+Route::post('admin/entreprises', 'App\Http\Controllers\EntrepriseController@store')->name('entreprises.store');
+Route::get('admin/entreprises/softDelete/{id}', 'App\Http\Controllers\EntrepriseController@softDelete')->name('entreprises.softdelete');
+Route::post('admin/entreprises/{id}/updateUser', 'App\Http\Controllers\EntrepriseController@updateUser')->name('entreprises.updateUser');
+Route::post('/entreprises/{id}/change-password', 'App\Http\Controllers\EntrepriseController@changePassword')->name('entreprises.changePassword');
+
+/**  admin/demandes routes */
+Route::resource('admin/demandes', 'App\Http\Controllers\DemandeController')->except(['store']);
+Route::get('/demandes/{id}/accepte', 'App\Http\Controllers\DemandeController@accepte')->name('demandes.accepte');
+Route::get('/demandes/{id}/rejette','App\Http\Controllers\DemandeController@rejette')->name('demandes.rejette');
+
+/*layout initialization*/
+Route::get('/admin/admin_layout', [App\Http\Controllers\HomeController::class, 'index'])->name('admin.admin_layout');

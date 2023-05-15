@@ -13,6 +13,7 @@ return new class extends Migration
             $table->string('ville')->after('prenom');
             $table->integer('zip')->after('ville');
             $table->string('telephone')->after('zip');
+            
         });
     }
 
