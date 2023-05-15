@@ -5,21 +5,17 @@
     <h1>Tous les utilisateurs</h1>
     <nav>
       <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+        <li class="breadcrumb-item"><a>Utlisateurs</a></li>
         <li class="breadcrumb-item active">Tous les utilisateurs</li>
       </ol>
     </nav>
   </div><!-- End Page Title -->
-
-  
   <section class="section dashboard">
-
     <div class="row">
       <div class="col-lg-12">
-
         <div class="card">
           <div class="card-body">
-                <h5 class="card-title">Tous les utilisateurs</h5>
+              <h5 class="card-title">Tous les utilisateurs</h5>
               @if ($message = Session::get('success'))
                 <div class="alert alert-primary" role="alert">
                     {{$message}}
@@ -61,10 +57,7 @@
 
           </div>
         </div>
-
       </div>
     </div>
-
-    </section>
-
+  </section>
 @endsection

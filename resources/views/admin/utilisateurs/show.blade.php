@@ -7,11 +7,11 @@
     color: rgba(1, 41, 112, 0.6);}
 </style>
 <div class="pagetitle">
-    <h1>Tous les utilisateurs</h1>
+    <h1>informations de l'utilisateur</h1>
     <nav>
       <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-        <li class="breadcrumb-item active">Tous les utilisateurs</li>
+        <li class="breadcrumb-item"><a href="index.html">Utilisateurs</a></li>
+        <li class="breadcrumb-item active">informations de l'utilisateur</li>
       </ol>
     </nav>
   </div><!-- End Page Title -->
@@ -41,21 +41,29 @@
                           <div class="col-lg-3 col-md-4 profil_label ">Nom complet</div>
                           <div class="col-lg-9 col-md-8">{{$utilisateur->prenom}} {{$utilisateur->nom}}</div>
                         </div>
+
+                        <hr style="margin-top: 1rem">
       
                         <div class="row">
                           <div class="col-lg-3 col-md-4 profil_label">Adresse email</div>
                           <div class="col-lg-9 col-md-8">{{$utilisateur->email}}</div>
                         </div>
+
+                        <hr style="margin-top: 1rem">
       
                         <div class="row">
                           <div class="col-lg-3 col-md-4 profil_label">Téléphone</div>
                           <div class="col-lg-9 col-md-8">{{$utilisateur->telephone}}</div>
                         </div>
+
+                        <hr style="margin-top: 1rem">
       
                         <div class="row">
                           <div class="col-lg-3 col-md-4 profil_label">Ville</div>
                           <div class="col-lg-9 col-md-8">{{$utilisateur->ville}}</div>
                         </div>
+
+                        <hr style="margin-top: 1rem">
       
                         <div class="row">
                           <div class="col-lg-3 col-md-4 profil_label">Zip</div>

@@ -59,71 +59,39 @@
 
           <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
             <i class="bi bi-bell"></i>
-            <span class="badge bg-primary badge-number">4</span>
+            <span class="badge bg-primary badge-number">{{ $count }}</span>
           </a><!-- End Notification Icon -->
 
           <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow notifications">
             <li class="dropdown-header">
-              You have 4 new notifications
-              <a href="#"><span class="badge rounded-pill bg-primary p-2 ms-2">View all</span></a>
+              Vous avez {{ $count }} nouvelles notifications
             </li>
-            <li>
-              <hr class="dropdown-divider">
-            </li>
+            @foreach ($notifications as $index => $notification)
+              @if ($index < 4)
+                <li>
+                  <hr class="dropdown-divider">
+                </li>
 
-            <li class="notification-item">
-              <i class="bi bi-exclamation-circle text-warning"></i>
-              <div>
-                <h4>Lorem Ipsum</h4>
-                <p>Quae dolorem earum veritatis oditseno</p>
-                <p>30 min. ago</p>
-              </div>
-            </li>
-
-            <li>
-              <hr class="dropdown-divider">
-            </li>
-
-            <li class="notification-item">
-              <i class="bi bi-x-circle text-danger"></i>
-              <div>
-                <h4>Atque rerum nesciunt</h4>
-                <p>Quae dolorem earum veritatis oditseno</p>
-                <p>1 hr. ago</p>
-              </div>
-            </li>
-
-            <li>
-              <hr class="dropdown-divider">
-            </li>
-
-            <li class="notification-item">
-              <i class="bi bi-check-circle text-success"></i>
-              <div>
-                <h4>Sit rerum fuga</h4>
-                <p>Quae dolorem earum veritatis oditseno</p>
-                <p>2 hrs. ago</p>
-              </div>
-            </li>
-
-            <li>
-              <hr class="dropdown-divider">
-            </li>
-
-            <li class="notification-item">
-              <i class="bi bi-info-circle text-primary"></i>
-              <div>
-                <h4>Dicta reprehenderit</h4>
-                <p>Quae dolorem earum veritatis oditseno</p>
-                <p>4 hrs. ago</p>
-              </div>
-            </li>
-
-            <li>
-              <hr class="dropdown-divider">
-            </li>
+              <!-- Notification Items -->
+                <a style="color: #6F6C6D" href="{{ route('demandes.show', $notification['demande_id']) }}">
+                  <li class="notification-item">
+                    <i class="bi bi-info-circle text-primary"></i>
+                    <div>
+                      <h4>{{ $notification['raison_sociale'] }}</h4>
+                      <p>{{ $notification['telephone'] }}</p>
+                      <p>{{ $notification['date_soumission'] }}</p>
+                    </div>
+                  </li>
+                </a>
+                <li>
+                  <hr class="dropdown-divider">
+                </li>
+              @else
+                @break
+              @endif
+            @endforeach
             <li class="dropdown-footer">
-              <a href="#">Show all notifications</a>
+              <a href="{{ route('demandes.index') }}">Afficher toutes les demandes</a>
             </li>
 
           </ul><!-- End Notification Dropdown Items -->
@@ -280,7 +248,7 @@
       <li class="nav-item">
         <a class="nav-link 
         <?php 
-        if (Request::is('admin/utilisateurs') || Request::is('admin/utilisateurs/create') || Request::is('utilisateurs/poubelle') ) {
+        if (Request::is('admin/utilisateurs') || Request::is('admin/utilisateurs/create') || Request::is('admin/utilisateurs/poubelle') ) {
         } else {
           echo 'collapsed';
         }
@@ -290,7 +258,7 @@
           <i class="bi bi-people " ></i><span>Utilisateurs</span><i class="bi bi-chevron-down ms-auto"></i>
         </a>
         <ul id="user-nav" class="nav-content collapse <?php 
-        if (Request::is('admin/utilisateurs') || Request::is('admin/utilisateurs/create') || Request::is('utilisateurs/poubelle') ) {echo 'show';
+        if (Request::is('admin/utilisateurs') || Request::is('admin/utilisateurs/create') || Request::is('admin/utilisateurs/poubelle') ) {echo 'show';
         } 
         
         ?>" data-bs-parent="#sidebar-nav">
@@ -305,7 +273,7 @@
             </a>
           </li>
           <li>
-            <a class="{{ Request::is('utilisateurs/poubelle') ? 'active' : '' }}" href="/utilisateurs/poubelle">
+            <a class="{{ Request::is('admin/utilisateurs/poubelle') ? 'active' : '' }}" href="{{ route('utilisateurs.poubelle') }}">
               <i class="bi bi-circle"></i><span>Poubelle</span>
             </a>
           </li>
@@ -315,22 +283,34 @@
       </li><!-- End Utilisateurs Nav -->
 
       <li class="nav-item">
-        <a class="nav-link collapsed" data-bs-target="#company-nav" data-bs-toggle="collapse" href="#">
-          <i class="bi bi-building"></i><span>Entreprises</span><i class="bi bi-chevron-down ms-auto"></i>
+        <a class="nav-link 
+        <?php 
+        if (Request::is('admin/entreprises') || Request::is('admin/entreprises/create') || Request::is('admin/entreprises/poubelle') ) {
+        } else {
+          echo 'collapsed';
+        }
+        
+        ?>
+        " data-bs-target="#entrepriser-nav" data-bs-toggle="collapse" href="#">
+          <i class="bi bi-code-slash" ></i><span>Entreprises</span><i class="bi bi-chevron-down ms-auto"></i>
         </a>
-        <ul id="company-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+        <ul id="entrepriser-nav" class="nav-content collapse <?php 
+        if (Request::is('admin/entreprises') || Request::is('admin/entreprises/create') || Request::is('admin/entreprises/poubelle') ) {echo 'show';
+        } 
+        
+        ?>" data-bs-parent="#sidebar-nav">
           <li>
-            <a href="forms-elements.html">
+            <a class="{{ Request::is('admin/entreprises') ? 'active' : '' }}" href="/admin/entreprises" >
               <i class="bi bi-circle"></i><span>Tous les entreprises</span>
             </a>
           </li>
           <li>
-            <a href="forms-layouts.html">
-              <i class="bi bi-circle"></i><span>Ajouter une entreprise</span>
+            <a class="{{ Request::is('admin/entreprises/create') ? 'active' : '' }}" href="{{ route('entreprises.create') }}" >
+              <i class="bi bi-circle"></i><span>Ajouter un entreprises</span>
             </a>
           </li>
           <li>
-            <a href="utilisateurs/poubelle">
+            <a class="{{ Request::is('admin/entreprises/poubelle') ? 'active' : '' }}" href="{{ route('entreprises.poubelle') }}">
               <i class="bi bi-circle"></i><span>Poubelle</span>
             </a>
           </li>
