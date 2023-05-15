@@ -1,6 +1,7 @@
 <?php
-
-use App\Http\Controllers\HomeController;
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\AcceuilController;
+use App\Http\Controllers\EntrepriseController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,20 +15,21 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/',[AcceuilController::class,'index']);
+Route::get('/connect','App\Http\Controllers\AcceuilController@redirect')->middleware('auth','verified');
 
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
 Auth::routes();
 
+Route::get('/annuaire',[AcceuilController::class,'Annuaire']);
+Route::get('/acceuil',[AcceuilController::class,'Acceuil']);
+Route::get('/demande_entreprise',[EntrepriseController::class,'demande_entreprise'])->middleware('auth','verified');
 
-Route::get('/annuaire', function () {
-    return view('/annuaire');
-});
 
-Route::get('/acceuil',[AcceuilController::class,'redirect'])->middleware('auth','verified');
+
+Route::get('/admin/dashboard',[AdminController::class,'dashbord'])->middleware('auth','verified');
+
 
 Route::get('/admin', function () {
     return view('/admin/admin_layout');
@@ -54,14 +56,13 @@ Route::middleware([
 });
 
 
-Route::get('/admin/dashboard', function () {
-    return view('/admin/dashboard');
-});
+// Route::get('/admin/dashboard', function () {
+//     return view('/admin/dashboard');
+// });
 
 
-Route::get('/admin/dashboard', function () {
-    return view('/admin/dashboard');
-});
+
+Route::post('admin/entreprises', 'App\Http\Controllers\EntrepriseController@store')->name('entreprises.store');
 
 
 /**  admin/utilisateurs routes */
@@ -89,5 +90,5 @@ Route::resource('admin/demandes', 'App\Http\Controllers\DemandeController')->exc
 Route::get('/demandes/{id}/accepte', 'App\Http\Controllers\DemandeController@accepte')->name('demandes.accepte');
 Route::get('/demandes/{id}/rejette','App\Http\Controllers\DemandeController@rejette')->name('demandes.rejette');
 
-/*layout initialization*/
+/layout initialization/
 Route::get('/admin/admin_layout', [App\Http\Controllers\HomeController::class, 'index'])->name('admin.admin_layout');

@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\MailNotify;
 use App\Models\Demande;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
+use TheSeer\Tokenizer\Exception;
 
 class DemandeController extends Controller
 {
@@ -73,9 +76,20 @@ class DemandeController extends Controller
         // Update the status of the demand to "accepté"
         $demande->status = 'accepté';
         $demande->save();
-        
-        // Redirect or return a response
-        return redirect()->route('demandes.index')->with('success', 'Demande accepted successfully');
+    
+        // Prepare data to be passed to the email template
+        $data = [
+            'subject' => 'Demande Acceptée',
+            'demande' => $demande,
+        ];
+    
+        // Send email notification
+        try {
+            Mail::to($demande->entreprise->email)->send(new MailNotify($data));
+            return redirect()->route('demandes.index')->with('success', 'Demande accepted successfully');
+        } catch (Exception $e) {
+            return redirect()->route('demandes.index')->with('success', 'Failed to send email');
+        }
     }
 
     public function rejette($id)
@@ -86,7 +100,18 @@ class DemandeController extends Controller
         $demande->status = 'rejeté';
         $demande->save();
         
-        // Redirect or return a response
-        return redirect()->route('demandes.index')->with('success', 'Demande rejected successfully');
+        // Prepare data to be passed to the email template
+        $data = [
+            'subject' => 'Demande rejeté',
+            'demande' => $demande,
+        ];
+    
+        // Send email notification
+        try {
+            Mail::to($demande->entreprise->email)->send(new MailNotify($data));
+            return redirect()->route('demandes.index')->with('success', 'Demande rejeté successfully');
+        } catch (Exception $e) {
+            return redirect()->route('demandes.index')->with('success', 'Failed to send email');
+        }
     }
 }
