@@ -1,6 +1,7 @@
 @extends('admin.admin_layout')
 
 @section('content')
+
 <div class="pagetitle">
     <h1>Demandes d'inscription</h1>
     <nav>
@@ -38,7 +39,7 @@
                 <tr>
                   <th scope="col">#</th>
                   <th scope="col">Date de création</th>
-                  <th scope="col">Remarque</th>
+                  <th scope="col">Raison Social</th>
                   <th scope="col">Pack</th>
                   <th scope="col">Entreprise ID</th>
                   <th scope="col">Status</th>
@@ -50,28 +51,20 @@
                 <tr>
                     <td>{{ $demande->id }}</td>
                     <td>{{$new_date = date("d-m-Y",strtotime($demande->date_creation))}}</td>
-                    <td>
-                      @if (Str::length($demande->remarque) > 20)
-                        {{ Str::limit($demande->remarque, 15) }}...
-                      @else
-                        {{ $demande->remarque }}
-                      @endif
+                    <td>{{ $demande->entreprise->raison_sociale }}
                     </td>
                     <td>{{ $demande->pack }}</td>
                     <td><a href="{{ route('entreprises.show', $demande->entreprise_id) }}">{{ $demande->entreprise_id }}</a></td>
-                    <td style="color: 
-                    <?php 
+                    <td><span  style="color : <?php
                       if ($demande->status === 'en attente') {
                         echo 'orange';
                       } elseif ($demande->status === 'accepté') {
                         echo 'green';
                       } elseif ($demande->status === 'rejeté') {
                         echo 'red';
-                      }
-                    ?>
-                  " >{{ $demande->status }}</td>
+                      }?>">{{ $demande->status }}</span></td>
 
-                    <td>
+                    <td><div style="text-align: center">
                       @if ($demande->status === 'en attente')
                           <a href="{{ route('demandes.show', $demande->id) }}"><i class="bi bi-eye m-3" style="color: black; font-size: 20px"></i></a>
                           <a href="{{ route('demandes.accepte', $demande->id) }}"><i class="bi bi-check-lg m-3" style="color: green; font-size: 20px"></i></a>
@@ -79,7 +72,7 @@
                       @else
                           <a href="{{ route('demandes.show', $demande->id) }}"><i class="bi bi-eye m-3" style="color: black; font-size: 20px"></i></a>
                       @endif
-                      
+                      </div>
                     </td>
 
                 </tr>

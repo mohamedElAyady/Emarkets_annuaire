@@ -143,7 +143,7 @@
                 </li>
                 <li style=" display: inline-block;  margin-top: 7px; float: right;">
                     <button class="button-21 nunito skeleton" role="button">
-                    <b>Details</b>
+                        <b>Details</b>
                     </button>s
                 </li>
                 </ul>

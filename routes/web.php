@@ -90,5 +90,10 @@ Route::resource('admin/demandes', 'App\Http\Controllers\DemandeController')->exc
 Route::get('/demandes/{id}/accepte', 'App\Http\Controllers\DemandeController@accepte')->name('demandes.accepte');
 Route::get('/demandes/{id}/rejette','App\Http\Controllers\DemandeController@rejette')->name('demandes.rejette');
 
-/layout initialization/
+/*layout initialization*/
 Route::get('/admin/admin_layout', [App\Http\Controllers\HomeController::class, 'index'])->name('admin.admin_layout');
+Route::get('/admin/annonces/changeStatus', [App\Http\Controllers\AnnonceController::class, 'changeStatus'])->name('admin.annonces.changeStatus');
+
+/**  admin/annonces routes */
+Route::resource('admin/annonces', 'App\Http\Controllers\AnnonceController');
+Route::post('admin/annonces/{annonce}', 'AnnonceController@update');

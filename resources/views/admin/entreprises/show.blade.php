@@ -40,9 +40,10 @@
                         </div>
                         @endif
                         <div class="row">
-                              <div class="text-center">
-                                <img src="{{ $entreprise->logo_url }}" alt="Logo" class="img-fluid">
-                              </div>
+                          <div class="text-center">
+                            <img src="{{ asset($entreprise->logo_url) }}" alt="Logo" class="img-fluid">
+                          </div>
+                          
 
                               <div class="row">
                                 <div class="col-lg-3 col-md-4 profil_label">Raison sociale</div>

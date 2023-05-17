@@ -114,4 +114,5 @@ class DemandeController extends Controller
             return redirect()->route('demandes.index')->with('success', 'Failed to send email');
         }
     }
+    
 }
