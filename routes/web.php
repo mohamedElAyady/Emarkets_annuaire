@@ -4,6 +4,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AcceuilController;
 use App\Http\Controllers\AnnuaireController;
 use App\Http\Controllers\EntrepriseController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ContactController;
 
@@ -101,7 +102,7 @@ Route::resource('admin/demandes', 'App\Http\Controllers\DemandeController')->exc
 Route::get('/demandes/{id}/accepte', 'App\Http\Controllers\DemandeController@accepte')->name('demandes.accepte');
 Route::get('/demandes/{id}/rejette','App\Http\Controllers\DemandeController@rejette')->name('demandes.rejette');
 
-/*layout initialization*/
+/**layout initialization**/
 Route::get('/admin/admin_layout', [App\Http\Controllers\HomeController::class, 'index'])->name('admin.admin_layout');
 
 /**  admin/annonces routes */
