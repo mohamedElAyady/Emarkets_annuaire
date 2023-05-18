@@ -35,7 +35,7 @@ class AcceuilController extends Controller
             return redirect('acceuil');
         }
         else{
-            return view('admin.admin_layout');
+            return view('acceuil');
         }
         
     }
