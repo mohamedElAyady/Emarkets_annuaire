@@ -1,9 +1,11 @@
 <?php
+use App\Http\Controllers\CommentsController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AcceuilController;
+use App\Http\Controllers\AnnuaireController;
 use App\Http\Controllers\EntrepriseController;
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\ContactController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -18,11 +20,19 @@ use Illuminate\Support\Facades\Route;
 Route::get('/',[AcceuilController::class,'index']);
 Route::get('/connect','App\Http\Controllers\AcceuilController@redirect')->middleware('auth','verified');
 
-
-
 Auth::routes();
 
-Route::get('/annuaire',[AcceuilController::class,'Annuaire']);
+Route::get('/card', function () {
+    return view('/card_details');
+});
+Route::get('/details/{id}', [AnnuaireController::class, 'affiche_details'])->name('details');
+Route::post('/comments', [CommentsController::class, 'store'])->name('comments.store');
+
+
+
+
+
+Route::get('/annuaire',[AnnuaireController::class,'Annuaire']);
 Route::get('/acceuil',[AcceuilController::class,'Acceuil']);
 Route::get('/demande_entreprise',[EntrepriseController::class,'demande_entreprise'])->middleware('auth','verified');
 
@@ -92,3 +102,11 @@ Route::get('/demandes/{id}/rejette','App\Http\Controllers\DemandeController@reje
 
 /*layout initialization*/
 Route::get('/admin/admin_layout', [App\Http\Controllers\HomeController::class, 'index'])->name('admin.admin_layout');
+
+/**  admin/annonces routes */
+Route::get('/admin/annonces/changeStatus', [App\Http\Controllers\AnnonceController::class, 'changeStatus'])->name('admin.annonces.changeStatus');
+Route::resource('admin/annonces', 'App\Http\Controllers\AnnonceController');
+Route::post('admin/annonces/{annonce}', 'AnnonceController@update');
+
+Route::get('/contact', [ContactController::class, 'index'])->name('contact.index');
+Route::post('/contact', [ContactController::class, 'store'])->name('contact.store');

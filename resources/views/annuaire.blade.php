@@ -6,148 +6,55 @@
             <div class="row" style="margin-bottom: 10px">
                 <input type="text" class="form-control" id="searchInput" placeholder="Search by name, sector, city, or address">
             </div>
+
+            @foreach ($info as $item)
             <div class="card mt-3" style="background-image: url('assets/annuaire/img/cardbackground.png'); background-size:contain; background-repeat: no-repeat; background-position: right ">
-            <div class="card-header " style="opacity: 0.5;">
-                <span class="skeleton" style="opacity: 0.5;"><i class="fa-solid fa-diagram-project" style="margin-right: 5px; font-size: 15px;"></i> secteur d'activité</span>
-            </div>
-            <div class="card-body">
-                <h3 class="card-title skeleton">
-                <img src="assets/annuaire/img/elogo.png" alt="" style="width: 50px; height: 50px; margin-right: 5px;">
-                <b>E-markets expo</b>
-                </h3>
-                <p class="nunito skeleton">
-                <i class="fa-sharp fa-solid fa-location-dot"style="" ></i>
-                59, Av Fal ouled oumeir, 3°et, app 6 agadir - 10090
-                </p>
-            </div>
-            <div class="card-footer bg-transparent">
-                <ul style="list-style: none; ">
-                <li class="nunito skeleton" style=" display: inline-block;  margin-top: 15px; margin-left: -25px">
-                    <i class="fa-solid fa-comment"></i> | <span class="comments-count skeleton" >10</span> commentaire
-                </li>
-                <li style=" display: inline-block;  margin-top: 7px; float: right;">
-                    <button class="button-21 nunito skeleton" role="button">
-                    <b>Details</b>
-                    </button>
-                </li>
-                </ul>
-            </div>
-            </div>
+                <div class="card-header " style="opacity: 0.5;">
+                    <span class="skeleton" style="opacity: 0.5;"><i class="fa-solid fa-diagram-project" style="margin-right: 5px; font-size: 15px;"></i>  {{$item->secteur_activite}}  </span>
+                </div>
 
 
-            <div class="card mt-3" style="background-image: url('assets/annuaire/img/cardbackground.png'); background-size:contain; background-repeat: no-repeat; background-position: right ">
-            <div class="card-header " style="opacity: 0.5;">
-                <span class="skeleton" style="opacity: 0.5;"><i class="fa-solid fa-diagram-project" style="margin-right: 5px; font-size: 15px;"></i> secteur d'activité</span>
+
+                <div class="card-body">
+                    <h3 class="card-title skeleton">
+                    <img src="assets/annuaire/img/elogo.png" alt="" style="width: 50px; height: 50px; margin-right: 5px;">
+                    <b>{{$item->raison_sociale}}</b>
+                    </h3>
+                    <p class="nunito skeleton">
+                    <i class="fa-sharp fa-solid fa-location-dot"style="" ></i>
+                    {{$item->adresse}}
+                    </p>
+                </div>
+                <div class="card-footer bg-transparent">
+                    <ul style="list-style: none; ">
+                    <li class="nunito skeleton" style=" display: inline-block;  margin-top: 15px; margin-left: -25px">
+                        <i class="fa-solid fa-comment"></i> | <span class="comments-count skeleton" >10</span> commentaire
+                    </li>
+                    <li style=" display: inline-block;  margin-top: 7px; float: right;">
+                        <button onclick="window.location.href='{{ route('details', $item->id) }}'"  class="button-21 nunito skeleton" role="button">
+                        <b>details
+                        </b>
+                        </button>
+                    </li>
+                    </ul>
+                </div>
             </div>
-            <div class="card-body">
-                <h3 class="card-title skeleton">
-                <img src="assets/annuaire/img/elogo.png" alt="" style="width: 50px; height: 50px; margin-right: 5px;">
-                <b>E-markets expo</b>
-                </h3>
-                <p class="nunito skeleton">
-                <i class="fa-sharp fa-solid fa-location-dot"style="" ></i>
-                59, Av Fal ouled oumeir, 3°et, app 6 agadir - 10090
-                </p>
-            </div>
-            <div class="card-footer bg-transparent">
-                <ul style="list-style: none; ">
-                <li class="nunito skeleton" style=" display: inline-block;  margin-top: 15px; margin-left: -25px">
-                    <i class="fa-solid fa-comment"></i> | <span class="comments-count skeleton" >10</span> commentaire
-                </li>
-                <li style=" display: inline-block;  margin-top: 7px; float: right;">
-                    <button class="button-21 nunito skeleton" role="button">
-                    <b>Details</b>
-                    </button>
-                </li>
-                </ul>
-            </div>
-            </div>
+            
+            @endforeach
+           
+   </div>
+
 
             
-            <div class="card mt-3" style="background-image: url('assets/annuaire/img/cardbackground.png'); background-size:contain; background-repeat: no-repeat; background-position: right ">
-            <div class="card-header " style="opacity: 0.5;">
-                <span class="skeleton" style="opacity: 0.5;"><i class="fa-solid fa-diagram-project" style="margin-right: 5px; font-size: 15px;"></i> secteur d'activité</span>
-            </div>
-            <div class="card-body">
-                <h3 class="card-title skeleton">
-                <img src="assets/annuaire/img/elogo.png" alt="" style="width: 50px; height: 50px; margin-right: 5px;">
-                <b>E-markets expo</b>
-                </h3>
-                <p class="nunito skeleton">
-                <i class="fa-sharp fa-solid fa-location-dot"style="" ></i>
-                59, Av Fal ouled oumeir, 3°et, app 6 agadir - 10090
-                </p>
-            </div>
-            <div class="card-footer bg-transparent">
-                <ul style="list-style: none; ">
-                <li class="nunito skeleton" style=" display: inline-block;  margin-top: 15px; margin-left: -25px">
-                    <i class="fa-solid fa-comment"></i> | <span class="comments-count skeleton" >10</span> commentaire
-                </li>
-                <li style=" display: inline-block;  margin-top: 7px; float: right;">
-                    <button class="button-21 nunito skeleton" role="button">
-                    <b>Details</b>
-                    </button>
-                </li>
-                </ul>
-            </div>
-            </div>
+
+           
+            
 
             
-            <div class="card mt-3" style="background-image: url('assets/annuaire/img/cardbackground.png'); background-size:contain; background-repeat: no-repeat; background-position: right ">
-            <div class="card-header " style="opacity: 0.5;">
-                <span class="skeleton" style="opacity: 0.5;"><i class="fa-solid fa-diagram-project" style="margin-right: 5px; font-size: 15px;"></i> secteur d'activité</span>
-            </div>
-            <div class="card-body">
-                <h3 class="card-title skeleton">
-                <img src="assets/annuaire/img/elogo.png" alt="" style="width: 50px; height: 50px; margin-right: 5px;">
-                <b>E-markets expo</b>
-                </h3>
-                <p class="nunito skeleton">
-                <i class="fa-sharp fa-solid fa-location-dot"style="" ></i>
-                59, Av Fal ouled oumeir, 3°et, app 6 agadir - 10090
-                </p>
-            </div>
-            <div class="card-footer bg-transparent">
-                <ul style="list-style: none; ">
-                <li class="nunito skeleton" style=" display: inline-block;  margin-top: 15px; margin-left: -25px">
-                    <i class="fa-solid fa-comment"></i> | <span class="comments-count skeleton" >10</span> commentaire
-                </li>
-                <li style=" display: inline-block;  margin-top: 7px; float: right;">
-                    <button class="button-21 nunito skeleton" role="button">
-                    <b>Details</b>
-                    </button>
-                </li>
-                </ul>
-            </div>
-            </div>
+           
 
             
-            <div class="card mt-3" style="background-image: url('assets/annuaire/img/cardbackground.png'); background-size:contain; background-repeat: no-repeat; background-position: right ">
-            <div class="card-header " style="opacity: 0.5;">
-                <span class="skeleton" style="opacity: 0.5;"><i class="fa-solid fa-diagram-project" style="margin-right: 5px; font-size: 15px;"></i> secteur d'activité</span>
-            </div>
-            <div class="card-body">
-                <h3 class="card-title skeleton">
-                <img src="assets/annuaire/img/elogo.png" alt="" style="width: 50px; height: 50px; margin-right: 5px;">
-                <b>E-markets expo</b>
-                </h3>
-                <p class="nunito skeleton">
-                <i class="fa-sharp fa-solid fa-location-dot"style="" ></i>
-                59, Av Fal ouled oumeir, 3°et, app 6 agadir - 10090
-                </p>
-            </div>
-            <div class="card-footer bg-transparent">
-                <ul style="list-style: none; ">
-                <li class="nunito skeleton" style=" display: inline-block;  margin-top: 15px; margin-left: -25px">
-                    <i class="fa-solid fa-comment"></i> | <span class="comments-count skeleton" >10</span> commentaire
-                </li>
-                <li style=" display: inline-block;  margin-top: 7px; float: right;">
-                    <button class="button-21 nunito skeleton" role="button">
-                    <b>Details</b>
-                    </button>s
-                </li>
-                </ul>
-            </div>
+           
             </div>
 
             

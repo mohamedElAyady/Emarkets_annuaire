@@ -6,6 +6,10 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 
+
+use App\Models\Entreprise;
+
+
 class AcceuilController extends Controller
 {
     public function redirect()
@@ -31,15 +35,12 @@ class AcceuilController extends Controller
             return redirect('acceuil');
         }
         else{
-            return view('acceuil');
+            return view('admin.admin_layout');
         }
         
     }
 
-    public function Annuaire()
-    {
-       return view('annuaire');
-    }
+   
 
     public function Acceuil()
     {

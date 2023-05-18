@@ -478,7 +478,9 @@ select{
  </head>
                                
 <body >
-    @include('layouts.navbar')
+    <header>
+     @include('layouts.navbar')
+    </header>
                                     
   <div class="container">
     <div class="card">
