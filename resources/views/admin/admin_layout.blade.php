@@ -4,27 +4,27 @@
 <head>
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
-  
+
     <title>Administration</title>
     <meta content="" name="description">
     <meta content="" name="keywords">
-  
+
     <!-- Favicons -->
     <link href="{{asset('admin_assets/img/favicon.png ')}}" rel="icon">
-    
-  
+
+
     <link href="{{asset('admin_assets/img/apple-touch-icon.png')}}" rel="apple-touch-icon"><!-- Google Fonts -->
     <link href="https://fonts.gstatic.com" rel="preconnect">
-    
-  
+
+
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet"><!-- Vendor CSS Files -->
 
     <link href="{{asset('admin_assets/vendor/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet">
     <link href="{{asset('admin_assets/vendor/bootstrap-icons/bootstrap-icons.css')}}" rel="stylesheet">
-  
+
     <!-- Template Main CSS File -->
     <link href="{{asset('admin_assets/css/style.css')}}" rel="stylesheet">
-    
+
   <link href="{{asset('admin_assets/vendor/simple-datatables/style.css')}}" rel="stylesheet">
 </head>
 
@@ -34,7 +34,7 @@
   <header id="header" class="header fixed-top d-flex align-items-center">
 
     <div class="d-flex align-items-center justify-content-between">
-      <a href="index.html" class="logo d-flex align-items-center">
+      <a href="/acceuil" class="logo d-flex align-items-center">
         <img src="{{asset('assets/annuaire/img/logo.png')}}" alt="">
       </a>
       <i class="bi bi-list toggle-sidebar-btn"></i>
@@ -247,21 +247,21 @@
 
 
       <li class="nav-item">
-        <a class="nav-link 
-        <?php 
+        <a class="nav-link
+        <?php
         if (Request::is('admin/utilisateurs') || Request::is('admin/utilisateurs/create') || Request::is('admin/utilisateurs/poubelle') ) {
         } else {
           echo 'collapsed';
         }
-        
+
         ?>
         " data-bs-target="#user-nav" data-bs-toggle="collapse" href="#">
           <i class="bi bi-people " ></i><span>Utilisateurs</span><i class="bi bi-chevron-down ms-auto"></i>
         </a>
-        <ul id="user-nav" class="nav-content collapse <?php 
+        <ul id="user-nav" class="nav-content collapse <?php
         if (Request::is('admin/utilisateurs') || Request::is('admin/utilisateurs/create') || Request::is('admin/utilisateurs/poubelle') ) {echo 'show';
-        } 
-        
+        }
+
         ?>" data-bs-parent="#sidebar-nav">
           <li>
             <a class="{{ Request::is('admin/utilisateurs') ? 'active' : '' }}" href="/admin/utilisateurs" >
@@ -278,27 +278,27 @@
               <i class="bi bi-circle"></i><span>Poubelle</span>
             </a>
           </li>
-          
+
           </li>
         </ul>
       </li><!-- End Utilisateurs Nav -->
 
       <li class="nav-item">
-        <a class="nav-link 
-        <?php 
+        <a class="nav-link
+        <?php
         if (Request::is('admin/entreprises') || Request::is('admin/entreprises/create') || Request::is('admin/entreprises/poubelle') ) {
         } else {
           echo 'collapsed';
         }
-        
+
         ?>
         " data-bs-target="#entrepriser-nav" data-bs-toggle="collapse" href="#">
           <i class="bi bi-code-slash" ></i><span>Entreprises</span><i class="bi bi-chevron-down ms-auto"></i>
         </a>
-        <ul id="entrepriser-nav" class="nav-content collapse <?php 
+        <ul id="entrepriser-nav" class="nav-content collapse <?php
         if (Request::is('admin/entreprises') || Request::is('admin/entreprises/create') || Request::is('admin/entreprises/poubelle') ) {echo 'show';
-        } 
-        
+        }
+
         ?>" data-bs-parent="#sidebar-nav">
           <li>
             <a class="{{ Request::is('admin/entreprises') ? 'active' : '' }}" href="/admin/entreprises" >
@@ -315,27 +315,27 @@
               <i class="bi bi-circle"></i><span>Poubelle</span>
             </a>
           </li>
-          
+
           </li>
         </ul>
       </li><!-- End Entreprises Nav -->
 
 
       <li class="nav-item">
-        <a class="nav-link 
-        <?php 
+        <a class="nav-link
+        <?php
         if (Request::is('admin/annonces') ) {
         } else {
           echo 'collapsed';
         }
-        
+
         ?>" data-bs-target="#annonce-nav" data-bs-toggle="collapse" href="#">
           <i class="bi bi-journal-text"></i><span>Annonces</span><i class="bi bi-chevron-down ms-auto"></i>
         </a>
-        <ul id="annonce-nav" class="nav-content collapse <?php 
+        <ul id="annonce-nav" class="nav-content collapse <?php
         if (Request::is('admin/annonces')) {echo 'show';
-        } 
-        
+        }
+
         ?> " data-bs-parent="#sidebar-nav">
           <li>
             <a class="{{ Request::is('admin/annonces') ? 'active' : '' }}"  href="/admin/annonces">
@@ -352,7 +352,7 @@
               <i class="bi bi-circle"></i><span>Poubelle</span>
             </a>
           </li>
-          
+
           </li>
         </ul>
       </li><!-- End Annonces Nav -->
@@ -372,7 +372,7 @@
               <i class="bi bi-circle"></i><span>Ajouter une catégorie</span>
             </a>
           </li>
-          
+
           </li>
         </ul>
       </li><!-- End category Nav -->
@@ -393,7 +393,7 @@
               <i class="bi bi-circle"></i><span>Boîte de Contacts</span>
             </a>
           </li>
-          
+
           </li>
         </ul>
       </li><!-- End demandes Nav -->
@@ -415,7 +415,7 @@
 
 
         <!-- content here -->
-        
+
     @yield('content')
         <!-- fin content -->
 
@@ -425,7 +425,7 @@
 
   <!-- ======= Footer ======= -->
   <footer id="footer" class="footer">
-    
+
   </footer><!-- End Footer -->
 
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-circle-fill"></i></a>
