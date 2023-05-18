@@ -9,8 +9,8 @@
                 </div>
 
                 <div class="card-body d-flex flex-wrap">
-                    <div class="logo-wrapper" style="width: 25%;">
-                        <img src="assets/annuaire/img/elogo.png" alt="" style="width: 50px; height: 50px; margin-right: 5px;">
+                    <div class="logo-wrapper">
+                        <img src="{{$info->logo_url}}" alt="" style="width: 50px; height: 50px; margin-right: 5px;">
                     </div>
                     <div class="info-wrapper" style="">
                         <h3 class="card-title skeleton" style="text-align: center">

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Annonce;
 use App\Models\Entreprise;
 use Illuminate\Http\Request;
 
@@ -9,8 +10,8 @@ class AnnuaireController extends Controller
 {
     public function Annuaire()
     {
-        $info=Entreprise::all();
-       return view('annuaire',compact('info'));
+        $annonces = Annonce::where('statut', 'active')->get();
+        return view('annuaire', compact('annonces'));
     }
 
     public function affiche_details($id)
