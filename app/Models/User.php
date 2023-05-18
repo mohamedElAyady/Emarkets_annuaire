@@ -20,6 +20,10 @@ class User extends Authenticatable
     use TwoFactorAuthenticatable;
     use SoftDeletes;
 
+    public function entreprise()
+    {
+    return $this->hasOne(Entreprise::class);
+    }
     /**
      * The attributes that are mass assignable.
      *

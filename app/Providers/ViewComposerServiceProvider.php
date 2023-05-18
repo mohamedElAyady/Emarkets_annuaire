@@ -23,23 +23,25 @@ class ViewComposerServiceProvider extends ServiceProvider
         Carbon::setLocale('fr');
         $count = 0;
         foreach ($demandes as $demande) {
-            $raisonSociale = $demande->entreprise->raison_sociale;
-            $telephone = $demande->entreprise->telephone;
-            $demande_id = $demande->id;
-            $status = $demande->status;
-            $dateSoumission = Carbon::parse($demande->date_creation)->diffForHumans();
-            if ($status === 'en attente') {
-                $count++;
-                $notification = [
-                    'demande_id' => $demande_id,
-                    'raison_sociale' => $raisonSociale,
-                    'telephone' => $telephone,
-                    'date_soumission' => $dateSoumission
-                ];
+            if ($demande->entreprise) { 
+                $raisonSociale = $demande->entreprise->raison_sociale;
+                $telephone = $demande->entreprise->telephone;
+                $demande_id = $demande->id;
+                $status = $demande->status;
+                $dateSoumission = Carbon::parse($demande->date_creation)->diffForHumans();
+                if ($status === 'en attente') {
+                    $count++;
+                    $notification = [
+                        'demande_id' => $demande_id,
+                        'raison_sociale' => $raisonSociale,
+                        'telephone' => $telephone,
+                        'date_soumission' => $dateSoumission
+                    ];
 
-                $notifications[] = $notification;
+                    $notifications[] = $notification;
+                    }
+                }
             }
-        }
 
         $view->with('notifications', $notifications);
         $view->with('count', $count);

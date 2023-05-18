@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
   
-    <title>Dashboard - NiceAdmin Bootstrap Template</title>
+    <title>Administration</title>
     <meta content="" name="description">
     <meta content="" name="keywords">
   
@@ -19,7 +19,8 @@
   
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet"><!-- Vendor CSS Files -->
 
-    <link href="{{asset('admin_assets/vendor/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet"><link href="{{asset('admin_assets/vendor/bootstrap-icons/bootstrap-icons.css')}}" rel="stylesheet"><link rel="stylesheet">
+    <link href="{{asset('admin_assets/vendor/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet">
+    <link href="{{asset('admin_assets/vendor/bootstrap-icons/bootstrap-icons.css')}}" rel="stylesheet">
   
     <!-- Template Main CSS File -->
     <link href="{{asset('admin_assets/css/style.css')}}" rel="stylesheet">
@@ -321,12 +322,23 @@
 
 
       <li class="nav-item">
-        <a class="nav-link collapsed" data-bs-target="#annonce-nav" data-bs-toggle="collapse" href="#">
+        <a class="nav-link 
+        <?php 
+        if (Request::is('admin/annonces') ) {
+        } else {
+          echo 'collapsed';
+        }
+        
+        ?>" data-bs-target="#annonce-nav" data-bs-toggle="collapse" href="#">
           <i class="bi bi-journal-text"></i><span>Annonces</span><i class="bi bi-chevron-down ms-auto"></i>
         </a>
-        <ul id="annonce-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+        <ul id="annonce-nav" class="nav-content collapse <?php 
+        if (Request::is('admin/annonces')) {echo 'show';
+        } 
+        
+        ?> " data-bs-parent="#sidebar-nav">
           <li>
-            <a href="forms-elements.html">
+            <a class="{{ Request::is('admin/annonces') ? 'active' : '' }}"  href="/admin/annonces">
               <i class="bi bi-circle"></i><span>Tous les annonces</span>
             </a>
           </li>

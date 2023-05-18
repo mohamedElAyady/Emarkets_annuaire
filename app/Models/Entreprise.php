@@ -21,6 +21,7 @@ class Entreprise extends Model
         'utilisateur_id',
         'site_web',
         'secteur_activite',
+        'pack_id',
     ];
     protected $dates = ['deleted_at'];
 
@@ -30,4 +31,14 @@ class Entreprise extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function demandes()
+    {
+        return $this->hasMany(Demande::class);
+    }
+    public function pack()
+    {
+        return $this->belongsTo(Pack::class);
+    }
+    
 }

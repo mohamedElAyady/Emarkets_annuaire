@@ -48,15 +48,15 @@
                                 <hr style="margin-top: 1rem">
                               
                                 <div class="row">
-                                  <div class="col-lg-3 col-md-4 profil_label">Remarque</div>
-                                  <div class="col-lg-9 col-md-8">{{ $demande->remarque }}</div>
+                                  <div class="col-lg-3 col-md-4 profil_label">Raison Social</div>
+                                  <div class="col-lg-9 col-md-8">{{ $demande->entreprise->raison_sociale }}</div>
                                 </div>
                               
                                 <hr style="margin-top: 1rem">
                               
                                 <div class="row">
                                   <div class="col-lg-3 col-md-4 profil_label">Pack</div>
-                                  <div class="col-lg-9 col-md-8">{{ $demande->pack }}</div>
+                                  <div class="col-lg-9 col-md-8">{{ $demande->pack->name }}</div>
                                 </div>
                               
                                 <hr style="margin-top: 1rem">

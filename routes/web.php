@@ -6,6 +6,7 @@ use App\Http\Controllers\AnnuaireController;
 use App\Http\Controllers\EntrepriseController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ContactController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Entreprise;
 use App\Models\User;
 use App\Rules\MatchOldPassword;
 use Illuminate\Http\Request;
@@ -49,10 +50,14 @@ class UtilisateurController extends Controller
             'email'=>'required',
             'password'=>'required',
         ]);
-
-        $utilisateur = User::create($request->all());
+    
+        $input = $request->all();
+        $input['password'] = Hash::make($input['password']);
+    
+        $utilisateur = User::create($input);
+    
         return redirect()->route('utilisateurs.index')
-        ->with('success',"l'utilisateur a été bien ajouter");
+            ->with('success',"L'utilisateur a été ajouté avec succès");
     }
 
     /**
@@ -111,7 +116,7 @@ class UtilisateurController extends Controller
             return redirect()->route('utilisateurs.index')
                 ->with('error', 'Utilisateur not found');
         }
-    
+        $this->entrepriseDelete($id);
         $utilisateur->delete();
     
         return redirect()->route('utilisateurs.index')
@@ -141,27 +146,22 @@ class UtilisateurController extends Controller
         ->with('success', 'Utilisateur deleted permanently.');
     }
 
-    public function changePassword(Request $request, $id) {
-        $user = User::findOrFail($id);
-    
-        $validatedData = $request->validate([
-            'currentpassword' => 'required',
-            'newpassword' => 'required|string|min:8|confirmed',
-        ]);
-    
-        // check if the current password is correct
-        if (!Hash::check($request->currentpassword, $user->password)) {
-            return redirect()->back()->withErrors(['currentpassword' => 'Mot de passe actuel incorrect.']);
-        }
-    
-        // set the new password
-        $user->password = Hash::make($request->newpassword);
-        $user->save();
-    
-        return redirect()->back()->with('success', 'Le mot de passe a été modifié avec succès.');
-    }
     
 
+    public function entrepriseDelete($id)
+    {
+        // Find all demandes associated with the entreprise_id
+        $entreprises = Entreprise::where('utilisateur_id', $id)->get();
+    
+        // Soft delete each demande
+        foreach ($entreprises as $entreprise) {
+            $d = new EntrepriseController();
+            $d->demandesDelete($entreprise->id);
+            $entreprise->delete();
+            
+        }
+
+    }
     
 
 }
