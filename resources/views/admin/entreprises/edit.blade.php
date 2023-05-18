@@ -49,7 +49,7 @@
                           @csrf
                           @method('PUT')
                           <div class="text-center">
-                            <img src="{{ $entreprise->logo_url }}" alt="Logo" class="img-fluid">
+                            <img src="{{ asset($entreprise->logo_url) }}" alt="Logo" class="img-fluid">
                           </div>
                           <div class="col-md-6">
                             <input type="text" class="form-control" name="raison_sociale" placeholder="Raison sociale" value="{{ $entreprise->raison_sociale }}">

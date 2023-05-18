@@ -13,11 +13,16 @@ class Demande extends Model
         'pack',
         'status',
         'entreprise_id',
+        'pack_id',
     ];
 
     // Relationship with Entreprise model
     public function entreprise()
     {
         return $this->belongsTo(Entreprise::class);
+    }
+    public function pack()
+    {
+        return $this->belongsTo(Pack::class);
     }
 }

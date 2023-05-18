@@ -53,7 +53,7 @@
                     <td>{{$new_date = date("d-m-Y",strtotime($demande->date_creation))}}</td>
                     <td>{{ $demande->entreprise->raison_sociale }}
                     </td>
-                    <td>{{ $demande->pack }}</td>
+                    <td>{{ $demande->pack->name }}</td>
                     <td><a href="{{ route('entreprises.show', $demande->entreprise_id) }}">{{ $demande->entreprise_id }}</a></td>
                     <td><span  style="color : <?php
                       if ($demande->status === 'en attente') {

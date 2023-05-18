@@ -105,6 +105,7 @@ class EntrepriseController extends Controller
     
         // Save logo to the specified path
         $logo->move(public_path('admin_assets/input_images'), $logoPath);
+        $pack = 0;
     
         $entreprise = Entreprise::create([
             'raison_sociale' => $request->raison_sociale,
@@ -117,7 +118,7 @@ class EntrepriseController extends Controller
             'site_web' => $request->site_web,
             'secteur_activite' => $request->secteur_activite,
             'utilisateur_id' => $request->utilisateur_id,
-            'pack_id' => 0,
+            'pack_id' => $pack,
             'logo_url' => $logoPath,
         ]);
     
@@ -125,7 +126,7 @@ class EntrepriseController extends Controller
         $demande = new Demande([
             'status' => 'en attente',
             'date_creation' => now(),
-            'pack_id' => '0',
+            'pack_id' => $pack,
         ]);
         $entreprise->demandes()->save($demande);
     
@@ -207,7 +208,7 @@ class EntrepriseController extends Controller
      */
     public function restore($id)
     {
-        $entreprise = User::onlyTrashed()->where('id' , $id)->first()->restore() ;
+        $entreprise = Entreprise::onlyTrashed()->where('id' , $id)->first()->restore() ;
       //  dd($product);
 
         return redirect()->route('entreprises.index')
@@ -218,32 +219,13 @@ class EntrepriseController extends Controller
      */
     public function hardDelete($id)
     {
-    $entreprise = User::withTrashed()->findOrFail($id);
+    $entreprise = Entreprise::withTrashed()->findOrFail($id);
     $entreprise->forceDelete();
 
     return redirect()->route('entreprises.index')
         ->with('success', 'entreprise deleted permanently.');
     }
 
-    public function changePassword(Request $request, $id) {
-        $user = User::findOrFail($id);
-    
-        $validatedData = $request->validate([
-            'currentpassword' => 'required',
-            'newpassword' => 'required|string|min:8|confirmed',
-        ]);
-    
-        // check if the current password is correct
-        if (!Hash::check($request->currentpassword, $user->password)) {
-            return redirect()->back()->withErrors(['currentpassword' => 'Mot de passe actuel incorrect.']);
-        }
-    
-        // set the new password
-        $user->password = Hash::make($request->newpassword);
-        $user->save();
-    
-        return redirect()->back()->with('success', 'Le mot de passe a été modifié avec succès.');
-    }
 
     /**
      * Remove the specified resource from storage.
@@ -257,10 +239,24 @@ class EntrepriseController extends Controller
                 ->with('error', 'Entreprise non trouvée');
         }
 
+        $this->demandesDelete($id); // Call demandesDelete method
         $entreprise->delete();
+        
 
         return redirect()->route('entreprises.index')
             ->with('success', 'Entreprise supprimée avec succès');
+    }
+
+    public function demandesDelete($id)
+    {
+        // Find all demandes associated with the entreprise_id
+        $demandes = Demande::where('entreprise_id', $id)->get();
+    
+        // Soft delete each demande
+        foreach ($demandes as $demande) {
+            $demande->delete();
+        }
+
     }
     
 

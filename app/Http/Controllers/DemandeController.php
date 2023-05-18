@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Mail\MailNotify;
+use App\Models\Annonce;
 use App\Models\Demande;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use TheSeer\Tokenizer\Exception;
@@ -68,7 +70,7 @@ class DemandeController extends Controller
         //
     }
 
-        
+     /*   
     public function accepte($id)
     {
         $demande = Demande::findOrFail($id);
@@ -90,7 +92,44 @@ class DemandeController extends Controller
         } catch (Exception $e) {
             return redirect()->route('demandes.index')->with('success', 'Failed to send email');
         }
+    }*/
+
+    
+public function accepte($id)
+{
+    $demande = Demande::findOrFail($id);
+
+    // Update the status of the demand to "accepté"
+    $demande->status = 'accepté';
+    $demande->save();
+
+    // Get the expiration date based on entreprise's pack duration
+    $expirationDate = Carbon::now()->addDays($demande->pack->duree);
+
+    // Create an annonce with the specified data
+    $annonce = Annonce::create([
+        'datePublication' => Carbon::now(),
+        'dateExpiration' => $expirationDate,
+        'status' => 'active',
+        'categorie' => '--------',
+        'entreprise_id' => $demande->entreprise->id,
+
+    ]);
+
+    // Prepare data to be passed to the email template
+    $data = [
+        'subject' => 'Demande Acceptée',
+        'demande' => $demande,
+    ];
+
+    // Send email notification
+    try {
+        Mail::to($demande->entreprise->email)->send(new MailNotify($data));
+        return redirect()->route('demandes.index')->with('success', 'Demande accepted successfully');
+    } catch (Exception $e) {
+        return redirect()->route('demandes.index')->with('success', 'Failed to send email');
     }
+}
 
     public function rejette($id)
     {
