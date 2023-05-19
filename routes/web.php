@@ -4,6 +4,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AcceuilController;
 use App\Http\Controllers\AnnuaireController;
 use App\Http\Controllers\EntrepriseController;
+use App\Http\Controllers\PackController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ContactController;
@@ -100,7 +101,8 @@ Route::post('/entreprises/{id}/change-password', 'App\Http\Controllers\Entrepris
 /**  admin/demandes routes */
 Route::resource('admin/demandes', 'App\Http\Controllers\DemandeController')->except(['store']);
 Route::get('/demandes/{id}/accepte', 'App\Http\Controllers\DemandeController@accepte')->name('demandes.accepte');
-Route::get('/demandes/{id}/rejette','App\Http\Controllers\DemandeController@rejette')->name('demandes.rejette');
+Route::post('/demandes//rejette/{id}', 'App\Http\Controllers\DemandeController@rejette')->name('demandes.rejette');
+
 
 /**layout initialization**/
 Route::get('/admin/admin_layout', [App\Http\Controllers\HomeController::class, 'index'])->name('admin.admin_layout');
@@ -110,5 +112,15 @@ Route::get('/admin/annonces/changeStatus', [App\Http\Controllers\AnnonceControll
 Route::resource('admin/annonces', 'App\Http\Controllers\AnnonceController');
 Route::post('admin/annonces/{annonce}', 'AnnonceController@update');
 
+/*admin/contact*/
+Route::resource('admin/contact', 'App\Http\Controllers\ContactController')->except(['store']);
 Route::get('/contact', [ContactController::class, 'index'])->name('contact.index');
+Route::get('admin/boiteContact', [ContactController::class, 'initTable'])->name('contact.boiteContact');
 Route::post('/contact', [ContactController::class, 'store'])->name('contact.store');
+Route::resource('admin/packs', 'App\Http\Controllers\PackController')->except(['store']);
+Route::post('admin/pack/storeData', [PackController::class, 'storeData'])->name('admin.pack.storeData');
+
+/*admin/profile*/
+Route::get('/admin/profile', function () {
+    return view('admin/admin_profile/profile');
+})->name('admin.profile');

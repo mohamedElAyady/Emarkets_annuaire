@@ -10,7 +10,7 @@
     <meta content="" name="keywords">
 
     <!-- Favicons -->
-    <link href="{{asset('admin_assets/img/favicon.png ')}}" rel="icon">
+    <link href="{{asset('admin_assets/img/logov2.png ')}}" rel="icon">
 
 
     <link href="{{asset('admin_assets/img/apple-touch-icon.png')}}" rel="apple-touch-icon"><!-- Google Fonts -->
@@ -103,56 +103,37 @@
 
           <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
             <i class="bi bi-chat-left-text"></i>
-            <span class="badge bg-success badge-number">3</span>
-          </a><!-- End Messages Icon -->
+            <span class="badge bg-success badge-number">{{ $contactsCount }}</span>
+          </a><!-- End Notification Icon -->
 
-          <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow messages">
+          <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow notifications">
             <li class="dropdown-header">
-              You have 3 new messages
-              <a href="#"><span class="badge rounded-pill bg-primary p-2 ms-2">View all</span></a>
+              Vous avez {{ $contactsCount }} nouvelles messages
             </li>
-            <li>
-              <hr class="dropdown-divider">
-            </li>
+            @foreach ($contacts as $index => $contact)
+              @if ($index < 4)
+                <li>
+                  <hr class="dropdown-divider">
+                </li>
 
-            <li class="message-item">
-              <a href="#">
-                <img src="{{asset('admin_assets/img/messages-1.jpg')}}" alt="" class="rounded-circle">
-                <div>
-                  <h4>Maria Hudson</h4>
-                  <p>Velit asperiores et ducimus soluta repudiandae labore officia est ut...</p>
-                  <p>4 hrs. ago</p>
-                </div>
-              </a>
-            </li>
-            <li>
-              <hr class="dropdown-divider">
-            </li>
-
-            <li class="message-item">
-              <a href="#">
-                <img src="{{asset('admin_assets/img/messages-2.jpg')}}" alt="" class="rounded-circle">
-                <div>
-                  <h4>Anna Nelson</h4>
-                  <p>Velit asperiores et ducimus soluta repudiandae labore officia est ut...</p>
-                  <p>6 hrs. ago</p>
-                </div>
-              </a>
-            </li>
-            <li>
-              <hr class="dropdown-divider">
-            </li>
-
-            <li class="message-item">
-              <a href="#">
-                <img src="{{asset('admin_assets/img/messages-3.jpg')}}" alt="" class="rounded-circle">
-                <div>
-                  <h4>David Muldon</h4>
-                  <p>Velit asperiores et ducimus soluta repudiandae labore officia est ut...</p>
-                  <p>8 hrs. ago</p>
-                </div>
-              </a>
-            </li>
+                <!-- Notification Items -->
+                <a style="color: #6F6C6D" href="{{ route('contact.show', $contact->id) }}">
+                  <li class="notification-item">
+                    <i class="bi bi-check-circle text-success"></i>
+                    <div>
+                      <h4>{{ $contact->prenom }} {{ $contact->nom }}</h4>
+                      <p>{{ $contact->sujet }}</p>
+                      <p>{{ \Carbon\Carbon::parse($contact->created_at)->locale('fr')->diffForHumans() }}</p>
+                    </div>
+                  </li>
+                </a>
+                <li>
+                  <hr class="dropdown-divider">
+                </li>
+              @else
+                @break
+              @endif
+            @endforeach
             <li>
               <hr class="dropdown-divider">
             </li>
@@ -175,16 +156,16 @@
           <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
             <li class="dropdown-header">
               <h6>Kevin Anderson</h6>
-              <span>Web Designer</span>
+              <span>Admin</span>
             </li>
             <li>
               <hr class="dropdown-divider">
             </li>
 
             <li>
-              <a class="dropdown-item d-flex align-items-center" href="users-profile.html">
+              <a class="dropdown-item d-flex align-items-center" href="/admin/profile">
                 <i class="bi bi-person"></i>
-                <span>My Profile</span>
+                <span>Mon Profile</span>
               </a>
             </li>
             <li>
@@ -192,9 +173,9 @@
             </li>
 
             <li>
-              <a class="dropdown-item d-flex align-items-center" href="users-profile.html">
+              <a class="dropdown-item d-flex align-items-center" href="#">
                 <i class="bi bi-gear"></i>
-                <span>Account Settings</span>
+                <span>Paramètres</span>
               </a>
             </li>
             <li>
@@ -202,9 +183,9 @@
             </li>
 
             <li>
-              <a class="dropdown-item d-flex align-items-center" href="pages-faq.html">
+              <a class="dropdown-item d-flex align-items-center" href="#">
                 <i class="bi bi-question-circle"></i>
-                <span>Need Help?</span>
+                <span>aider?</span>
               </a>
             </li>
             <li>
@@ -214,7 +195,7 @@
             <li>
               <a class="dropdown-item d-flex align-items-center" href="#">
                 <i class="bi bi-box-arrow-right"></i>
-                <span>Sign Out</span>
+                <span>déconnecter</span>
               </a>
             </li>
 
@@ -352,6 +333,7 @@
               <i class="bi bi-circle"></i><span>Poubelle</span>
             </a>
           </li>
+          
 
           </li>
         </ul>
@@ -379,18 +361,25 @@
 
 
       <li class="nav-item">
-        <a class="nav-link collapsed" data-bs-target="#autre-nav" data-bs-toggle="collapse" href="#">
+        <a class="nav-link <?php
+        if (Request::is('admin/boiteContact') || Request::is('admin/packs') ){}  else {
+          echo 'collapsed';
+        }
+        ?>" data-bs-target="#autre-nav" data-bs-toggle="collapse" href="#">
           <i class="bi bi-three-dots"></i><span>Autre</span><i class="bi bi-chevron-down ms-auto"></i>
         </a>
-        <ul id="autre-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+        <ul id="autre-nav" class="nav-content collapse  <?php
+        if (Request::is('admin/boiteContact') || Request::is('admin/packs') ) {echo 'show';
+        }
+        ?> " data-bs-parent="#sidebar-nav">
           <li>
-            <a href="forms-elements.html">
-              <i class="bi bi-circle"></i><span>Bloquer un commentaire</span>
+            <a class="{{ Request::is('admin/boiteContact') ? 'active' : '' }}" href="{{ route('contact.boiteContact') }}">
+              <i class="bi bi-circle"></i><span>Boîte de Contacts</span>
             </a>
           </li>
           <li>
-            <a href="forms-layouts.html">
-              <i class="bi bi-circle"></i><span>Boîte de Contacts</span>
+            <a class="{{ Request::is('admin/packs') ? 'active' : '' }}" href="/admin/packs">
+              <i class="bi bi-circle"></i><span>Les packs</span>
             </a>
           </li>
 
@@ -399,7 +388,9 @@
       </li><!-- End demandes Nav -->
 
       <li class="nav-item">
-        <a class="nav-link collapsed" href="users-profile.html">
+        <a class="nav-link <?php
+        if (!Request::is('admin/profile') ) echo 'collapsed';
+        ?>" href="/admin/profile">
           <i class="bi bi-person"></i>
           <span>Profile</span>
         </a>
@@ -412,7 +403,15 @@
   </aside><!-- End Sidebar-->
 
   <main id="main" class="main">
-
+    @if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+    @endif
 
         <!-- content here -->
 

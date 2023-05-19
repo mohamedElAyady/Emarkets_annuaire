@@ -131,12 +131,17 @@ public function accepte($id)
     }
 }
 
-    public function rejette($id)
+    public function rejette(Request $request, $id)
     {
+        // Validate the form inputs
+        $request->validate([
+            'motif' => 'required',
+        ]);
         $demande = Demande::findOrFail($id);
         
         // Update the status of the demand to "rejeté"
         $demande->status = 'rejeté';
+        $demande->motif_refus = $request->input('motif');
         $demande->save();
         
         // Prepare data to be passed to the email template

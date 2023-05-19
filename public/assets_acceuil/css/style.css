@@ -39,7 +39,6 @@ body {
   --------------------------------------------------------------*/
   #header {
     height: 80px;
-    padding: 20px 0;
     position: relative;
     z-index: 10;
   }
@@ -61,11 +60,6 @@ body {
     text-decoration: none;
   }
 
-  #header .logo img {
-    padding: 0;
-    margin: 0;
-
-  }
 
   #header .contact-link a {
     color: #fff;

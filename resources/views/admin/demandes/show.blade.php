@@ -67,7 +67,14 @@
                                 </div>
 
                                 <hr style="margin-top: 1rem">
-                              
+                                @if ($demande->status === 'rejeté')
+                                <div class="row">
+                                  <div class="col-lg-3 col-md-4 profil_label">Motif de refus</div>
+                                  <div class="col-lg-9 col-md-8">{{ $demande->motif_refus }}</div>
+                                </div>
+
+                                <hr style="margin-top: 1rem">
+                              @endif
                                 <div class="row">
                                   <div class="col-lg-3 col-md-4 profil_label">Status</div>
                                   <div class="col-lg-6 col-md-8"style="color: 

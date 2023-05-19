@@ -21,7 +21,7 @@
 
     <div class="container-fluid container-xl d-flex align-items-center justify-content-between">
 
-      <a href="/acceuil" class="logo d-flex align-items-center">
+      <a href="#" class="logo d-flex align-items-center">
         <img src="assets/annuaire/img/logo.png"  alt="">
       </a>
 

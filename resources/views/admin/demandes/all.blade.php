@@ -1,6 +1,8 @@
 @extends('admin.admin_layout')
 
 @section('content')
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
 
 <div class="pagetitle">
     <h1>Demandes d'inscription</h1>
@@ -68,17 +70,29 @@
                       @if ($demande->status === 'en attente')
                           <a href="{{ route('demandes.show', $demande->id) }}"><i class="bi bi-eye m-3" style="color: black; font-size: 20px"></i></a>
                           <a href="{{ route('demandes.accepte', $demande->id) }}"><i class="bi bi-check-lg m-3" style="color: green; font-size: 20px"></i></a>
-                          <a href="{{ route('demandes.rejette', $demande->id) }}"><i class="bi bi-x-lg m-3" style="color: red; font-size: 20px;"></i></a>
-                      @else
+                          <a href="#" class="reject-link" data-demande-id="{{ $demande->id }}">
+                            <i class="bi bi-x-lg m-3" style="color: red; font-size: 20px;"></i>
+                          </a>
+                          @else
                           <a href="{{ route('demandes.show', $demande->id) }}"><i class="bi bi-eye m-3" style="color: black; font-size: 20px"></i></a>
                       @endif
                       </div>
                     </td>
-
                 </tr>
                 @endforeach
               </tbody>
             </table>
+            <form id="motif_form" action="#" method="POST" style="display: none;">
+              @csrf
+              <div class="row">
+                <div class="col-2"><b>Motif de refus:</b></div>
+                <div class="col-9"><input type="text" name="motif" class="form-control"></div>
+                <button class="col-1" type="submit" style="background: none; border: none;">
+                  <i class="bi bi-plus-circle m-3" style="color: black; font-size: 25px;"></i>
+                </button>
+              </div>
+            </form>
+            
             
             <!-- End Table with stripped rows -->
 
@@ -87,7 +101,22 @@
       </div>
     </div>
   </section>
+  
 
- 
+  <script>
+    $(document).ready(function() {
+      $('.reject-link').click(function(e) {
+        e.preventDefault();
+        var demandeId = $(this).data('demande-id');
+        var form = $('#motif_form');
+    
+        // Update the form action URL with the demande ID
+        form.attr('action', "{{ route('demandes.rejette', '') }}" + '/' + demandeId);
+    
+        form.slideToggle();
+      });
+    });
+    </script>
+    
 
 @endsection
