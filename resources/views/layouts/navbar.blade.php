@@ -1,9 +1,4 @@
 
-<!-- ======= Header ======= -->
-      <!-- Favicons -->
-      <link href="assets/annuaire/img/favicon.png" rel="icon">
-      <link href="assets/annuaire/img/apple-touch-icon.png" rel="apple-touch-icon">
-
 
       <!-- Google Fonts -->
       <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
@@ -11,11 +6,8 @@
       <!-- Scripts -->
 
 
-      <!-- Template Main CSS File -->
-      <link href="{{ asset('assets/annuaire/css/main.css') }}" rel="stylesheet">
-      <link href="{{ asset('assets/annuaire/css/style.css') }}" rel="stylesheet">
         <!-- Favicons -->
-    <header id="header" class="header fixed-top position-absolute">
+    <header class="header fixed-top position-absolute" >
 
 
 
@@ -37,7 +29,7 @@
           @if (Route::has('login'))
           @auth
                 <li>
-                 <a href="{{ url('entreprise') }}" class="getstarted">devenir entreprise</a>
+                 <a href="{{ url('demande_annoncement') }}" class="getstarted">Demande d'annoncement</a>
                </li>
               <li class="nav-item dropdown pe-3">
                 <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">

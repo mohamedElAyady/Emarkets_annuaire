@@ -65,6 +65,14 @@
                   <div class="col-md-6">
                     <textarea class="form-control" name="description" placeholder="Description"></textarea>
                   </div>
+                  <div class="col-md-6">
+                    <select name="radio_input" class="form-control">
+                      <option selected disabled>Pack</option>
+                        @foreach ($packs as $pack)
+                        <option value="{{ $pack->id }}">{{ $pack->id }} - {{ $pack->name }}</option>
+                        @endforeach
+                    </select>
+                  </div>
                   <div class="text-center">
                     <button type="submit" class="btn btn-primary">Submit</button>
                     <button type="reset" class="btn btn-secondary">Reset</button>

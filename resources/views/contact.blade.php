@@ -14,6 +14,7 @@
   <link href="assets_acceuil/img/apple-touch-icon.png" rel="apple-touch-icon">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 
+  <link href="assets_acceuil\css\header_style.css" rel="stylesheet">
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,600,600i,700,700i" rel="stylesheet">
 
@@ -34,8 +35,7 @@
   @include('layouts.navbar')
   <!-- End #header -->
   <!-- ======= Contact Us Section ======= -->
-  <section id="contact" class="contact">
-    <section id="contact" class="contact contact-section">
+  <section id="contact" class="contact" style="margin-top: 65px">
     <div class="container">
 
       <div class="row contact-info">

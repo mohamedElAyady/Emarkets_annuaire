@@ -102,15 +102,36 @@
                               <hr style="margin-top: 1rem">
                             
                               <div class="row">
-                                <div class="col-lg-3 col-md-4 profil_label">Site web</div>
-                                <div class="col-lg-9 col-md-8">{{ $entreprise->site_web }}</div>
-                              </div>
+                                <div class="col-lg-3 col-md-4 profil_label">Social Media</div>
+                                <div class="col-lg-9 col-md-8">
+                                    @php
+                                        $simplifiedData = app('App\Http\Controllers\EntrepriseController')->simplifySocialMediaUrls($entreprise->site_web);
+                                        $socialMediaUrls = json_decode($simplifiedData, true);
+                                    @endphp
+                                    
+                                    <ul>
+                                        @foreach ($socialMediaUrls as $platform => $url)
+                                            <li>
+                                                <a href="{{ $url }}">{{ $platform }}</a>
+                                            </li>
+                                        @endforeach
+                                    </ul>
+                                </div>
+                            </div>
+                            
 
                               <hr style="margin-top: 1rem">
                             
                               <div class="row">
                                 <div class="col-lg-3 col-md-4 profil_label">Secteur d'activité</div>
                                 <div class="col-lg-9 col-md-8">{{ $entreprise->secteur_activite }}</div>
+                              </div>
+
+                              <hr style="margin-top: 1rem">
+                            
+                              <div class="row">
+                                <div class="col-lg-3 col-md-4 profil_label">Pack</div>
+                                <div class="col-lg-9 col-md-8">{{ $entreprise->pack->name }}</div>
                               </div>
                               
                               

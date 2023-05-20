@@ -124,3 +124,12 @@ Route::post('admin/pack/storeData', [PackController::class, 'storeData'])->name(
 Route::get('/admin/profile', function () {
     return view('admin/admin_profile/profile');
 })->name('admin.profile');
+
+Route::get('/demande', function () {
+    return view('others/creer_demande');
+});
+Route::get('/demande_annoncement', function () {
+    return view('others/demande_annoncement');
+});
+
+Route::post('/createDemande', [EntrepriseController::class, 'createDemande'])->name('createDemande');

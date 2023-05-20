@@ -525,7 +525,7 @@ select{
                    <input type="hidden" name="utilisateur_id" value="{{ Auth::id()}}">
                       <div class="input-text">
                         <div class="input-div">
-                            <input type="text" required require name="type_entreprise" id="user_name">
+                            <input type="text" required name="type_entreprise" id="user_name">
                             <span>type d'entreprise</span>
                          </div>
                         <div class="input-div"> 

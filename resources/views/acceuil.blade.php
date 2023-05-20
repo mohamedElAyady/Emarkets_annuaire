@@ -14,6 +14,8 @@
   <link href="assets_acceuil/img/apple-touch-icon.png" rel="apple-touch-icon">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 
+  <!-- header -->
+  <link href="assets_acceuil\css\header_style.css" rel="stylesheet">
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,600,600i,700,700i" rel="stylesheet">
 
@@ -35,36 +37,9 @@
   <!-- End #header -->
 
   <!-- ======= Hero Section ======= -->
-  <section id="hero" style="background-image: url('assets/annuaire/img/cardbackground.png');">
-    <div class="hero-container">
-      <h1>Emarket Annuaire</h1>
-      <h2>Trouver une entreprise</h2>
+  <section  style="background-image: url('assets/annuaire/img/cardbackground.png'); height: 100vh;">
 
-      <form action="forms/notify.php" method="post" role="form" class="php-email-form">
-
-        <div class="input-group">
-            <select id="DoctorSpecialties" class="search-query search-query-spe" name="data[Doctor][specialties]">
-                <option value="">Toutes les spécialités</option>
-                <option value="1" >Allergologie</option><option value="8" >Anatomie et cytologie pathologiques humaines</option><option value="9" >Anesthésie-réanimation</option><option value="10" >Angiologie, artères, veines, lymphatiques</option><option value="11" >Biologie médicale</option><option value="2" >Cancérologie</option><option value="12" >Cardiologie et médecine des affections vasculaires</option><option value="40" >Chirurgie dentaire</option><option value="13" >Chirurgie générale</option><option value="14" >Chirurgie infantile</option><option value="15" >Chirurgie maxillo-faciale</option><option value="16" >Chirurgie orthopédique, traumatologie</option><option value="17" >Chirurgie plastique</option><option value="18" >Dermato-vénéréologie</option><option value="19" >Diabétologie-nutrition</option><option value="42" >Diététique</option><option value="20" >Endocrinologie et maladies métaboliques</option><option value="43" >Gastroentérologie</option><option value="21" >Gynécologie obstétrique</option><option value="25" >Maladies du sang</option><option value="28" >Médecine d'urgence</option><option value="26" >Médecine du sport</option><option value="27" >Médecine du travail</option><option value="3" >Médecine générale</option><option value="29" >Médecine interne</option><option value="30" >Médecine physique et de réadaptation</option><option value="32" >Neurochirurgie</option><option value="33" >Neurologie</option><option value="34" >Neuropsychiatrie</option><option value="41" >Nutrition</option><option value="31" >Néphrologie</option><option value="5" >Ophtalmologie</option><option value="35" >Ostéopathie</option><option value="36" >Oto-rhino-laryngologie</option><option value="22" >Pathologie digestive</option><option value="24" >Pneumo-phtisiologie</option><option value="37" >Psychiatrie</option><option value="23" >Pédiatrie</option><option value="38" >Radiologie</option><option value="4" >Rhumatologie</option><option value="39" >Santé publique</option><option value="44" >Sexologie</option><option value="7" >Stomatologie</option><option value="6" >Urologie</option>                        </select>
-            <input type="text" class="search-query search-query-city" placeholder="Ville" id="city_autocomplete"  >
-
-        </div>
-
-        <div class="my-3">
-          <div class="loading">Loading</div>
-          <div class="error-message"></div>
-          <div class="sent-message">Your notification request was sent. Thank you!</div>
-        </div>
-        <div class="text-center"><button type="submit" >Trouver</button></div>
-      </form>
-    </div>
   </section><!-- End Hero -->
-
-  <main id="main">
-
-
-
-  </main><!-- End #main -->
 
   <!-- ======= Footer ======= -->
   <!-- End #footer -->
