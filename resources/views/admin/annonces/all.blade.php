@@ -41,7 +41,7 @@
                   <th scope="col">Date de publication</th>
                   <th scope="col">Date d'expiration</th>
                   <th scope="col">Pack</th>
-                  <th scope="col">Catégorie</th>
+                  <th scope="col">Raison Sociale</th>
                   <th scope="col">Entreprise ID</th>
                   <th scope="col">Statut</th>
                 </tr>
@@ -53,7 +53,7 @@
                     <td>{{$new_date = date("d-m-Y",strtotime($annonce->datePublication))}}</td>
                     <td>{{$new_date = date("d-m-Y",strtotime($annonce->dateExpiration))}}</td>
                     <td>{{ $annonce->entreprise->pack->name }}</td>
-                    <td>{{ $annonce->categorie }}</td>
+                    <td>{{ $annonce->entreprise->raison_sociale }}</td>
                     <td><div style="text-align: center"><a href="{{ route('entreprises.show', $annonce->entreprise_id) }}">{{ $annonce->entreprise_id }}</a></div></td>
                     <td><!-- Default switch -->
                       <div>

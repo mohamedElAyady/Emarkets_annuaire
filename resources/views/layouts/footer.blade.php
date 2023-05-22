@@ -54,7 +54,7 @@
         <!--Grid column-->
         <div class="col-lg-4 col-md-12 mb-4 mb-md-0">
           <a href="/acceuil" class="logo d-flex align-items-center">
-            <img src="assets/annuaire/img/logo.png" alt="">
+            <img src="{{asset('assets/annuaire/img/logo.png')}}" alt="">
           </a>
 
           <div class="mt-4" style="padding-left:20px">

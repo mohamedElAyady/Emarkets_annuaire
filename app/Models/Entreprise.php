@@ -40,5 +40,13 @@ class Entreprise extends Model
     {
         return $this->belongsTo(Pack::class);
     }
+    public function commentaires()
+    {
+        return $this->hasMany(Commentaire::class, 'entreprise_id');
+    }
+    public function annonce()
+    {
+        return $this->belongsTo(Annonce::class);
+    }
     
 }

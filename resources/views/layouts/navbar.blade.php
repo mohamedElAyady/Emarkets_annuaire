@@ -14,7 +14,7 @@
     <div class="container-fluid container-xl d-flex align-items-center justify-content-between">
 
       <a href="#" class="logo d-flex align-items-center">
-        <img src="assets/annuaire/img/logo.png"  alt="">
+        <img src="{{asset('assets/annuaire/img/logo.png')}}"  alt="">
       </a>
 
       <nav id="navbar" class="navbar">

@@ -1,5 +1,5 @@
 <?php
-use App\Http\Controllers\CommentsController;
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AcceuilController;
 use App\Http\Controllers\AnnuaireController;
@@ -29,7 +29,9 @@ Route::get('/card', function () {
     return view('/card_details');
 });
 Route::get('/details/{id}', [AnnuaireController::class, 'affiche_details'])->name('details');
-Route::post('/comments', [CommentsController::class, 'store'])->name('comments.store');
+Route::post('/comments', [CommentController::class, 'store'])->name('comments.store');
+Route::post('/updatecomment', [CommentController::class, 'update'])->name('comments.update');
+Route::delete('/comments/{id}', [CommentController::class,'destroy'])->name('comments.destroy');
 
 
 
@@ -125,11 +127,11 @@ Route::get('/admin/profile', function () {
     return view('admin/admin_profile/profile');
 })->name('admin.profile');
 
-Route::get('/demande', function () {
-    return view('others/creer_demande');
-});
-Route::get('/demande_annoncement', function () {
-    return view('others/demande_annoncement');
-});
-
+/*others*/
+Route::get('/demande', function () {return view('others/creer_demande');});
+Route::get('/demande_annoncement', function () { return view('others/demande_annoncement');});
 Route::post('/createDemande', [EntrepriseController::class, 'createDemande'])->name('createDemande');
+Route::get('/article_datails', function () {return view('others\article_details');});
+
+
+Route::get('/search', 'App\Http\Controllers\SearchController@search')->name('search');
