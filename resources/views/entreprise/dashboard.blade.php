@@ -1,4 +1,4 @@
-@extends('admin.admin_layout')
+@extends('entreprise.entreprise_layout')
 
 @section('content')
 <div class="pagetitle">

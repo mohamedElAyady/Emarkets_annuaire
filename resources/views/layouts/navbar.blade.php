@@ -28,9 +28,18 @@
 
           @if (Route::has('login'))
           @auth
-                <li>
+
+            @php
+              $entrepriseExists = App\Models\Entreprise::where('utilisateur_id', Auth::id())->exists();
+            @endphp
+      
+       
+            @if(!$entrepriseExists)
+              <li>
                  <a href="{{ url('demande_annoncement') }}" class="getstarted">Demande d'annoncement</a>
                </li>
+            @endif
+                
               <li class="nav-item dropdown pe-3">
                 <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
                   <span class="d-none d-md-block dropdown-toggle ps-2">{{ Auth::user()->prenom }} {{ Auth::user()->nom }}</span>

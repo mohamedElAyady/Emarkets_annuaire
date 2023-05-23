@@ -11,21 +11,86 @@
 
     <!-- Favicons -->
     <link href="{{asset('admin_assets/img/logov2.png ')}}" rel="icon">
+    <link href="{{asset('assets/annuaire/css/main.css')}}" rel="stylesheet">
 
 
     <link href="{{asset('admin_assets/img/apple-touch-icon.png')}}" rel="apple-touch-icon"><!-- Google Fonts -->
     <link href="https://fonts.gstatic.com" rel="preconnect">
-
-
+    
+ 
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet"><!-- Vendor CSS Files -->
 
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
     <link href="{{asset('admin_assets/vendor/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet">
     <link href="{{asset('admin_assets/vendor/bootstrap-icons/bootstrap-icons.css')}}" rel="stylesheet">
+
 
     <!-- Template Main CSS File -->
     <link href="{{asset('admin_assets/css/style.css')}}" rel="stylesheet">
 
-  <link href="{{asset('admin_assets/vendor/simple-datatables/style.css')}}" rel="stylesheet">
+  <style>
+    .card {
+    border: none;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .comment-header {
+    display: flex;
+    align-items: center;
+    padding: 12px;
+    border-bottom: 1px solid #e9ebee;
+    }
+
+    .comment-avatar {
+    width: 40px;
+    height: 40px;
+    background-color: #ddd;
+    border-radius: 50%;
+    }
+
+    .comment-username {
+    margin-left: 10px;
+    }
+
+    .comment-content {
+    padding: 12px;
+    }
+
+    .comment-text {
+    background-color: #f0f2f5;
+    border-radius: 10px;
+    padding: 10px;
+    margin: 0;
+    }
+
+    .dropdown-toggle {
+color: #333;
+}
+
+.dropdown-toggle:hover {
+    color: #555;
+}
+
+.dropdown-menu {
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+}
+
+.dropdown-item {
+    color: #333;
+}
+
+.dropdown-item:hover {
+    background-color: #e6e6e6;
+    color: #555;
+}
+.dropdown-toggle::after {
+display: none;
+}
+
+
+</style>
 </head>
 
 <body>
@@ -39,13 +104,6 @@
       </a>
       <i class="bi bi-list toggle-sidebar-btn"></i>
     </div><!-- End Logo -->
-
-    <div class="search-bar">
-      <form class="search-form d-flex align-items-center" method="POST" action="#">
-        <input type="text" name="query" placeholder="Search" title="Enter search keyword">
-        <button type="submit" title="Search"><i class="bi bi-search"></i></button>
-      </form>
-    </div><!-- End Search Bar -->
 
     <nav class="header-nav ms-auto">
       <ul class="d-flex align-items-center">
@@ -65,97 +123,46 @@
 
           <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow notifications">
             <li class="dropdown-header">
-              Vous avez {{ $count }} nouvelles notifications
+              Vous avez nouvelles notifications
             </li>
-            @foreach ($notifications as $index => $notification)
-              @if ($index < 4)
                 <li>
                   <hr class="dropdown-divider">
                 </li>
 
               <!-- Notification Items -->
-                <a style="color: #6F6C6D" href="{{ route('demandes.show', $notification['demande_id']) }}">
-                  <li class="notification-item">
-                    <i class="bi bi-info-circle text-primary"></i>
-                    <div>
-                      <h4>{{ $notification['raison_sociale'] }}</h4>
-                      <p>{{ $notification['telephone'] }}</p>
-                      <p>{{ $notification['date_soumission'] }}</p>
-                    </div>
-                  </li>
-                </a>
-                <li>
-                  <hr class="dropdown-divider">
+              @foreach($notifications as $notification)
+              <a style="color: #6F6C6D" href="#">
+                <li class="notification-item">
+                  <i class="bi bi-info-circle text-primary"></i>
+                  <div>
+                    <h4>{{ $notification->utilisateur->prenom }} {{ $notification->utilisateur->nom }}</h4>
+                    <p>nouveau commentaire</p>
+                    <p>{{ $notification->created_at }}</p>
+                  </div>
                 </li>
-              @else
-                @break
-              @endif
+              </a>
+              <li>
+                <hr class="dropdown-divider">
+              </li>
             @endforeach
             <li class="dropdown-footer">
-              <a href="{{ route('demandes.index') }}">Afficher toutes les demandes</a>
+              <a href="{{ route('entreprise.annonce') }}">Afficher toutes les commentaires</a>
             </li>
 
           </ul><!-- End Notification Dropdown Items -->
 
         </li><!-- End Notification Nav -->
 
-        <li class="nav-item dropdown">
-
-          <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
-            <i class="bi bi-chat-left-text"></i>
-            <span class="badge bg-success badge-number">{{ $contactsCount }}</span>
-          </a><!-- End Notification Icon -->
-
-          <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow notifications">
-            <li class="dropdown-header">
-              Vous avez {{ $contactsCount }} nouvelles messages
-            </li>
-            @foreach ($contacts as $index => $contact)
-              @if ($index < 4)
-                <li>
-                  <hr class="dropdown-divider">
-                </li>
-
-                <!-- Notification Items -->
-                <a style="color: #6F6C6D" href="{{ route('contact.show', $contact->id) }}">
-                  <li class="notification-item">
-                    <i class="bi bi-check-circle text-success"></i>
-                    <div>
-                      <h4>{{ $contact->prenom }} {{ $contact->nom }}</h4>
-                      <p>{{ $contact->sujet }}</p>
-                      <p>{{ \Carbon\Carbon::parse($contact->created_at)->locale('fr')->diffForHumans() }}</p>
-                    </div>
-                  </li>
-                </a>
-                <li>
-                  <hr class="dropdown-divider">
-                </li>
-              @else
-                @break
-              @endif
-            @endforeach
-            <li>
-              <hr class="dropdown-divider">
-            </li>
-
-            <li class="dropdown-footer">
-              <a href="#">Show all messages</a>
-            </li>
-
-          </ul><!-- End Messages Dropdown Items -->
-
-        </li><!-- End Messages Nav -->
-
         <li class="nav-item dropdown pe-3">
 
           <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
-            <img src="{{asset('admin_assets/img/profile-img.jpg')}}" alt="Profile" class="rounded-circle">
-            <span class="d-none d-md-block dropdown-toggle ps-2">K. Anderson</span>
+            <img src="{{asset(Auth::user()->profile_photo_path)}}" alt="Profile" class="rounded-circle">
+            <span class="d-none d-md-block dropdown-toggle ps-2">{{ Auth::user()->prenom }} {{ Auth::user()->nom }}</span>
           </a><!-- End Profile Iamge Icon -->
 
           <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
             <li class="dropdown-header">
-              <h6>Kevin Anderson</h6>
+              <h6>{{ Auth::user()->prenom }} {{ Auth::user()->nom }}</h6>
               <span>Admin</span>
             </li>
             <li>
@@ -163,7 +170,7 @@
             </li>
 
             <li>
-              <a class="dropdown-item d-flex align-items-center" href="/admin/profile">
+              <a class="dropdown-item d-flex align-items-center" href="/entreprise/profile">
                 <i class="bi bi-person"></i>
                 <span>Mon Profile</span>
               </a>
@@ -183,21 +190,14 @@
             </li>
 
             <li>
-              <a class="dropdown-item d-flex align-items-center" href="#">
-                <i class="bi bi-question-circle"></i>
-                <span>aider?</span>
-              </a>
-            </li>
-            <li>
-              <hr class="dropdown-divider">
-            </li>
-
-            <li>
-              <a class="dropdown-item d-flex align-items-center" href="#">
+              <a class="dropdown-item d-flex align-items-center" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                 <i class="bi bi-box-arrow-right"></i>
                 <span>déconnecter</span>
               </a>
-            </li>
+            </li>            
+            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+              @csrf
+             </form>
 
           </ul><!-- End Profile Dropdown Items -->
         </li><!-- End Profile Nav -->
@@ -210,192 +210,42 @@
   <!-- ======= Sidebar ======= -->
   <aside id="sidebar" class="sidebar">
 
-    <ul class="sidebar-nav" id="sidebar-nav">
+    <ul class="sidebar-nav" id="sidebar-nav" style="height: 100%; display: flex; flex-direction: column; justify-content: space-between;">
 
       <li class="nav-item">
-        <a class="nav-link {{ Request::is('admin/dashboard') ? '' : 'collapsed' }}" href="{{ url('/admin/dashboard') }}">
+        <a class="nav-link {{ Request::is('entreprise/dashboard') ? '' : 'collapsed' }}" href="{{ url('/admin/dashboard') }}">
           <i class="bi bi-house"></i>
           <span>tableau de bord</span>
         </a>
       </li><!-- End Dashboard Nav -->
 
       <li class="nav-item">
-        <a class="nav-link {{ Request::is('admin/demandes') ? '' : 'collapsed' }}" href="/admin/demandes">
+        <a class="nav-link {{ Request::is('entreprise/annonce') ? '' : 'collapsed' }}" href="/entreprise/annonce">
           <i class="bi bi-file-earmark-plus"></i>
-          <span>Demandes d'inscription</span>
+          <span>Mon annonce</span>
         </a>
       </li>
 
 
-      <li class="nav-item">
-        <a class="nav-link
-        <?php
-        if (Request::is('admin/utilisateurs') || Request::is('admin/utilisateurs/create') || Request::is('admin/utilisateurs/poubelle') ) {
-        } else {
-          echo 'collapsed';
-        }
-
-        ?>
-        " data-bs-target="#user-nav" data-bs-toggle="collapse" href="#">
-          <i class="bi bi-people " ></i><span>Utilisateurs</span><i class="bi bi-chevron-down ms-auto"></i>
-        </a>
-        <ul id="user-nav" class="nav-content collapse <?php
-        if (Request::is('admin/utilisateurs') || Request::is('admin/utilisateurs/create') || Request::is('admin/utilisateurs/poubelle') ) {echo 'show';
-        }
-
-        ?>" data-bs-parent="#sidebar-nav">
-          <li>
-            <a class="{{ Request::is('admin/utilisateurs') ? 'active' : '' }}" href="/admin/utilisateurs" >
-              <i class="bi bi-circle"></i><span>Tous les utilisateurs</span>
-            </a>
-          </li>
-          <li>
-            <a class="{{ Request::is('admin/utilisateurs/create') ? 'active' : '' }}" href="{{ route('utilisateurs.create') }}" >
-              <i class="bi bi-circle"></i><span>Ajouter un utilisateur</span>
-            </a>
-          </li>
-          <li>
-            <a class="{{ Request::is('admin/utilisateurs/poubelle') ? 'active' : '' }}" href="{{ route('utilisateurs.poubelle') }}">
-              <i class="bi bi-circle"></i><span>Poubelle</span>
-            </a>
-          </li>
-
-          </li>
-        </ul>
-      </li><!-- End Utilisateurs Nav -->
-
-      <li class="nav-item">
-        <a class="nav-link
-        <?php
-        if (Request::is('admin/entreprises') || Request::is('admin/entreprises/create') || Request::is('admin/entreprises/poubelle') ) {
-        } else {
-          echo 'collapsed';
-        }
-
-        ?>
-        " data-bs-target="#entrepriser-nav" data-bs-toggle="collapse" href="#">
-          <i class="bi bi-code-slash" ></i><span>Entreprises</span><i class="bi bi-chevron-down ms-auto"></i>
-        </a>
-        <ul id="entrepriser-nav" class="nav-content collapse <?php
-        if (Request::is('admin/entreprises') || Request::is('admin/entreprises/create') || Request::is('admin/entreprises/poubelle') ) {echo 'show';
-        }
-
-        ?>" data-bs-parent="#sidebar-nav">
-          <li>
-            <a class="{{ Request::is('admin/entreprises') ? 'active' : '' }}" href="/admin/entreprises" >
-              <i class="bi bi-circle"></i><span>Tous les entreprises</span>
-            </a>
-          </li>
-          <li>
-            <a class="{{ Request::is('admin/entreprises/create') ? 'active' : '' }}" href="{{ route('entreprises.create') }}" >
-              <i class="bi bi-circle"></i><span>Ajouter un entreprises</span>
-            </a>
-          </li>
-          <li>
-            <a class="{{ Request::is('admin/entreprises/poubelle') ? 'active' : '' }}" href="{{ route('entreprises.poubelle') }}">
-              <i class="bi bi-circle"></i><span>Poubelle</span>
-            </a>
-          </li>
-
-          </li>
-        </ul>
-      </li><!-- End Entreprises Nav -->
-
-
-      <li class="nav-item">
-        <a class="nav-link
-        <?php
-        if (Request::is('admin/annonces') ) {
-        } else {
-          echo 'collapsed';
-        }
-
-        ?>" data-bs-target="#annonce-nav" data-bs-toggle="collapse" href="#">
-          <i class="bi bi-journal-text"></i><span>Annonces</span><i class="bi bi-chevron-down ms-auto"></i>
-        </a>
-        <ul id="annonce-nav" class="nav-content collapse <?php
-        if (Request::is('admin/annonces')) {echo 'show';
-        }
-
-        ?> " data-bs-parent="#sidebar-nav">
-          <li>
-            <a class="{{ Request::is('admin/annonces') ? 'active' : '' }}"  href="/admin/annonces">
-              <i class="bi bi-circle"></i><span>Tous les annonces</span>
-            </a>
-          </li>
-          <li>
-            <a href="forms-layouts.html">
-              <i class="bi bi-circle"></i><span>Ajouter une annonce</span>
-            </a>
-          </li>
-          <li>
-            <a href="forms-layouts.html">
-              <i class="bi bi-circle"></i><span>Poubelle</span>
-            </a>
-          </li>
-          
-
-          </li>
-        </ul>
-      </li><!-- End Annonces Nav -->
-
-      <li class="nav-item">
-        <a class="nav-link collapsed" data-bs-target="#categorie-nav" data-bs-toggle="collapse" href="#">
-          <i class="bi bi-grid"></i><span>Catégories</span><i class="bi bi-chevron-down ms-auto"></i>
-        </a>
-        <ul id="categorie-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-          <li>
-            <a href="forms-elements.html">
-              <i class="bi bi-circle"></i><span>Tous les catégories</span>
-            </a>
-          </li>
-          <li>
-            <a href="forms-layouts.html">
-              <i class="bi bi-circle"></i><span>Ajouter une catégorie</span>
-            </a>
-          </li>
-
-          </li>
-        </ul>
-      </li><!-- End category Nav -->
-
-
+      
       <li class="nav-item">
         <a class="nav-link <?php
-        if (Request::is('admin/boiteContact') || Request::is('admin/packs') ){}  else {
-          echo 'collapsed';
-        }
-        ?>" data-bs-target="#autre-nav" data-bs-toggle="collapse" href="#">
-          <i class="bi bi-three-dots"></i><span>Autre</span><i class="bi bi-chevron-down ms-auto"></i>
-        </a>
-        <ul id="autre-nav" class="nav-content collapse  <?php
-        if (Request::is('admin/boiteContact') || Request::is('admin/packs') ) {echo 'show';
-        }
-        ?> " data-bs-parent="#sidebar-nav">
-          <li>
-            <a class="{{ Request::is('admin/boiteContact') ? 'active' : '' }}" href="{{ route('contact.boiteContact') }}">
-              <i class="bi bi-circle"></i><span>Boîte de Contacts</span>
-            </a>
-          </li>
-          <li>
-            <a class="{{ Request::is('admin/packs') ? 'active' : '' }}" href="/admin/packs">
-              <i class="bi bi-circle"></i><span>Les packs</span>
-            </a>
-          </li>
-
-          </li>
-        </ul>
-      </li><!-- End demandes Nav -->
-
-      <li class="nav-item">
-        <a class="nav-link <?php
-        if (!Request::is('admin/profile') ) echo 'collapsed';
-        ?>" href="/admin/profile">
+        if (!Request::is('entreprise/profile') ) echo 'collapsed';
+        ?>" href="/entreprise/profile">
           <i class="bi bi-person"></i>
           <span>Profile</span>
         </a>
       </li><!-- End Profile Page Nav -->
 
+
+      
+      <li class="nav-item" style="margin-top: auto;">
+        <a class="nav-link <?php if (!Request::is('en')) echo 'collapsed'; ?>" href="/entreprise/profile" style="color: gold;">
+          <i class="fas fa-crown" style="color: gold;"></i>
+          <span>Upgrade mon plan</span>
+        </a>
+      </li><!-- End Upgrade Plan Nav -->
+    
 
 
     </ul>
@@ -418,21 +268,10 @@
 
   </footer><!-- End Footer -->
 
-  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-circle-fill"></i></a>
-
-  <!-- Vendor JS Files -->
-  <script src="{{asset('admin_assets/vendor/apexcharts/apexcharts.min.js')}}"></script>
-  <script src="{{asset('admin_assets/vendor/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
-  <script src="{{asset('admin_assets/vendor/chart.js/chart.umd.js')}}"></script>
-  <script src="{{asset('admin_assets/vendor/echarts/echarts.min.js')}}"></script>
-  <script src="{{asset('admin_assets/vendor/quill/quill.min.js')}}"></script>
-  <script src="{{asset('admin_assets/vendor/simple-datatables/simple-datatables.js')}}"></script>
-  <script src="{{asset('admin_assets/vendor/tinymce/tinymce.min.js') }}"></script>
-  <script src="{{asset('admin_assets/vendor/php-email-form/validate.js')}}"></script>
-
   <!-- Template Main JS File -->
   <script src="{{asset('admin_assets/js/main.js')}}"></script>
-
+    <!-- Vendor JS Files -->
+  <script src="https://kit.fontawesome.com/badbb472a2.js" crossorigin="anonymous"></script>
 </body>
 
 </html>

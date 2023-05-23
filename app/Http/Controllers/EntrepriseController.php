@@ -191,13 +191,22 @@ class EntrepriseController extends Controller
         'adresse' => 'required',
         'email' => 'required|email',
         'telephone' => 'required',
-        'logo_url' => 'image|mimes:jpeg,png,jpg|max:2048', // Assuming logo_url is the field for the logo image
-        'utilisateur_id' => 'required',
+        'secteur_activite' => 'required',
+        'description' => 'nullable',
+        'logo_url' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
         'site_web' => 'nullable|url',
-        'secteur_activite' => 'nullable',
+        'facebook' => 'nullable|url',
+        'instagram' => 'nullable|url',
+        'linkedIn' => 'nullable|url',
+        'platform' => 'nullable',
+        'lien' => 'nullable',
     ]);
 
     $entreprise = Entreprise::findOrFail($id);
+    
+    if (Auth::user()->id !== $entreprise->utilisateur_id) {
+        abort(403, "Unauthorized access");
+    }
 
     if ($request->hasFile('logo_url')) {
         $logo = $request->file('logo_url');
@@ -210,6 +219,18 @@ class EntrepriseController extends Controller
         $entreprise->logo_url = $logoPath;
     }
 
+    // Save the social media URLs as an array in the 'site_web' column
+    $siteWebArray = [
+        'site_web' => $request->site_web,
+        'facebook' => $request->facebook,
+        'instagram' => $request->instagram,
+        'linkedIn' => $request->linkedIn,
+    ];
+
+    if ($request->platform) {
+        $siteWebArray[$request->platform] = $request->lien;
+    }        
+
     // Update the other fields
     $entreprise->raison_sociale = $request->input('raison_sociale');
     $entreprise->type_entreprise = $request->input('type_entreprise');
@@ -219,7 +240,7 @@ class EntrepriseController extends Controller
     $entreprise->email = $request->input('email');
     $entreprise->telephone = $request->input('telephone');
     $entreprise->utilisateur_id = $request->input('utilisateur_id');
-    $entreprise->site_web = $request->input('site_web');
+    $entreprise->site_web = json_encode($siteWebArray);
     $entreprise->secteur_activite = $request->input('secteur_activite');
 
     // Save the updated enterprise

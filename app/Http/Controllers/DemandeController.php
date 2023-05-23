@@ -116,9 +116,6 @@ public function accepte($id)
 
     ]);
 
-    // Update the entreprise's annonce_id with the newly created annonce ID
-    $demande->entreprise->annonce_id = $annonce->id;
-    $demande->entreprise->save();
 
     // Prepare data to be passed to the email template
     $data = [

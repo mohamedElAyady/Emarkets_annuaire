@@ -196,30 +196,30 @@
                             <h3 class="multisteps-form__title nunito" style="font-size: 2rem; color:#6F6C6D;"><b>Social media</b></h3>
                             <div class="multisteps-form__content">
                                 <div class="form-row mt-4">
-                                <div class="col-12 col-sm-6">
-                                    <input class="multisteps-form__input form-control" type="url" name="site_web" placeholder="Site web" required/>
-                                </div>
-                                <div class="col-12 col-sm-6 mt-4 mt-sm-0">
-                                    <input class="multisteps-form__input form-control" type="url" name="facebook" placeholder="Facebook" required/>
-                                </div>
-                                </div>
-                                <div class="form-row mt-4">
-                                <div class="col-12 col-sm-6">
-                                    <input class="multisteps-form__input form-control" type="url" name="instagram" placeholder="Instagram" required/>
-                                </div>
-                                <div class="col-12 col-sm-6 mt-4 mt-sm-0">
-                                    <input class="multisteps-form__input form-control" type="url" name="linkedIn" placeholder="linkedIn" required/>
-                                </div>
-                                </div>
-                                <hr>
-                                    <h5 class="nunito "  style="font-size: 1rem; color:#6F6C6D;">Autre:</h5>
-                                <div class="form-row mt-1">
-                                <div class="col-12 col-sm-3">
-                                    <input class="multisteps-form__input form-control" type="text" name="platform" placeholder="Platform"/>
-                                </div>
-                                <div class="col-12 col-sm-9 mt-4 mt-sm-0">
-                                    <input class="multisteps-form__input form-control" type="text" name="lien" placeholder="Lien"/>
-                                </div>
+                                  <div class="col-12 col-sm-6">
+                                      <input class="multisteps-form__input form-control" type="url" name="site_web" placeholder="Site web" required/>
+                                  </div>
+                                  <div class="col-12 col-sm-6 mt-4 mt-sm-0">
+                                      <input class="multisteps-form__input form-control" type="url" name="facebook" placeholder="Facebook" required/>
+                                  </div>
+                                  </div>
+                                  <div class="form-row mt-4">
+                                  <div class="col-12 col-sm-6">
+                                      <input class="multisteps-form__input form-control" type="url" name="instagram" placeholder="Instagram" required/>
+                                  </div>
+                                  <div class="col-12 col-sm-6 mt-4 mt-sm-0">
+                                      <input class="multisteps-form__input form-control" type="url" name="linkedIn" placeholder="linkedIn" required/>
+                                  </div>
+                                  </div>
+                                  <hr>
+                                      <h5 class="nunito "  style="font-size: 1rem; color:#6F6C6D;">Autre:</h5>
+                                  <div class="form-row mt-1">
+                                  <div class="col-12 col-sm-3">
+                                      <input class="multisteps-form__input form-control" type="text" name="platform" placeholder="Platform"/>
+                                  </div>
+                                  <div class="col-12 col-sm-9 mt-4 mt-sm-0">
+                                      <input class="multisteps-form__input form-control" type="text" name="lien" placeholder="Lien"/>
+                                  </div>
                                 </div>
                                 <div class="button-row d-flex mt-4">
                                     <button class="button-21 button-21-prev nunito skeleton  js-btn-prev" type="button" title="Prev">Prev</button>

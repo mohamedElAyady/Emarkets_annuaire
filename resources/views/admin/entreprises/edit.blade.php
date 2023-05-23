@@ -51,43 +51,82 @@
                           <div class="text-center">
                             <img src="{{ asset($entreprise->logo_url) }}" alt="Logo" class="img-fluid">
                           </div>
+
                           <div class="col-md-6">
                             <input type="text" class="form-control" name="raison_sociale" placeholder="Raison sociale" value="{{ $entreprise->raison_sociale }}">
                           </div>
+
                           <div class="col-md-6">
                             <input type="text" class="form-control" name="type_entreprise" placeholder="Type d'entreprise" value="{{ $entreprise->type_entreprise }}">
                           </div>
+
                           <div class="col-md-6">
-                            <textarea class="form-control" name="description" placeholder="Description">{{ $entreprise->description }}</textarea>
+                            <textarea class="form-control" name="description" placeholder="Description" rows="1">{{ $entreprise->description }}</textarea>
                           </div>
+
                           <div class="col-md-6">
                             <input type="text" class="form-control" name="ville" placeholder="Ville" value="{{ $entreprise->ville }}">
                           </div>
+
                           <div class="col-md-6">
                             <input type="text" class="form-control" name="adresse" placeholder="Adresse" value="{{ $entreprise->adresse }}">
                           </div>
+
                           <div class="col-md-6">
                             <input type="email" class="form-control" name="email" placeholder="Email" value="{{ $entreprise->email }}">
                           </div>
+
                           <div class="col-md-6">
                             <input type="text" class="form-control" name="telephone" placeholder="Numéro de téléphone" value="{{ $entreprise->telephone }}">
                           </div>
+
                           <div class="col-md-6">
                             <input type="file" class="form-control" name="logo_url">
                           </div>
+
                           <div class="col-md-6">
                             <input type="number" class="form-control" name="utilisateur_id" placeholder="ID de l'utilisateur" value="{{ $entreprise->utilisateur_id }}">
                           </div>
-                          <div class="col-md-6">
-                            <input type="url" class="form-control" name="site_web" placeholder="Site Web" value="{{ $entreprise->site_web }}">
-                          </div>
+
                           <div class="col-md-6">
                             <input type="text" class="form-control" name="secteur_activite" placeholder="Secteur d'activité" value="{{ $entreprise->secteur_activite }}">
                           </div>
-                        
+
+                          <div class="col-md-6">
+                            <input class=" form-control" type="url" name="site_web" placeholder="Site web" />
+                          </div>
+
+                          <div class="col-md-6">
+                              <input class=" form-control" type="url" name="facebook" placeholder="Facebook" />
+                          </div>
+                          
+                          <div class="col-md-6">
+                              <input class=" form-control" type="url" name="instagram" placeholder="Instagram" />
+                          </div>
+
+                          <div class="col-md-6">
+                              <input class=" form-control" type="url" name="linkedIn" placeholder="linkedIn" />
+                          </div>
+
+
+                          <hr>
+                          <h5 class="nunito "  style="font-size: 1rem; color:#6F6C6D;">Autre:</h5>
+                          <div class="row mt-1">
+
+                            <div class="col-12 col-sm-3 mt-4 mt-sm-0">
+                              <input class=" form-control" type="text" name="platform" placeholder="Platform"/>
+                            </div>
+
+                            <div class="col-12 col-sm-9 mt-4 mt-sm-0">
+                                <input class=" form-control" type="text" name="lien" placeholder="Lien"/>
+                            </div>
+                            
+                          </div>
+
                           <div class="text-center">
                             <button type="submit" class="btn btn-primary">Enregistrer</button>
                           </div>
+                          
                         </form>
                         <!-- End Profile Edit Form -->
       

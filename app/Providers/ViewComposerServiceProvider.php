@@ -2,11 +2,12 @@
 
 namespace App\Providers;
 
+use App\Models\Commentaire;
 use App\Models\Contact;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\View;
 use App\Models\Demande;
-use App\Models\Entreprise;
 use Carbon\Carbon;
 
 class ViewComposerServiceProvider extends ServiceProvider
@@ -49,6 +50,21 @@ class ViewComposerServiceProvider extends ServiceProvider
     
             $view->with(compact('notifications', 'count', 'contacts', 'contactsCount'));
         });
+
+        View::composer('entreprise.entreprise_layout', function ($view) {
+            $notifications = Commentaire::with('entreprise.utilisateur')
+                ->whereHas('entreprise.utilisateur', function ($query) {
+                    $query->where('id', Auth::id());
+                })
+                ->where('seen', 0)
+                ->orderBy('created_at', 'desc')
+                ->get();
+                
+            $count = $notifications->count();
+        
+            $view->with(compact('notifications', 'count'));
+        });
+        
     }
 
 }

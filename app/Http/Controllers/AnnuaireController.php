@@ -14,12 +14,14 @@ class AnnuaireController extends Controller
     {
         $annonces = Annonce::where('statut', 'active')
             ->join('entreprises', 'annonces.entreprise_id', '=', 'entreprises.id')
+            ->whereNull('entreprises.deleted_at')
             ->orderBy('entreprises.pack_id', 'desc')
             ->orderBy('annonces.created_at', 'desc')
             ->paginate(10);
     
         return view('annuaire', compact('annonces'));
     }
+    
     
     
     
@@ -33,10 +35,11 @@ class AnnuaireController extends Controller
     $simplifiedUrls = $this->simplifySocialMediaUrls($socialMediaUrls);
 
     // Increment the vues count of the annonce
-    if ($item->annonce) {
-        $item->annonce->increment('vues');
-    }
-    $comments = Commentaire::latest()->get();
+    $vues = Annonce::where('entreprise_id', $item->id)->value('vues');
+    Annonce::where('entreprise_id', $item->id)->update(['vues' => $vues + 1]);
+    
+    $comments = Commentaire::where('entreprise_id', $id)->latest()->get();
+
     $counts = $comments->count();
 
     return view('others\article_details', compact('item', 'simplifiedUrls','comments','counts'));

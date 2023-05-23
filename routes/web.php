@@ -126,6 +126,9 @@ Route::post('admin/pack/storeData', [PackController::class, 'storeData'])->name(
 Route::get('/admin/profile', function () {
     return view('admin/admin_profile/profile');
 })->name('admin.profile');
+Route::post('/admin/change-password', 'App\Http\Controllers\AdminProfileController@changePassword')->name('admin.changePassword');
+Route::post('/admin/update-profile', 'App\Http\Controllers\AdminProfileController@updateProfile')->name('admin.updateProfile');
+
 
 /*others*/
 Route::get('/demande', function () {return view('others/creer_demande');});
@@ -135,3 +138,22 @@ Route::get('/article_datails', function () {return view('others\article_details'
 
 
 Route::get('/search', 'App\Http\Controllers\SearchController@search')->name('search');
+
+
+/*entreprise/dashboard*/
+Route::get('/entreprise', function () {
+    return view('entreprise/dashboard');
+})->name('entreprise.dashboard');
+
+
+Route::get('/entreprise/annonce', 'App\Http\Controllers\Entreprise\AnnonceController@affiche_details')->name('entreprise.annonce');
+Route::post('/entreprise/annonces/toggleStatut', 'App\Http\Controllers\Entreprise\AnnonceController@toggleStatut')->name('entreprise.annonce.toggleStatut');
+Route::get('/entreprise/profile', function () {
+    return view('/entreprise/profile');
+})->name('entreprise.profile');
+Route::post('/entreprise/change-password', 'App\Http\Controllers\Entreprise\ChangePasswordController@update')->name('changePassword');
+Route::post('/entreprise/update-profile', 'App\Http\Controllers\Entreprise\ProfileController@update')->name('updateProfile');
+
+
+//logout
+Route::post('/logout', 'App\Http\Controllers\Auth\LoginController@logout')->name('logout');

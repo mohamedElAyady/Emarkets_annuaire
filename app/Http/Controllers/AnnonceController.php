@@ -12,9 +12,13 @@ class AnnonceController extends Controller
      */
     public function index()
     {
-        $annonces = Annonce::all();
+        $annonces = Annonce::whereHas('entreprise', function ($query) {
+            $query->whereNull('deleted_at');
+        })->get();
+    
         return view('admin.annonces.all', compact('annonces'));
     }
+    
 
     /**
      * Show the form for creating a new resource.

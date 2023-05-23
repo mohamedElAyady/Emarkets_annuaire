@@ -115,7 +115,8 @@
                     </h2>
                     <div class="row ">
                         <div class="col-12 col-lg-6">
-                            <p class="nunito skeleton p-2" style="line-height: 2rem;" >
+                            <p class="nunito skeleton" style="line-height: 2rem;" >
+                                <b>Les informations</b><br>
                                 <i class="fa-sharp fa-solid fa-location-dot" style="margin-right: 1rem"></i>{{$item->adresse}} <span style="color: coral">{{$item->ville}} </span>
                                 <br>
                                 <i class="fa-solid fa-envelope" style="margin-right: 1rem;"></i><a href="mailto:{{$item->email}}" style="color: coral">{{$item->email}}</a>
@@ -125,7 +126,7 @@
                             </p>
                         </div>
                         <div class="col-12 col-lg-6 ">
-                            <div class="nunito" style="padding-left:20px">
+                            <div class="nunito" style="padding-left:20px; line-height: 2rem;">
                                 <b>Social media</b>
                                 <br>
                                 <!-- Web site -->
@@ -152,9 +153,7 @@
                                         </a>
                                     @endif
                                 @endforeach
-                            </div>
-                            
-                                                           
+                            </div>                     
 
                             <div class="mt-3 nunito" style="padding-left:20px">
                                 <b>À propos</b>
@@ -168,10 +167,10 @@
                 <div class="card-footer bg-transparent">
                     <ul style="list-style: none; ">
                     <li class="nunito skeleton" style=" display: inline-block;  margin-top: 15px; margin-left: -25px">
-                        <i class="fa-solid fa-comment"></i> | <span class="comments-count skeleton" >{{$counts}}</span> commentaire
+                        <i class="fa-solid fa-comment"></i> | <span class="comments-count skeleton" >{{$counts}}</span> commentaires
                     </li>
                     <li class="nunito skeleton" style=" display: inline-block;  margin-top: 15px; margin-left: 20px">
-                        <i class="fa-solid fa-eye"></i> | <span class="comments-count skeleton" >{{$item->annonce->vues}}</span> vues
+                        <i class="fa-solid fa-eye"></i> | <span class="comments-count skeleton" >{{ \App\Models\Annonce::where('entreprise_id', $item->id)->value('vues') }}</span> vues
                     </li>
                     <li style=" display: inline-block;  margin-top: 7px; float: right;">
                         <!--<button class="button-21 nunito skeleton" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
