@@ -3,11 +3,11 @@
 @section('content')
 <x-form-section submit="updateProfileInformation" style="background-color: white">
     <x-slot name="title">
-        {{ __('Profile Information') }}
+        {{ __('Informations sur le profil') }}
     </x-slot>
 
     <x-slot name="description">
-        {{ __('Update your account\'s profile information and email address.') }}
+        {{ __('Mettez à jour les informations de profil et l\'adresse e-mail de votre compte.') }}
     </x-slot>
 
     <x-slot name="form">
@@ -62,6 +62,34 @@
             <x-input-error name="nom" for="nom" class="mt-2" />
         </div>
 
+         <!-- Prenom -->
+         <div class="col-span-6 sm:col-span-4">
+            <x-label name="prenom"  for="prenom" value="{{ __('Prenom') }}" />
+            <x-input id="prenom" name="prenom" type="text" class="mt-1 block w-full" wire:model.defer="state.prenom" autocomplete="prenom" />
+            <x-input-error name="prenom" for="prenom" class="mt-2" />
+        </div>
+
+        <!-- Ville -->
+        <div class="col-span-6 sm:col-span-4">
+            <x-label name="ville"  for="ville" value="{{ __('Ville') }}" />
+            <x-input id="ville" name="ville" type="text" class="mt-1 block w-full" wire:model.defer="state.ville" autocomplete="ville" />
+            <x-input-error name="ville" for="ville" class="mt-2" />
+        </div>
+
+        <!-- Telephone -->
+        <div class="col-span-6 sm:col-span-4">
+            <x-label name="telephone"  for="telephone" value="{{ __('Télephone') }}" />
+            <x-input id="telephone" name="telephone" type="text" class="mt-1 block w-full" wire:model.defer="state.telephone" autocomplete="telephone" />
+            <x-input-error name="telephone" for="telephone" class="mt-2" />
+        </div>
+
+         <!-- Ziip -->
+         <div class="col-span-6 sm:col-span-4">
+            <x-label name="zip"  for="zip" value="{{ __('Zip') }}" />
+            <x-input id="zip" name="zip" type="text" class="mt-1 block w-full" wire:model.defer="state.zip" autocomplete="zip" />
+            <x-input-error name="zip" for="zip" class="mt-2" />
+        </div>
+
         <!-- Email -->
         <div class="col-span-6 sm:col-span-4">
             <x-label for="email" value="{{ __('Email') }}" />
@@ -88,11 +116,11 @@
 
     <x-slot name="actions">
         <x-action-message class="mr-3" on="saved">
-            {{ __('Saved.') }}
+            {{ __('Enregistré.') }}
         </x-action-message>
 
         <x-button wire:loading.attr="disabled" wire:target="photo">
-            {{ __('Save') }}
+            {{ __('Sauvegarder') }}
         </x-button>
     </x-slot>
 </x-form-section>
