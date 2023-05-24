@@ -213,7 +213,7 @@ display: none;
     <ul class="sidebar-nav" id="sidebar-nav" style="height: 100%; display: flex; flex-direction: column; justify-content: space-between;">
 
       <li class="nav-item">
-        <a class="nav-link {{ Request::is('entreprise/dashboard') ? '' : 'collapsed' }}" href="{{ url('/admin/dashboard') }}">
+        <a class="nav-link {{ Request::is('entreprise') ? '' : 'collapsed' }}" href="{{ url('/entreprise') }}">
           <i class="bi bi-house"></i>
           <span>tableau de bord</span>
         </a>

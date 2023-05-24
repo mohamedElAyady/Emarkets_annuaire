@@ -97,4 +97,29 @@ class AnnonceController extends Controller
     // Announcement not found, return an error response
     return response()->json('error', 404);
 }
+    public function adminChangeStatus(Request $request)
+{
+    // Get the announcement ID from the request
+    $annonceId = $request->input('AnnId');
+
+    // Find the announcement in the database
+    $annonce = Annonce::find($annonceId);
+
+    if ($annonce) {
+        // Update the status based on the current value
+        if ($annonce->statut == 'active' ) {
+            $newStatus = 'stop';
+        }else{
+            $newStatus = 'active';
+        }
+        $annonce->statut = $newStatus;
+        $annonce->save();
+
+        // Return the new status as the response
+        return response()->json($newStatus);
+    }
+
+    // Announcement not found, return an error response
+    return response()->json('error', 404);
+}
 }

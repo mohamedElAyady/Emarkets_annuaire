@@ -57,13 +57,7 @@
                     <input type="number" class="form-control" name="utilisateur_id" placeholder="ID de l'utilisateur">
                   </div>
                   <div class="col-md-6">
-                    <input type="text" class="form-control" name="site_web" placeholder="Site web">
-                  </div>
-                  <div class="col-md-6">
                     <input type="text" class="form-control" name="secteur_activite" placeholder="Secteur d'activité">
-                  </div>
-                  <div class="col-md-6">
-                    <textarea class="form-control" name="description" placeholder="Description"></textarea>
                   </div>
                   <div class="col-md-6">
                     <select name="radio_input" class="form-control">
@@ -72,6 +66,30 @@
                         <option value="{{ $pack->id }}">{{ $pack->id }} - {{ $pack->name }}</option>
                         @endforeach
                     </select>
+                  </div>
+                  <div class="col-md-6">
+                    <input class="form-control" type="url" name="site_web" placeholder="Site web" required/>
+                  </div>
+                  <div class="col-md-6">
+                      <input class="form-control" type="url" name="facebook" placeholder="Facebook" required/>
+                  </div>
+                  <div class="col-12 col-sm-6">
+                      <input class="form-control" type="url" name="instagram" placeholder="Instagram" required/>
+                  </div>
+                  <div class="col-md-6">
+                      <input class="form-control" type="url" name="linkedIn" placeholder="linkedIn" required/>
+                  </div>
+                  
+                  <div class="col-md-6">
+                    <textarea class="form-control" name="description" rows="1" placeholder="Description"></textarea>
+                  </div>
+                  <hr>
+                      <h5 class="nunito "  style="font-size: 1rem; color:#6F6C6D;">Autre:</h5>
+                  <div class="col-12 col-sm-3">
+                      <input class="form-control" type="text" name="platform" placeholder="Platform"/>
+                  </div>
+                  <div class="col-12 col-sm-9">
+                      <input class="form-control" type="text" name="lien" placeholder="Lien"/>
                   </div>
                   <div class="text-center">
                     <button type="submit" class="btn btn-primary">Submit</button>

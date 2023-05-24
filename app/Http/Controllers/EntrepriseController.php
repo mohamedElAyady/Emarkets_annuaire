@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 
+use App\Models\Annonce;
 use App\Models\Demande;
 use App\Models\Entreprise;
 use App\Models\Pack;
@@ -142,7 +143,7 @@ class EntrepriseController extends Controller
             'description' => $request->description,
             'site_web' =>  json_encode($siteWebArray),
             'secteur_activite' => $request->secteur_activite,
-            'utilisateur_id' => Auth::id(),
+            'utilisateur_id' => $request->utilisateur_id,
             'pack_id' => $request->radio_input,
             'logo_url' => $logoPath,
         ]);
@@ -265,13 +266,17 @@ class EntrepriseController extends Controller
      */
     public function hardDelete($id)
     {
-    $entreprise = Entreprise::withTrashed()->findOrFail($id);
-    $entreprise->forceDelete();
-
-    return redirect()->route('entreprises.index')
-        ->with('success', 'entreprise deleted permanently.');
+        $entreprise = Entreprise::withTrashed()->findOrFail($id);
+    
+        // Delete the child rows from the 'annonces' table
+        $annonce = Annonce::where('entreprise_id', $id)->delete();
+    
+        // Delete the parent row from the 'entreprises' table
+        $entreprise->forceDelete();
+    
+        return redirect()->route('entreprises.index')
+            ->with('success', 'Entreprise deleted permanently.');
     }
-
 
     /**
      * Remove the specified resource from storage.

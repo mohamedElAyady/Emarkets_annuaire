@@ -91,6 +91,15 @@
                           <div class="col-md-6">
                             <input type="text" class="form-control" name="secteur_activite" placeholder="Secteur d'activité" value="{{ $entreprise->secteur_activite }}">
                           </div>
+                          
+                          <div class="col-md-6">
+                            <select name="radio_input" class="form-control">
+                              <option selected disabled>Pack</option>
+                                @foreach ($packs as $pack)
+                                <option value="{{ $pack->id }}">{{ $pack->id }} - {{ $pack->name }}</option>
+                                @endforeach
+                            </select>
+                          </div>
 
                           @php
                               $simplifiedData = app('App\Http\Controllers\EntrepriseController')->simplifySocialMediaUrls($entreprise->site_web);

@@ -43,16 +43,20 @@
                 @php
                  use App\Models\Annonce;
                   $statut = Annonce::where('entreprise_id', $item->id)->value('statut');   
-                @endphp
-                <form action="{{ route('entreprise.annonce.toggleStatut') }}" method="POST" style="margin-bottom: 0px;">
-                  @csrf
-                  <input type="hidden" name="entreprise_id" value="{{ $item->id }}">
-                  
-                      @if ($statut === "active")
+                @endphp 
+                @if ($statut === "active")
+                    <form action="{{ route('entreprise.annonce.toggleStatut') }}" method="POST" style="margin-bottom: 0px;">
+                    @csrf
+                        <input type="hidden" name="entreprise_id" value="{{ $item->id }}">
                         <button type="submit" class="btn btn-outline-danger">Désactiver</button>
-                      @else
+                    </form>
+                @elseif($statut === "désactivé")
+                    <form action="{{ route('entreprise.annonce.toggleStatut') }}" method="POST" style="margin-bottom: 0px;">
+                    @csrf
+                        <input type="hidden" name="entreprise_id" value="{{ $item->id }}">
                         <button type="submit" class="btn btn-outline-success">Activer</button>
-                      @endif
+                    </form>
+                @endif
                   
                 </form>
 
