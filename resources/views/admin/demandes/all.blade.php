@@ -57,7 +57,7 @@
                     </td>
                     <td>{{ $demande->pack->name }}</td>
                     <td><a href="{{ route('entreprises.show', $demande->entreprise_id) }}">{{ $demande->entreprise_id }}</a></td>
-                    <td><span  style="color : <?php
+                    <td><span  class="badge" style="background-color : <?php
                       if ($demande->status === 'en attente') {
                         echo 'orange';
                       } elseif ($demande->status === 'accepté') {

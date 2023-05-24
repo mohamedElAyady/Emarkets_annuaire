@@ -16,10 +16,7 @@ use Illuminate\Support\Facades\Hash;
 
 class EntrepriseController extends Controller
 {
-     public function demande_entreprise()
-     {
-        return view('demande_entreprise');
-     }
+
     public function index()
     {
         $entreprises = Entreprise::all();
@@ -329,3 +326,5 @@ class EntrepriseController extends Controller
 
 
 }
+
+

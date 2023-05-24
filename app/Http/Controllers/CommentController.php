@@ -15,10 +15,6 @@ class CommentController extends Controller
             'entreprise_id' => 'required|exists:entreprises,id',
         ]);
 
-        if (!Auth::check()) {
-            // User is not logged in, redirect to the account creation page
-            return redirect()->route('login')->with('info', 'Please create an account to add a comment.');
-        }
 
 
         $commentaire = Commentaire::create([
