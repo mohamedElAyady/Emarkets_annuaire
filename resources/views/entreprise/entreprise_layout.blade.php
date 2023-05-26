@@ -213,7 +213,7 @@ display: none;
     <ul class="sidebar-nav" id="sidebar-nav" style="height: 100%; display: flex; flex-direction: column; justify-content: space-between;">
 
       <li class="nav-item">
-        <a class="nav-link {{ Request::is('entreprise/dashboard') ? '' : 'collapsed' }}" href="{{ url('/admin/dashboard') }}">
+        <a class="nav-link {{ Request::is('entreprise') ? '' : 'collapsed' }}" href="{{ url('/entreprise') }}">
           <i class="bi bi-house"></i>
           <span>tableau de bord</span>
         </a>
@@ -224,10 +224,16 @@ display: none;
           <i class="bi bi-file-earmark-plus"></i>
           <span>Mon annonce</span>
         </a>
+
+
+      <li class="nav-item">
+        <a class="nav-link {{ Request::is('entreprise/support') ? '' : 'collapsed' }}" href="/entreprise/support">
+          <i class="bi bi-question-circle-fill"></i>
+          <span>Support technique</span>
+        </a>
       </li>
 
 
-      
       <li class="nav-item">
         <a class="nav-link <?php
         if (!Request::is('entreprise/profile') ) echo 'collapsed';

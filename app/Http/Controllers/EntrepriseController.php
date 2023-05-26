@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 
+use App\Models\Annonce;
 use App\Models\Demande;
 use App\Models\Entreprise;
 use App\Models\Pack;
@@ -16,10 +17,7 @@ use Illuminate\Support\Facades\Hash;
 
 class EntrepriseController extends Controller
 {
-     public function demande_entreprise()
-     {
-        return view('demande_entreprise');
-     }
+
     public function index()
     {
         $entreprises = Entreprise::all();
@@ -44,58 +42,7 @@ class EntrepriseController extends Controller
         return view('admin.entreprises.add',compact('packs'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-   /*
-    public function store(Request $request)
-    {
-        $request->validate([
-            'raison_sociale' => 'required',
-            'type_entreprise' => 'required',
-            'ville' => 'required',
-            'adresse' => 'required',
-            'email' => 'required|email',
-            'telephone' => 'required',
-            'utilisateur_id' => 'required',
-            'logo_url' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
-        ]);
     
-        $logo = $request->file('logo_url');
-        $logoPath = 'admin_assets/input_images/' . time() . '_' . $logo->getClientOriginalName();
-    
-        // Save logo to the specified path
-        $logo->move(public_path('admin_assets/input_images'), $logoPath);
-        $pack = 0;
-    
-        $entreprise = Entreprise::create([
-            'raison_sociale' => $request->raison_sociale,
-            'type_entreprise' => $request->type_entreprise,
-            'ville' => $request->ville,
-            'adresse' => $request->adresse,
-            'email' => $request->email,
-            'telephone' => $request->telephone,
-            'description' => $request->description,
-            'site_web' => $request->site_web,
-            'secteur_activite' => $request->secteur_activite,
-            'utilisateur_id' => $request->utilisateur_id,
-            'pack_id' => $pack,
-            'logo_url' => $logoPath,
-        ]);
-    
-        // Create a new demand associated with the enterprise
-        $demande = new Demande([
-            'status' => 'en attente',
-            'date_creation' => now(),
-            'pack_id' => $pack,
-        ]);
-        $entreprise->demandes()->save($demande);
-    
-        return redirect()->route('entreprises.index')
-            ->with('success', "L'entreprise a été ajoutée avec succès");
-    }*/
-
-
     public function store(Request $request)
     {
         $request->validate([
@@ -145,7 +92,7 @@ class EntrepriseController extends Controller
             'description' => $request->description,
             'site_web' =>  json_encode($siteWebArray),
             'secteur_activite' => $request->secteur_activite,
-            'utilisateur_id' => Auth::id(),
+            'utilisateur_id' => $request->utilisateur_id,
             'pack_id' => $request->radio_input,
             'logo_url' => $logoPath,
         ]);
@@ -176,7 +123,8 @@ class EntrepriseController extends Controller
      */
     public function edit(Entreprise $entreprise)
     {
-        return view('admin.entreprises.edit', compact('entreprise'));
+        $packs = Pack::all();
+        return view('admin.entreprises.edit', compact('entreprise','packs'));
     }
 
     /* Update the specified resource in storage. */
@@ -246,7 +194,7 @@ class EntrepriseController extends Controller
     // Save the updated enterprise
     $entreprise->save();
 
-    return redirect()->route('entreprises.index')
+    return redirect()->back()
         ->with('success', "L'entreprise a été mise à jour avec succès");
 }
 
@@ -268,13 +216,17 @@ class EntrepriseController extends Controller
      */
     public function hardDelete($id)
     {
-    $entreprise = Entreprise::withTrashed()->findOrFail($id);
-    $entreprise->forceDelete();
-
-    return redirect()->route('entreprises.index')
-        ->with('success', 'entreprise deleted permanently.');
+        $entreprise = Entreprise::withTrashed()->findOrFail($id);
+    
+        // Delete the child rows from the 'annonces' table
+        $annonce = Annonce::where('entreprise_id', $id)->delete();
+    
+        // Delete the parent row from the 'entreprises' table
+        $entreprise->forceDelete();
+    
+        return redirect()->route('entreprises.index')
+            ->with('success', 'Entreprise deleted permanently.');
     }
-
 
     /**
      * Remove the specified resource from storage.
@@ -328,4 +280,76 @@ class EntrepriseController extends Controller
     }    
 
 
+
+
+
+    public function demandeAnnoncement(Request $request)
+    {
+        $request->validate([
+            'raison_sociale' => 'required',
+            'type_entreprise' => 'required',
+            'ville' => 'required',
+            'adresse' => 'required',
+            'email' => 'required|email',
+            'telephone' => 'required',
+            'secteur_activite' => 'required',
+            'description' => 'nullable',
+            'logo_url' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'site_web' => 'nullable|url',
+            'facebook' => 'nullable|url',
+            'instagram' => 'nullable|url',
+            'linkedIn' => 'nullable|url',
+            'platform' => 'nullable',
+            'lien' => 'nullable',
+            'radio_input' => 'required|in:0,1,2',
+        ]);
+    
+        $logo = $request->file('logo_url');
+        $logoPath = 'admin_assets/input_images/' . time() . '_' . $logo->getClientOriginalName();
+    
+        // Save logo to the specified path
+        $logo->move(public_path('admin_assets/input_images'), $logoPath);
+
+        // Save the social media URLs as an array in the 'site_web' column
+        $siteWebArray = [
+            'site_web' => $request->site_web,
+            'facebook' => $request->facebook,
+            'instagram' => $request->instagram,
+            'linkedIn' => $request->linkedIn,
+        ];
+        
+        if ($request->platform) {
+            $siteWebArray[$request->platform] = $request->lien;
+        }        
+
+        $entreprise = Entreprise::create([
+            'raison_sociale' => $request->raison_sociale,
+            'type_entreprise' => $request->type_entreprise,
+            'ville' => $request->ville,
+            'adresse' => $request->adresse,
+            'email' => $request->email,
+            'telephone' => $request->telephone,
+            'description' => $request->description,
+            'site_web' =>  json_encode($siteWebArray),
+            'secteur_activite' => $request->secteur_activite,
+            'utilisateur_id' => Auth::id(),
+            'pack_id' => $request->radio_input,
+            'logo_url' => $logoPath,
+        ]);
+    
+        // Create a new demand associated with the enterprise
+        $demande = new Demande([
+            'status' => 'en attente',
+            'date_creation' => now(),
+            'pack_id' => $request->radio_input,
+        ]);
+        $entreprise->demandes()->save($demande);
+    
+       // Redirect back or to a specific route
+       return redirect()->route('home')->with('success', 'Demande créée avec succès.');
+    }
+
+
 }
+
+

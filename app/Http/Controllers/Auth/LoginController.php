@@ -44,6 +44,6 @@ class LoginController extends Controller
 
         Auth::logout();
 
-        return view('acceuil');
+        return  redirect()->route('home');
     }
 }

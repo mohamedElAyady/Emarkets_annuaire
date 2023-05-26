@@ -216,7 +216,7 @@
                                 </a>
                                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                                 <li>
-                                    <button class="dropdown-item" type="button" data-bs-toggle="collapse" data-bs-target="#updatecomment" aria-expanded="false" aria-controls="updatecomment">
+                                    <button class="dropdown-item" type="button" data-bs-toggle="collapse" data-bs-target="#updatecomment{{ $comment->id }}" aria-expanded="false" aria-controls="updatecomment{{ $comment->id }}">
                                         Modifier
                                       </button></li>
                                 <li>
@@ -234,7 +234,7 @@
                 <div class="card-body">
                     <div class="comment-content">
                         <p class="comment-text">{{ $comment->content }}</p>
-                        <div class="row collapse mt-2" id="updatecomment">
+                        <div class="row collapse mt-2" id="updatecomment{{ $comment->id }}">
                             <form  action="{{ route('comments.update') }}" method="POST">
                                 @csrf
                                 <div class="col-10">

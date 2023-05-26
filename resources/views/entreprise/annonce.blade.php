@@ -25,14 +25,19 @@
   <section class="section dashboard">
 
     @if ($errors->any())
-            <div class="alert alert-danger">
-                <ul>
-                    @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
-            </div>
-            @endif
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+    @endif
+    
+    <div class="alert alert-info">
+        Si vous souhaitez mettre à jour des informations, veuillez faire une demande sur la page de support.
+    </div>
+      
     <div class="content col-xs-12 col-lg-12 ">
         <div class="card mt-3" style="/*background-image: url('assets/annuaire/img/cardbackground.png'); background-size:contain; background-repeat: no-repeat; background-position: right*/ ">
           
@@ -43,16 +48,20 @@
                 @php
                  use App\Models\Annonce;
                   $statut = Annonce::where('entreprise_id', $item->id)->value('statut');   
-                @endphp
-                <form action="{{ route('entreprise.annonce.toggleStatut') }}" method="POST" style="margin-bottom: 0px;">
-                  @csrf
-                  <input type="hidden" name="entreprise_id" value="{{ $item->id }}">
-                  
-                      @if ($statut === "active")
+                @endphp 
+                @if ($statut === "active")
+                    <form action="{{ route('entreprise.annonce.toggleStatut') }}" method="POST" style="margin-bottom: 0px;">
+                    @csrf
+                        <input type="hidden" name="entreprise_id" value="{{ $item->id }}">
                         <button type="submit" class="btn btn-outline-danger">Désactiver</button>
-                      @else
+                    </form>
+                @elseif($statut === "désactivé")
+                    <form action="{{ route('entreprise.annonce.toggleStatut') }}" method="POST" style="margin-bottom: 0px;">
+                    @csrf
+                        <input type="hidden" name="entreprise_id" value="{{ $item->id }}">
                         <button type="submit" class="btn btn-outline-success">Activer</button>
-                      @endif
+                    </form>
+                @endif
                   
                 </form>
 

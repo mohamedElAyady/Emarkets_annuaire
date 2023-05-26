@@ -21,89 +21,8 @@
   <link href="{{ asset('multi_step_form_assets\style.css')}}" rel="stylesheet">
   <link href="{{ asset('assets\annuaire\css\main.css')}}" rel="stylesheet">
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-  <script>
-    // $(document).ready(function() {
-    //   // Array to store data
-    //   var formDataArray = [];
-  
-    //   // Add an event listener to the button click
-    //   $('.js-btn-submit').click(function() {
-    //     // Get the CSRF token value
-    //     var csrfToken = $('meta[name="csrf-token"]').attr('content');
-  
-    //     // Get the input values
-    //     var typeEntreprise = $('input[name="type_entreprise"]').val();
-    //     var raisonSociale = $('input[name="raison_sociale"]').val();
-    //     var ville = $('input[name="ville"]').val();
-    //     var adresse = $('input[name="adresse"]').val();
-    //     var email = $('input[name="email"]').val();
-    //     var telephone = $('input[name="telephone"]').val();
-    //     var secteurActivite = $('select[name="secteur_activite"]').val();
-    //     var logoFileInput = $('input[name="logo_url"]')[0];
-    //     var description = $('textarea[name="description"]').val();
-    //     var siteWeb = $('input[name="site_web"]').val();
-    //     var facebook = $('input[name="facebook"]').val();
-    //     var instagram = $('input[name="instagram"]').val();
-    //     var linkedIn = $('input[name="linkedIn"]').val();
-    //     var platform = $('input[name="platform"]').val();
-    //     var lien = $('input[name="lien"]').val();
-  
-    //     // Create a new FormData object
-    //     var formData = new FormData();
-  
-    //     // Append the input values to the FormData object
-    //     formData.append('type_entreprise', typeEntreprise);
-    //     formData.append('raison_sociale', raisonSociale);
-    //     formData.append('ville', ville);
-    //     formData.append('adresse', adresse);
-    //     formData.append('email', email);
-    //     formData.append('telephone', telephone);
-    //     formData.append('secteur_activite', secteurActivite);
-    //     formData.append('description', description);
-    //     formData.append('site_web', siteWeb);
-    //     formData.append('facebook', facebook);
-    //     formData.append('instagram', instagram);
-    //     formData.append('linkedIn', linkedIn);
-    //     formData.append('platform', platform);
-    //     formData.append('lien', lien);
-  
-    //     // Append the file to the FormData object
-    //     if (logoFileInput.files.length > 0) {
-    //       formData.append('logo_url', logoFileInput.files[0]);
-    //     }
-  
-    //     // Add form data to the array
-    //     formDataArray.push(formData);
-  
-    //     // Log the array to the console
-    //     console.log(formDataArray);
   
   
-    //     // Make an AJAX request to the server
-    //     $.ajax({
-    //       url: '{{ route('createDemande') }}',
-    //       type: 'POST',
-    //       headers: {
-    //         'X-CSRF-TOKEN': csrfToken
-    //       },
-    //       data: formData,
-    //       contentType: false,
-    //       processData: false,
-    //       success: function(response) {
-    //         console.log(response);
-    //         // Handle the success response
-    //       },
-    //       error: function(xhr, status, error) {
-    //         console.error(xhr.responseText);
-    //         // Handle the error response
-    //       }
-    //     });
-    //   });
-    // });
-  </script>
-  
-  
-
 <body>
     <!-- ======= Header ======= -->
     @include('layouts.navbar')
@@ -130,7 +49,7 @@
               </div>
               <div class="row">
                 <div class="col-12 col-lg-8 m-auto">
-                    <form class="multisteps-form__form" action="{{ route('entreprises.store') }}" method="POST" enctype="multipart/form-data">
+                    <form class="multisteps-form__form" action="{{ route('creer_demande_annoncement') }}" method="POST" enctype="multipart/form-data">
                     @csrf
                         <div class="multisteps-form__panel bg-white js-active" data-animation="scaleIn">
                             <h3 class="multisteps-form__title nunito" style="font-size: 2rem; color:#6F6C6D;"><b>Entreprise infos</b></h3>

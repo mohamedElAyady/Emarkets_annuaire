@@ -85,12 +85,12 @@
         var id = id;
         $.ajax({
             type: "GET",
-            url: '/admin/annonces/changeStatus',
+            url: '/admin/annonces/adminChangeStatus',
             data: {
                 AnnId: id
             },
             success: function(result) {
-                if (result === 'active') {
+                if (result === 'active' ) {
                   Swal.fire({
                   title: "Done!",
                   text: "Annonce est active",

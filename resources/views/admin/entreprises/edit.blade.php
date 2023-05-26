@@ -91,23 +91,36 @@
                           <div class="col-md-6">
                             <input type="text" class="form-control" name="secteur_activite" placeholder="Secteur d'activité" value="{{ $entreprise->secteur_activite }}">
                           </div>
+                          
+                          <div class="col-md-6">
+                            <select name="radio_input" class="form-control">
+                              <option selected disabled>Pack</option>
+                                @foreach ($packs as $pack)
+                                <option value="{{ $pack->id }}">{{ $pack->id }} - {{ $pack->name }}</option>
+                                @endforeach
+                            </select>
+                          </div>
+
+                          @php
+                              $simplifiedData = app('App\Http\Controllers\EntrepriseController')->simplifySocialMediaUrls($entreprise->site_web);
+                              $socialMediaUrls = json_decode($simplifiedData, true);
+                          @endphp
 
                           <div class="col-md-6">
-                            <input class=" form-control" type="url" name="site_web" placeholder="Site web" />
+                            <input class=" form-control" type="url" name="site_web" placeholder="Site web" value="{{$socialMediaUrls['site_web']}}"/>
                           </div>
 
                           <div class="col-md-6">
-                              <input class=" form-control" type="url" name="facebook" placeholder="Facebook" />
+                              <input class=" form-control" type="url" name="facebook" placeholder="Facebook" value="{{$socialMediaUrls['facebook']}}" />
                           </div>
                           
                           <div class="col-md-6">
-                              <input class=" form-control" type="url" name="instagram" placeholder="Instagram" />
+                              <input class=" form-control" type="url" name="instagram" placeholder="Instagram" value="{{$socialMediaUrls['instagram']}}" />
                           </div>
 
                           <div class="col-md-6">
-                              <input class=" form-control" type="url" name="linkedIn" placeholder="linkedIn" />
+                              <input class=" form-control" type="url" name="linkedIn" placeholder="linkedIn" value="{{$socialMediaUrls['linkedIn']}}"/>
                           </div>
-
 
                           <hr>
                           <h5 class="nunito "  style="font-size: 1rem; color:#6F6C6D;">Autre:</h5>

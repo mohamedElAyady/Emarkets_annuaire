@@ -9,7 +9,11 @@ class Contact extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['nom', 'prenom', 'email', 'sujet', 'message', 'seen'];
+    protected $fillable = ['nom', 'prenom', 'email', 'sujet', 'message', 'seen', 'entreprise_id', 'image_url'];
 
     protected $table = 'contacts';
+    public function entreprise()
+    {
+        return $this->belongsTo(Entreprise::class);
+    }
 }

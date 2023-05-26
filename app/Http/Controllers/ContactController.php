@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 use App\Models\Contact;
+use App\Models\Entreprise;
 use App\Models\Pack;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 
 class ContactController extends Controller
@@ -24,13 +27,16 @@ class ContactController extends Controller
             'message' => 'required',
         ]);
 
+        // Convert the message to HTML
+        $htmlMessage = nl2br($request->message);
+
         // Process the form data and send an email, save to the database, etc.
         $contact = Contact::create([
             'nom' => $request->nom,
             'prenom' => $request->prenom,
             'email' => $request->email,
             'sujet' => $request->sujet,
-            'message' => $request->message,
+            'message' => $htmlMessage,
         ]);
         // Redirect back to the contact form with a success message
         return redirect()->back()->with('success', 'Votre message a été envoyé. Merci!');
@@ -64,6 +70,48 @@ class ContactController extends Controller
     
         return redirect()->route('packs.index')
             ->with('success', 'Pack created successfully');
+    }
+
+
+
+    public function supportContact(Request $request)
+    {
+        // Validate the form data
+        $validatedData = $request->validate([
+            'sujet' => 'required',
+            'message' => 'required',
+            'image' => 'nullable|image|max:2048', // Maximum file size of 2MB
+        ]);
+    
+        $user = Auth::user();
+        $entreprise = Entreprise::where('utilisateur_id', Auth::id())->first();
+    
+        // Convert the message to HTML
+        $htmlMessage = nl2br($request->message);
+    
+        // Process the form data and send an email, save to the database, etc.
+        $contactData = [
+            'nom' => $user->nom,
+            'prenom' => $user->prenom,
+            'email' => $user->email,
+            'sujet' => $request->sujet,
+            'message' => $htmlMessage,
+            'entreprise_id' => $entreprise->id,
+        ];
+    
+        // Check if an image file is uploaded
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+            $imagePath = 'admin_assets/input_images/' . time() . '_' . $image->getClientOriginalName();
+            // Save image to the specified path
+            $image->move(public_path('admin_assets/input_images'), $imagePath);
+            $contactData['image_url'] = $imagePath;
+        }
+    
+        $contact = Contact::create($contactData);
+    
+        // Redirect back to the contact form with a success message
+        return redirect()->back()->with('success', 'Votre message a été envoyé. Merci!');
     }
     
 
