@@ -29,7 +29,7 @@
                         @endforeach
                     </ul>
                 </div>
-                @endif
+              @endif
             <!-- Table with stripped rows -->
             <table class="table datatable">
               <thead>

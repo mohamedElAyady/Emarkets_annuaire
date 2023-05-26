@@ -11,7 +11,7 @@ class AdminRole
     {
         $user = Auth::user();
         // Check if the user is authenticated
-        if ($user->usertype == 1 ) {
+        if ($user->usertype == 2 ) {
             // 
             return $next($request);
         } else {

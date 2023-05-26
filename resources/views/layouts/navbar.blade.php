@@ -38,8 +38,20 @@
               <li>
                  <a href="{{ url('demande_annoncement') }}" class="getstarted">Demande d'annoncement</a>
                </li>
+            
             @endif
-                
+
+            @if(Auth::user()->usertype == 2)
+              <li>
+                <a class="nav-link " href="{{ url('admin') }}">Tableau de board</a>
+              </li>
+            @endif
+
+            @if(Auth::user()->usertype == 1)
+              <li>
+                <a class="nav-link " href="{{ url('entreprise') }}">Tableau de board</a>
+              </li>
+            @endif
               <li class="nav-item dropdown pe-3">
                 <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
                   <span class="d-none d-md-block dropdown-toggle ps-2">{{ Auth::user()->prenom }} {{ Auth::user()->nom }}</span>
@@ -69,11 +81,11 @@
           @else
 
               <li>
-                  <a href="{{ route('login') }}" class="getstarted">Log in</a>
+                  <a class="nav-link scrollto " href="{{ route('login') }}" >Connexion</a>
               </li>
           @if (Route::has('register'))
               <li>
-                  <a href="{{ route('register') }}" class="getstarted">Register</a>
+                  <a href="{{ route('register') }}" class="getstarted">Inscrivez-vous</a>
               </li>
           @endif
           @endauth

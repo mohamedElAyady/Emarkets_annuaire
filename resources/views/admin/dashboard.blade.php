@@ -26,8 +26,8 @@
                 <i class="bi bi-globe-europe-africa"></i>
               </div>
               <div class="ps-3">
-                <h6>145</h6>
-                <span class="text-success small pt-1 fw-bold">12%</span> <span class="text-muted small pt-2 ps-1">increase</span>
+                <h6>15</h6>
+                <span class="text-success small pt-1 fw-bold">+15</span> <span class="text-muted small pt-2 ps-1">increase</span>
 
               </div>
             </div>
@@ -47,13 +47,9 @@
               </div>
               <div class="ps-3">
                 <h6>
-                  <?php
-                  use Illuminate\Support\Facades\Cache;
-                  $visitorCount = Cache::get('visitor_count', 0);
-                  echo $visitorCount;
-                  ?>
+                  32
                 </h6>
-                <span class="text-success small pt-1 fw-bold">12%</span>
+                <span class="text-success small pt-1 fw-bold">+12</span>
                 <span class="text-muted small pt-2 ps-1">increase</span>
               </div>
             </div>
@@ -74,7 +70,7 @@
                 <i class="bi bi-book"></i>
               </div>
               <div class="ps-3">
-                <h6>145</h6>
+                <h6>10</h6>
                 <span class="text-success small pt-1 fw-bold">+1</span> <span class="text-muted small pt-2 ps-1">Ajouter il y a 2 heures</span>
 
               </div>

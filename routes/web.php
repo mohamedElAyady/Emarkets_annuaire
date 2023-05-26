@@ -32,6 +32,7 @@ Route::get('/acceuil',[AcceuilController::class,'Acceuil']);
 Route::get('/contact', [ContactController::class, 'index'])->name('contact.index');
 Route::post('/contact', [ContactController::class, 'store'])->name('contact.store');
 Route::get('/search', 'App\Http\Controllers\SearchController@search')->name('search');
+Route::post('/creer_demande_annoncement', 'App\Http\Controllers\EntrepriseController@demandeAnnoncement')->name('creer_demande_annoncement')->middleware('auth','verified');
 
 Route::middleware(['auth','verified'])->group(function () {
 
@@ -63,6 +64,7 @@ Route::middleware(['auth','verified'])->group(function () {
         Route::get('admin/utilisateurs/softDelete/{id}', 'App\Http\Controllers\UtilisateurController@softDelete')->name('utilisateurs.softdelete');
         Route::post('admin/utilisateurs/{id}/updateUser', 'App\Http\Controllers\UtilisateurController@updateUser')->name('utilisateurs.updateUser');
         Route::post('/utilisateurs/{id}/change-password', 'App\Http\Controllers\UtilisateurController@changePassword')->name('utilisateurs.changePassword');
+        Route::post('/update-usertype', 'App\Http\Controllers\UtilisateurController@updateUserType')->name('utilisateurs.update.usertype');
 
 
         /**  admin/entreprises routes */
@@ -104,16 +106,17 @@ Route::middleware(['auth','verified'])->group(function () {
     /*others*/
     Route::get('/demande', function () {return view('others/creer_demande');});
     Route::get('/demande_annoncement', function () { return view('others/demande_annoncement');});
-    Route::post('/createDemande', [EntrepriseController::class, 'createDemande'])->name('createDemande');
 
     Route::middleware(['role.entreprise'])->group(function () {
         /*entreprise interface*/
         Route::get('/entreprise', function () {return view('entreprise/dashboard');})->name('entreprise.dashboard');
         Route::get('/entreprise/annonce', 'App\Http\Controllers\Entreprise\AnnonceController@affiche_details')->name('entreprise.annonce');
         Route::post('/entreprise/annonces/toggleStatut', 'App\Http\Controllers\Entreprise\AnnonceController@toggleStatut')->name('entreprise.annonce.toggleStatut');
+        Route::get('/entreprise/support', function () {return view('/entreprise/support'); })->name('entreprise.support');
         Route::get('/entreprise/profile', function () {return view('/entreprise/profile'); })->name('entreprise.profile');
         Route::post('/entreprise/change-password', 'App\Http\Controllers\Entreprise\ChangePasswordController@update')->name('changePassword');
         Route::post('/entreprise/update-profile', 'App\Http\Controllers\Entreprise\ProfileController@update')->name('updateProfile');
+        Route::post('/entreprise/supportContact', 'App\Http\Controllers\ContactController@supportContact')->name('entreprises.supportContact');
     });
 
 });

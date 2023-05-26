@@ -162,6 +162,18 @@ class UtilisateurController extends Controller
         }
 
     }
+
+    public function updateUserType(Request $request)
+{
+    $userId = $request->input('user_id');
+    $userType = $request->input('user_type');
+    
+    $user = User::findOrFail($userId);
+    $user->usertype = $userType;
+    $user->save();
+    
+    return response()->json(['success' => true]);
+}
     
 
 }

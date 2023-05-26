@@ -89,7 +89,7 @@ public function accepte($id)
     $annonce = Annonce::create([
         'datePublication' => Carbon::now(),
         'dateExpiration' => $expirationDate,
-        'status' => 'active',
+        'statut' => 'active',
         'categorie' => '--------',
         'entreprise_id' => $demande->entreprise->id,
 

@@ -22,14 +22,18 @@
                 <div class="card">
                   <div class="card-body pt-3">
                     <!-- Bordered Tabs -->
-                    <ul class="nav nav-tabs nav-tabs-bordered">
+                    <ul class="nav nav-tabs nav-tabs-bordered ">
                       <li class="nav-item">
                         <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#profile-overview">Overview</button>
+                        
                       </li>
                     </ul>
                     <div class="tab-content pt-2">
                       <div class="tab-pane fade show active profile-overview" id="profile-overview">
-                        <h5 class="card-title" style="color: #51678f;">Détails de l'entreprise</h5>
+                        <div class="row">
+                          <h5 class="card-title col-10" style="color: #51678f;">Détails de l'entreprise</h5>
+                          <a href="{{ route('entreprises.edit', $entreprise->id) }}" class="col-1"><i class="bi bi-pencil-fill" style="color: black; font-size: 25px"></i></a>
+                        </div>
                         @if ($errors->any())
                         <div class="alert alert-danger">
                             <ul>
@@ -41,7 +45,7 @@
                         @endif
                         <div class="row">
                           <div class="text-center">
-                            <img src="{{ asset($entreprise->logo_url) }}" alt="Logo" class="img-fluid">
+                            <img style="width: 200px; height: 200px;" src="{{ asset($entreprise->logo_url) }}" alt="Logo" class="img-fluid">
                           </div>
                           
 

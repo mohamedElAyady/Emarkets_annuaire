@@ -224,10 +224,16 @@ display: none;
           <i class="bi bi-file-earmark-plus"></i>
           <span>Mon annonce</span>
         </a>
+
+
+      <li class="nav-item">
+        <a class="nav-link {{ Request::is('entreprise/support') ? '' : 'collapsed' }}" href="/entreprise/support">
+          <i class="bi bi-question-circle-fill"></i>
+          <span>Support technique</span>
+        </a>
       </li>
 
 
-      
       <li class="nav-item">
         <a class="nav-link <?php
         if (!Request::is('entreprise/profile') ) echo 'collapsed';

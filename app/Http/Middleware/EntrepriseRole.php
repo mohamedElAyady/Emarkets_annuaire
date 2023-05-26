@@ -11,7 +11,7 @@ class EntrepriseRole
     {
         $user = Auth::user();
         // Check if the user is authenticated
-        if ($user->usertype == 2 ) {
+        if ($user->usertype == 1 ) {
             // 
             return $next($request);
         } else {

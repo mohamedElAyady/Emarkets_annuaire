@@ -45,12 +45,21 @@
                         </div>
                         @endif
                         <div class="row">
-
+          
+                              @if ($contact->entreprise_id != null)
+                                <div class="row">
+                                  <div class="col-lg-3 col-md-4 profil_label">Expéditeur</div>
+                                  <div class="col-lg-9 col-md-8">
+                                    <a href="{{ route('entreprises.show', $contact->entreprise->id) }}">{{$contact->entreprise->raison_sociale}}</a>
+                                  </div>
+                                </div>
+                              @else
                               <div class="row">
                                 <div class="col-lg-3 col-md-4 profil_label">Expéditeur</div>
-                                <div class="col-lg-9 col-md-8">{{ $contact->prenom }} {{ $contact->nom }}</div>
+                                <div class="col-lg-9 col-md-8">{{ $contact->prenom }} {{ $contact->nom }}</a></div>
                               </div>
-                            
+                              @endif
+                              
                               <hr style="margin-top: 1rem">                          
 
                               <div class="row">
@@ -69,11 +78,23 @@
    
 
                               <div class="row">
-                                <div class="col-lg-3 col-md-4 profil_label">Message  </div>
+                                <div class="col-lg-3 col-md-4 profil_label">Message</div>
                                 <div class="col-lg-9 col-md-8">
-                                  <p>{{ $contact->message }}</p>
-                                 </div>
+                                    <div>{!! nl2br(strip_tags($contact->message)) !!}</div>
+                                </div>
                               </div>
+                            @if ($contact->image_url != null)
+                              <hr style="margin-top: 1rem">
+   
+
+                              <div class="row">
+                                <div class="col-lg-3 col-md-4 profil_label">Fichier</div>
+                                <div class="col-lg-9 col-md-8">
+                                    <a href="{{url($contact->image_url)}}" download><img src="{{asset($contact->image_url)}}" alt="" srcset="" style="width: 200px; height: 200px;"></a>
+                                </div>
+                              </div>
+                            @endif
+                            
                             
 
 
