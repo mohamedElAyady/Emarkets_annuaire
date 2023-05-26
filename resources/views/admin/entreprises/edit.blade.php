@@ -49,7 +49,7 @@
                           @csrf
                           @method('PUT')
                           <div class="text-center">
-                            <img src="{{ asset($entreprise->logo_url) }}" alt="Logo" class="img-fluid">
+                            <img src="{{ asset($entreprise->logo_url) }}" alt="Logo" style="width: 200px; height: 200px;"  class="img-fluid">
                           </div>
 
                           <div class="col-md-6">

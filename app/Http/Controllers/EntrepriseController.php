@@ -294,7 +294,7 @@ class EntrepriseController extends Controller
             'telephone' => 'required',
             'secteur_activite' => 'required',
             'description' => 'nullable',
-            'logo_url' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'logo_url' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
             'site_web' => 'nullable|url',
             'facebook' => 'nullable|url',
             'instagram' => 'nullable|url',
