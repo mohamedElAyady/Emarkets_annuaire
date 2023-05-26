@@ -95,6 +95,10 @@ public function accepte($id)
 
     ]);
 
+    // Update the associated entreprise's usertype to 1
+    $annonce->entreprise->utilisateur->usertype = 1;
+    $annonce->entreprise->utilisateur->save();
+
 
     // Prepare data to be passed to the email template
     $data = [
